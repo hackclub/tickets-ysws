@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tickets | Hack Club YSWS</title>
+    <meta
+      name="description"
+      content="Build a movie website and get ticket grants to watch more movies. A Hack Club YSWS program for teenagers."
+    />
+    <meta property="og:title" content="Tickets | Hack Club YSWS" />
+    <meta
+      property="og:description"
+      content="Build a movie website and get ticket grants to watch more movies. A Hack Club YSWS program for teenagers."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Google Fonts: Bebas Neue for retro cinema marquee headings, Space Mono for ticket stubs, Plus Jakarta Sans for clean body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ==========================================================================
+       CINEMA TOP MARQUEE ACCENT
+       ========================================================================== -->
+    <header style="width: 100%; padding: 12px 20px 0">
+      <div class="container">
+        <div class="bulb-row" aria-hidden="true">
+          <span class="bulb"></span>
+          <span class="bulb"></span>
+          <span class="bulb"></span>
+          <span class="bulb"></span>
+          <span class="bulb"></span>
+          <span class="bulb"></span>
+          <span class="bulb"></span>
+          <span class="bulb"></span>
+          <span class="bulb"></span>
+          <span class="bulb"></span>
+          <span class="bulb"></span>
+          <span class="bulb"></span>
+          <span class="bulb"></span>
+          <span class="bulb"></span>
+          <span class="bulb"></span>
+          <span class="bulb"></span>
+          <span class="bulb"></span>
+          <span class="bulb"></span>
+          <span class="bulb"></span>
+          <span class="bulb"></span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- ==========================================================================
+         1. HERO SECTION
+         ========================================================================== -->
+      <section class="hero-section" id="hero">
+        <div class="container">
+          <!-- Label above headline -->
+          <div class="hero-kicker-bar">
+            <span class="kicker-pill">A Hack Club YSWS</span>
+          </div>
+
+          <!-- Large Hero Cinema Ticket Stub -->
+          <div class="hero-ticket-wrapper">
+            <div class="hero-ticket" id="heroTicket">
+              <!-- Main Ticket Body -->
+              <div class="hero-ticket-main">
+                <div>
+                  <div class="ticket-header-meta">
+                    <div class="ticket-badge-admit">
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <polygon
+                          points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                        ></polygon>
+                      </svg>
+                      <span>Admit One Teen Maker</span>
+                    </div>
+                    <span class="ticket-serial">NO. 840291</span>
+                  </div>
+
+                  <!-- Headline (No hyphens, no em dashes) -->
+                  <h1 class="hero-headline">
+                    Build a movie website.
+                    <span class="highlight">Watch more movies on us.</span>
+                  </h1>
+
+                  <!-- One sentence subheading explaining the offer -->
+                  <p class="hero-subheading">
+                    Pick a film you love, build an extraordinary web experience
+                    around it, ship it live, and earn ticket grants to spend at
+                    your local cinema.
+                  </p>
+                </div>
+
+                <!-- Action Links -->
+                <div class="hero-actions">
+                  <!-- Primary RSVP Button linking to external form URL -->
+                  <!-- [RSVP_FORM_URL] placeholder configurable via href -->
+                  <a
+                    href="https://rsvp.soon.it/tickets"
+                    class="btn-rsvp"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span>RSVP</span>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </a>
+
+                  <!-- Secondary text link to join the Slack channel -->
+                  <!-- [SLACK_CHANNEL_URL] placeholder configurable via href -->
+                  <a
+                    href="https://hackclub.enterprise.slack.com/archives/C0C8FKNHNV9"
+                    class="slack-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span>Join the Slack channel</span>
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                      ></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Perforation Cutout Line -->
+              <div class="hero-perforation" aria-hidden="true">
+                <span class="notch-top"></span>
+                <span class="notch-bottom"></span>
+              </div>
+
+              <!-- Tear Off Cinema Stub Side -->
+              <div class="hero-ticket-stub">
+                <div class="stub-brand-badge">TICKETS</div>
+
+                <div class="stub-middle-grant">
+                  <div class="grant-big">$5</div>
+                  <div class="grant-unit">Per hour of build time</div>
+                  <div
+                    style="
+                      font-family: var(--font-mono);
+                      font-size: 11px;
+                      color: var(--ticket-muted);
+                      margin-top: 6px;
+                    "
+                  >
+                    Up to 10 hours grant
+                  </div>
+                </div>
+
+                <div class="stub-barcode" aria-hidden="true">
+                  <svg
+                    class="barcode-svg"
+                    viewBox="0 0 140 36"
+                    fill="currentColor"
+                  >
+                    <rect x="0" y="0" width="3" height="36" />
+                    <rect x="5" y="0" width="2" height="36" />
+                    <rect x="10" y="0" width="5" height="36" />
+                    <rect x="18" y="0" width="2" height="36" />
+                    <rect x="23" y="0" width="4" height="36" />
+                    <rect x="30" y="0" width="2" height="36" />
+                    <rect x="35" y="0" width="6" height="36" />
+                    <rect x="44" y="0" width="3" height="36" />
+                    <rect x="50" y="0" width="2" height="36" />
+                    <rect x="55" y="0" width="5" height="36" />
+                    <rect x="63" y="0" width="2" height="36" />
+                    <rect x="68" y="0" width="4" height="36" />
+                    <rect x="75" y="0" width="3" height="36" />
+                    <rect x="81" y="0" width="6" height="36" />
+                    <rect x="90" y="0" width="2" height="36" />
+                    <rect x="95" y="0" width="5" height="36" />
+                    <rect x="103" y="0" width="2" height="36" />
+                    <rect x="108" y="0" width="4" height="36" />
+                    <rect x="115" y="0" width="2" height="36" />
+                    <rect x="120" y="0" width="6" height="36" />
+                    <rect x="129" y="0" width="3" height="36" />
+                    <rect x="135" y="0" width="5" height="36" />
+                  </svg>
+                  <span class="barcode-number">HC 2026 TKT</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Decorative Perforation Divider -->
+      <div class="film-perforation" aria-hidden="true">
+        <div class="perforation-line"></div>
+        <div class="sprocket-cluster">
+          <div class="sprocket-hole"></div>
+          <div class="sprocket-hole"></div>
+          <div class="sprocket-hole"></div>
+        </div>
+        <div class="perforation-line"></div>
+      </div>
+
+      <!-- ==========================================================================
+         2. HOW IT WORKS SECTION (FOUR NUMBERED TICKET STUB CARDS)
+         ========================================================================== -->
+      <section class="how-it-works-section" id="how-it-works">
+        <div class="container">
+          <div class="section-title-wrap">
+            <p class="section-eyebrow">Production Schedule</p>
+            <h2 class="section-title">How It Works</h2>
+          </div>
+
+          <div class="steps-grid">
+            <!-- Step 1 -->
+            <article class="step-ticket">
+              <div class="step-ticket-top">
+                <span class="notch-left" aria-hidden="true"></span>
+                <span class="step-number-tag">Scene 01</span>
+                <div class="step-icon-wrap" aria-hidden="true">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect
+                      x="2"
+                      y="2"
+                      width="20"
+                      height="20"
+                      rx="2.18"
+                      ry="2.18"
+                    ></rect>
+                    <line x1="7" y1="2" x2="7" y2="22"></line>
+                    <line x1="17" y1="2" x2="17" y2="22"></line>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <line x1="2" y1="7" x2="7" y2="7"></line>
+                    <line x1="2" y1="17" x2="7" y2="17"></line>
+                    <line x1="17" y1="17" x2="22" y2="17"></line>
+                    <line x1="17" y1="7" x2="22" y2="7"></line>
+                  </svg>
+                </div>
+                <span class="notch-right" aria-hidden="true"></span>
+              </div>
+              <div class="step-ticket-content">
+                <div>
+                  <h3 class="step-title">Pick a movie you love</h3>
+                  <p class="step-desc">
+                    Choose any motion picture that inspires you. It can be a
+                    legendary classic, an animated masterpiece, a sci fi
+                    thriller, or a summer blockbuster.
+                  </p>
+                </div>
+                <div class="step-footer-meta">
+                  <span>Phase: Inspiration</span>
+                  <span>Entry pass</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Step 2 -->
+            <article class="step-ticket">
+              <div class="step-ticket-top">
+                <span class="notch-left" aria-hidden="true"></span>
+                <span class="step-number-tag">Scene 02</span>
+                <div class="step-icon-wrap" aria-hidden="true">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="16 18 22 12 16 6"></polyline>
+                    <polyline points="8 6 2 12 8 18"></polyline>
+                  </svg>
+                </div>
+                <span class="notch-right" aria-hidden="true"></span>
+              </div>
+              <div class="step-ticket-content">
+                <div>
+                  <h3 class="step-title">Build a website themed around it</h3>
+                  <p class="step-desc">
+                    Be creative: design, interactivity, soundtrack, scenes,
+                    anything goes. Bring the mood, quotes, lore, or characters
+                    to life on the web canvas.
+                  </p>
+                </div>
+                <div class="step-footer-meta">
+                  <span>Phase: Craft</span>
+                  <span>Tracked time</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Step 3 -->
+            <article class="step-ticket">
+              <div class="step-ticket-top">
+                <span class="notch-left" aria-hidden="true"></span>
+                <span class="step-number-tag">Scene 03</span>
+                <div class="step-icon-wrap" aria-hidden="true">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                  </svg>
+                </div>
+                <span class="notch-right" aria-hidden="true"></span>
+              </div>
+              <div class="step-ticket-content">
+                <div>
+                  <h3 class="step-title">Ship it live and submit</h3>
+                  <p class="step-desc">
+                    Publish your project to the world on GitHub Pages or Vercel.
+                    Submit your public source repository and working site URL
+                    through the submission portal.
+                  </p>
+                </div>
+                <div class="step-footer-meta">
+                  <span>Phase: Release</span>
+                  <span>Public link</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Step 4 -->
+            <article class="step-ticket">
+              <div class="step-ticket-top">
+                <span class="notch-left" aria-hidden="true"></span>
+                <span class="step-number-tag">Scene 04</span>
+                <div class="step-icon-wrap" aria-hidden="true">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"
+                    ></path>
+                    <path d="M4 6v12c0 1.1.9 2 2 2h14v-4"></path>
+                    <path
+                      d="M18 12a2 2 0 0 0-2 2c0 1.1.9 2 2 2h4v-4h-4z"
+                    ></path>
+                  </svg>
+                </div>
+                <span class="notch-right" aria-hidden="true"></span>
+              </div>
+              <div class="step-ticket-content">
+                <div>
+                  <h3 class="step-title">Get your ticket grants</h3>
+                  <p class="step-desc">
+                    Get ticket grants of $5 per hour of build time, up to 10
+                    hours, to go watch more movies. Use the grant at your
+                    neighborhood cinema with friends.
+                  </p>
+                </div>
+                <div class="step-footer-meta">
+                  <span>Phase: Showtime</span>
+                  <span>$50 maximum</span>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Note about Hackatime tracking -->
+          <div class="hackatime-notice-box">
+            <div class="notice-icon-holder" aria-hidden="true">
+              <svg
+                width="26"
+                height="26"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+            <p class="notice-text">
+              <strong>Time Verification:</strong> Hours are tracked with
+              Hackatime, Hack Club open source coding tracker for code editors.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Decorative Perforation Divider -->
+      <div class="film-perforation" aria-hidden="true">
+        <div class="perforation-line"></div>
+        <div class="sprocket-cluster">
+          <div class="sprocket-hole"></div>
+          <div class="sprocket-hole"></div>
+          <div class="sprocket-hole"></div>
+        </div>
+        <div class="perforation-line"></div>
+      </div>
+
+      <!-- ==========================================================================
+         3. FAQ SECTION (ACCORDION WITH NATIVE DETAILS & SUMMARY)
+         ========================================================================== -->
+      <section class="faq-section" id="faq">
+        <div class="container">
+          <div class="section-title-wrap">
+            <p class="section-eyebrow">Audience Inquiries</p>
+            <h2 class="section-title">Frequently Asked Questions</h2>
+          </div>
+
+          <div class="faq-container">
+            <!-- Item 1: Eligibility -->
+            <details class="faq-item">
+              <summary class="faq-summary">
+                <div class="faq-question-wrap">
+                  <span class="faq-stub-notch" aria-hidden="true"></span>
+                  <span class="faq-question">Who can participate?</span>
+                </div>
+                <div class="faq-toggle-icon" aria-hidden="true">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </div>
+              </summary>
+              <div class="faq-content">
+                <p>
+                  Any teenager 18 years old or younger anywhere on earth can
+                  join. Whether you attend school, study at home, or code in
+                  your free time, you are welcome.
+                </p>
+              </div>
+            </details>
+
+            <!-- Item 2: Experience -->
+            <details class="faq-item">
+              <summary class="faq-summary">
+                <div class="faq-question-wrap">
+                  <span class="faq-stub-notch" aria-hidden="true"></span>
+                  <span class="faq-question">Do I need experience?</span>
+                </div>
+                <div class="faq-toggle-icon" aria-hidden="true">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </div>
+              </summary>
+              <div class="faq-content">
+                <p>
+                  No. Beginners are welcome. If this is your very first website,
+                  you will find friendly peers in Slack ready to share templates
+                  and answer questions whenever you get stuck.
+                </p>
+              </div>
+            </details>
+
+            <!-- Item 3: Cost -->
+            <details class="faq-item">
+              <summary class="faq-summary">
+                <div class="faq-question-wrap">
+                  <span class="faq-stub-notch" aria-hidden="true"></span>
+                  <span class="faq-question">Does it cost anything?</span>
+                </div>
+                <div class="faq-toggle-icon" aria-hidden="true">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </div>
+              </summary>
+              <div class="faq-content">
+                <p>
+                  No. Taking part is completely free of charge. You build, you
+                  ship, and Hack Club provides the ticket grant.
+                </p>
+              </div>
+            </details>
+
+            <!-- Item 4: Valid Project -->
+            <details class="faq-item">
+              <summary class="faq-summary">
+                <div class="faq-question-wrap">
+                  <span class="faq-stub-notch" aria-hidden="true"></span>
+                  <span class="faq-question"
+                    >What counts as a valid project?</span
+                  >
+                </div>
+                <div class="faq-toggle-icon" aria-hidden="true">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </div>
+              </summary>
+              <div class="faq-content">
+                <p>
+                  A live website clearly themed around a movie, built by you,
+                  with a public repo. It can feature custom interactive scene
+                  recreations, custom soundtracks, trivia games, or artistic
+                  tributes.
+                </p>
+              </div>
+            </details>
+
+            <!-- Item 5: Hours and Grant -->
+            <details class="faq-item">
+              <summary class="faq-summary">
+                <div class="faq-question-wrap">
+                  <span class="faq-stub-notch" aria-hidden="true"></span>
+                  <span class="faq-question"
+                    >How are hours counted and how do I get my grant?</span
+                  >
+                </div>
+                <div class="faq-toggle-icon" aria-hidden="true">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </div>
+              </summary>
+              <div class="faq-content">
+                <p>
+                  Install the Hackatime plugin in VS Code or your preferred
+                  editor to track time while programming. When you ship, submit
+                  your repository and live address. After verification, grants
+                  are disbursed via prepaid debit card or direct cinema
+                  reimbursement.
+                </p>
+              </div>
+            </details>
+
+            <!-- Item 6: AI Tools Policy -->
+            <details class="faq-item">
+              <summary class="faq-summary">
+                <div class="faq-question-wrap">
+                  <span class="faq-stub-notch" aria-hidden="true"></span>
+                  <span class="faq-question">Can I use AI tools?</span>
+                </div>
+                <div class="faq-toggle-icon" aria-hidden="true">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </div>
+              </summary>
+              <div class="faq-content">
+                <p>
+                  You may consult AI tools as a learning assistant to explain
+                  concepts or debug errors. However, the core design and code
+                  must be authored by your own hands. Auto generated websites
+                  created by a single prompt do not qualify.
+                </p>
+              </div>
+            </details>
+
+            <!-- Item 7: Schedule Dates -->
+            <details class="faq-item">
+              <summary class="faq-summary">
+                <div class="faq-question-wrap">
+                  <span class="faq-stub-notch" aria-hidden="true"></span>
+                  <span class="faq-question">When does it start and end?</span>
+                </div>
+                <div class="faq-toggle-icon" aria-hidden="true">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </div>
+              </summary>
+              <div class="faq-content">
+                <!-- <p>
+                  Tickets is active today and running through the current
+                  season. RSVP early to ensure your grant allocation, and check
+                  our Slack channel for the final curtain call announcement.
+                </p> -->
+                <p>
+                  Tickets haven't started yet, and we are planning on launching
+                  soon. Check our Slack channel for the final curtain call
+                  announcement.
+                </p>
+              </div>
+            </details>
+
+            <!-- Item 8: Organizers -->
+            <details class="faq-item">
+              <summary class="faq-summary">
+                <div class="faq-question-wrap">
+                  <span class="faq-stub-notch" aria-hidden="true"></span>
+                  <span class="faq-question">Who runs this?</span>
+                </div>
+                <div class="faq-toggle-icon" aria-hidden="true">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </div>
+              </summary>
+              <div class="faq-content">
+                <p>
+                  Organized by teen makers in the Hack Club community with
+                  funding and support provided by Hack Club.
+                </p>
+              </div>
+            </details>
+          </div>
+
+          <!-- RSVP Call to Action Banner -->
+          <div class="cta-banner">
+            <h3 class="cta-title">Your Cinema Grant Awaits</h3>
+            <p class="cta-desc">
+              Grab your popcorn, open your text editor, and build the movie
+              website of your dreams today.
+            </p>
+            <a
+              href="https://forms.hackclub.com/tickets"
+              class="btn-rsvp"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>RSVP For Tickets</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==========================================================================
+       4. FOOTER (AUTHENTIC HACK CLUB FOOTER)
+       ========================================================================== -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <!-- Left: Hack Club wordmark / logo & 501(c)(3) nonprofit wording -->
+          <div class="footer-brand">
+            <a
+              href="https://hackclub.com"
+              class="hackclub-flag-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Hack Club Homepage"
+            >
+              <!-- Inline SVG Hack Club Flag Wordmark (High contrast white and gold) -->
+              <svg
+                width="150"
+                height="42"
+                viewBox="0 0 160 45"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M0 0H140L160 22.5L140 45H0V0Z" fill="#8F1924" />
+                <path
+                  d="M3 3H138L156 22.5L138 42H3V3Z"
+                  stroke="#E6B764"
+                  stroke-width="2"
+                />
+                <text
+                  x="24"
+                  y="29"
+                  fill="#FCFBF9"
+                  font-family="'Bebas Neue', sans-serif"
+                  font-size="24"
+                  letter-spacing="2"
+                >
+                  HACK CLUB
+                </text>
+              </svg>
+            </a>
+
+            <!-- Exact 501(c)(3) nonprofit legal wording without any hyphens -->
+            <p class="footer-legal-copy">
+              Hack Club is a registered 501(c)(3) nonprofit public charity. EIN
+              813748307. Fiscal sponsorship provided by The Hack Foundation.
+            </p>
+
+            <p class="footer-credit">
+              Made with care by teenagers in the Hack Club community
+            </p>
+          </div>
+
+          <!-- Right: Links to Hack Club, Slack, GitHub, Code of Conduct -->
+          <div class="footer-links-group">
+            <nav class="footer-nav" aria-label="Footer Navigation">
+              <a
+                href="https://hackclub.com"
+                class="footer-nav-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Hack Club</a
+              >
+              <a
+                href="https://hackclub.com/slack"
+                class="footer-nav-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Slack</a
+              >
+              <a
+                href="https://github.com/hackclub"
+                class="footer-nav-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                >GitHub</a
+              >
+              <a
+                href="https://hackclub.com/conduct"
+                class="footer-nav-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Code of Conduct</a
+              >
+            </nav>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ==========================================================================
+       VANILLA JAVASCRIPT: TASTEFUL INTERACTION (TILT & SMOOTH FAQ)
+       ========================================================================== -->
+    <script src="./script.js"></script>
+  </body>
+</html>
