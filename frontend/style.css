@@ -87,6 +87,13 @@ summary:focus-visible {
   padding-right: 20px;
 }
 
+.hackclub-logo {
+  width: 200px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 /* ==========================================================================
        MARQUEE LIGHTS & DECORATIVE BORDERS
        ========================================================================== */
@@ -224,14 +231,6 @@ summary:focus-visible {
   position: relative;
 }
 
-.hero-kicker-bar {
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-align: center;
-}
-
 .kicker-pill {
   font-family: var(--font-mono);
   font-size: 13px;
@@ -269,6 +268,7 @@ summary:focus-visible {
   transition:
     transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
     box-shadow 0.4s ease;
+    margin-top: 30px;
 }
 
 @media (min-width: 840px) {
