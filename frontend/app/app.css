@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -6,20 +7,9 @@
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-html,
-body {
-  @apply bg-white dark:bg-gray-950;
-
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
-}
-
-@import url(https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap);
-
 /* ==========================================================================
-       RESET & CINEMA DESIGN TOKENS
-       ========================================================================== */
+   RESET & CINEMA DESIGN TOKENS
+   ========================================================================== */
 :root {
   --bg-black: #0c0a0e;
   --bg-surface: #141017;
@@ -38,6 +28,7 @@ body {
   --ticket-muted: #6b6057;
   --text-white: #fcfbf9;
   --text-muted: #c4b9b4;
+  --success-green: #2e7d32;
   --font-display: "Bebas Neue", sans-serif;
   --font-body: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
   --font-mono: "Space Mono", monospace;
@@ -57,6 +48,10 @@ html {
   color: var(--text-white);
   font-family: var(--font-body);
   line-height: 1.6;
+
+  @media (prefers-color-scheme: dark) {
+    color-scheme: dark;
+  }
 }
 
 body {
@@ -88,6 +83,9 @@ body {
 /* Accessibility: Visible Focus Rings */
 a:focus-visible,
 button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
 summary:focus-visible {
   outline: 3px solid var(--gold-light);
   outline-offset: 4px;
@@ -104,6 +102,11 @@ summary:focus-visible {
   padding-right: 20px;
 }
 
+/* Narrower variant used by the submission page */
+.container--narrow {
+  max-width: 980px;
+}
+
 .hackclub-logo {
   width: 200px;
   position: absolute;
@@ -113,8 +116,8 @@ summary:focus-visible {
 }
 
 /* ==========================================================================
-       MARQUEE LIGHTS & DECORATIVE BORDERS
-       ========================================================================== */
+   MARQUEE LIGHTS & DECORATIVE BORDERS
+   ========================================================================== */
 .marquee-frame {
   border: 3px solid var(--gold-dark);
   border-radius: 16px;
@@ -196,8 +199,46 @@ summary:focus-visible {
 }
 
 /* ==========================================================================
-       SECTION DIVIDERS: TICKET PERFORATIONS & SPROCKETS
-       ========================================================================== */
+   TOP NAVIGATION (SUBMISSION PAGE)
+   ========================================================================== */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0 28px;
+  border-bottom: 1px solid rgba(230, 183, 100, 0.2);
+}
+
+.brand-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+}
+
+.nav-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--gold-light);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+  transition:
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.nav-back-link:hover {
+  color: var(--text-white);
+  transform: translateX(-3px);
+}
+
+/* ==========================================================================
+   SECTION DIVIDERS: TICKET PERFORATIONS & SPROCKETS
+   ========================================================================== */
 .film-perforation {
   width: 100%;
   max-width: 900px;
@@ -238,8 +279,8 @@ summary:focus-visible {
 }
 
 /* ==========================================================================
-       HERO SECTION
-       ========================================================================== */
+   HERO SECTION
+   ========================================================================== */
 .hero-section {
   padding-top: 50px;
   padding-bottom: 30px;
@@ -577,8 +618,8 @@ summary:focus-visible {
 }
 
 /* ==========================================================================
-       SECTION HEADERS (CINEMA MARQUEE STYLE)
-       ========================================================================== */
+   SECTION HEADERS (CINEMA MARQUEE STYLE)
+   ========================================================================== */
 .section-title-wrap {
   text-align: center;
   margin-bottom: 44px;
@@ -601,8 +642,8 @@ summary:focus-visible {
 }
 
 /* ==========================================================================
-       HOW IT WORKS: 4 TICKET STUB CARDS
-       ========================================================================== */
+   HOW IT WORKS: 4 TICKET STUB CARDS
+   ========================================================================== */
 .steps-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -770,8 +811,8 @@ summary:focus-visible {
 }
 
 /* ==========================================================================
-       FAQ ACCORDION: NATIVE DETAILS & SUMMARY
-       ========================================================================== */
+   FAQ ACCORDION: NATIVE DETAILS & SUMMARY
+   ========================================================================== */
 .faq-container {
   max-width: 860px;
   margin: 0 auto;
@@ -896,8 +937,8 @@ summary:focus-visible {
 }
 
 /* ==========================================================================
-       CALL TO ACTION STRIP
-       ========================================================================== */
+   CALL TO ACTION STRIP
+   ========================================================================== */
 .cta-banner {
   margin: 60px auto 20px;
   max-width: 860px;
@@ -933,8 +974,953 @@ summary:focus-visible {
 }
 
 /* ==========================================================================
-       FOOTER (AUTHENTIC HACK CLUB FOOTER)
-       ========================================================================== */
+   SUBMISSION HEADER & STEP PROGRESS STRIP
+   ========================================================================== */
+.submission-hero {
+  text-align: center;
+  padding: 40px 0 32px;
+}
+
+.sub-kicker {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  background: rgba(143, 25, 36, 0.7);
+  border: 1px solid var(--gold-primary);
+  padding: 6px 18px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+.sub-title {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 7vw, 76px);
+  line-height: 0.96;
+  text-transform: uppercase;
+  color: var(--text-white);
+  letter-spacing: 0.02em;
+  margin-bottom: 16px;
+  text-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.8),
+    0 0 30px rgba(230, 183, 100, 0.2);
+}
+
+.sub-title .gold-accent {
+  color: var(--gold-light);
+}
+
+.sub-lead {
+  font-size: clamp(16px, 2vw, 19px);
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* Progress Filmstrip */
+.progress-filmstrip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 36px 0 48px;
+  padding: 12px;
+  background: #150f19;
+  border: 2px solid rgba(230, 183, 100, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.progress-frame {
+  padding: 14px 12px;
+  border-radius: 8px;
+  background: rgba(28, 22, 34, 0.6);
+  border: 1px solid rgba(230, 183, 100, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.progress-frame.active {
+  background: rgba(143, 25, 36, 0.4);
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 15px rgba(230, 183, 100, 0.25);
+}
+
+.progress-frame.completed {
+  background: rgba(46, 125, 50, 0.2);
+  border-color: #4caf50;
+}
+
+.frame-number {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--gold-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.frame-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-white);
+  line-height: 1.1;
+}
+
+@media (max-width: 600px) {
+  .progress-filmstrip {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   SUBMISSION STEPS WRAPPER & CARDS
+   ========================================================================== */
+.steps-container {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  margin-bottom: 60px;
+}
+
+.step-card {
+  background-color: var(--ticket-cream);
+  color: var(--ticket-text);
+  border-radius: 14px;
+  border: 3px solid var(--ticket-border);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.85);
+  position: relative;
+  overflow: hidden;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.step-card.locked {
+  opacity: 0.55;
+  filter: grayscale(0.4);
+  pointer-events: none;
+}
+
+.step-card-header {
+  background: linear-gradient(135deg, #1d1522, #291724);
+  color: var(--gold-light);
+  padding: 18px 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px dashed rgba(230, 183, 100, 0.4);
+  position: relative;
+}
+
+.step-header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.step-tag {
+  font-family: var(--font-display);
+  font-size: 26px;
+  letter-spacing: 0.06em;
+  color: var(--gold-primary);
+  line-height: 1;
+}
+
+.step-header-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-white);
+}
+
+.step-status-pill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-pending {
+  background: rgba(230, 183, 100, 0.15);
+  color: var(--gold-light);
+  border: 1px solid rgba(230, 183, 100, 0.3);
+}
+
+.status-completed {
+  background: rgba(46, 125, 50, 0.3);
+  color: #81c784;
+  border: 1px solid #4caf50;
+}
+
+.status-locked {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.step-card-body {
+  padding: 32px 28px;
+  background: radial-gradient(
+    circle at top left,
+    #ffffff,
+    var(--ticket-cream) 75%
+  );
+}
+
+.step-instruction {
+  font-size: 16px;
+  color: #3f333a;
+  margin-bottom: 24px;
+  line-height: 1.55;
+}
+
+/* Lock banner for gated steps */
+.locked-notice {
+  background: rgba(20, 14, 22, 0.95);
+  border: 2px dashed rgba(230, 183, 100, 0.4);
+  border-radius: 10px;
+  padding: 24px;
+  text-align: center;
+  color: var(--text-white);
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.locked-notice-icon {
+  color: var(--gold-primary);
+}
+
+.locked-notice p {
+  font-size: 15px;
+  color: var(--gold-light);
+  max-width: 440px;
+}
+
+/* ==========================================================================
+   STEP 1: HCB SIGN IN ELEMENTS
+   ========================================================================== */
+.hcb-box {
+  border: 2px solid var(--ticket-border);
+  border-radius: 12px;
+  padding: 24px;
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  margin-bottom: 16px;
+}
+
+.hcb-box-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #e8dec8;
+}
+
+.hcb-brand-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: 0.04em;
+  color: #17111a;
+}
+
+.btn-hcb-auth {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: linear-gradient(135deg, var(--velvet-bright), var(--velvet-deep));
+  color: var(--text-white);
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  border-radius: 8px;
+  border: 2px solid var(--gold-primary);
+  box-shadow: 0 8px 24px rgba(143, 25, 36, 0.4);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  width: 100%;
+  max-width: 380px;
+}
+
+.btn-hcb-auth:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #cc293a, var(--velvet-red));
+  box-shadow:
+    0 12px 28px rgba(143, 25, 36, 0.55),
+    0 0 18px var(--gold-glow);
+}
+
+/* Demo Account Switcher */
+.quick-auth-options {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px dashed #d9ccb4;
+}
+
+.quick-auth-label {
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--ticket-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+
+.demo-account-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.demo-chip {
+  background: #f4ecdc;
+  border: 1px solid #dcd1ba;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2e262c;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s ease;
+}
+
+.demo-chip:hover {
+  background: #ede2cd;
+  border-color: var(--velvet-red);
+  color: var(--velvet-red);
+}
+
+/* Connected User Profile View */
+.hcb-profile-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  background: #fdfaf3;
+  border: 2px solid #388e3c;
+  border-radius: 10px;
+  padding: 18px 22px;
+}
+
+.hcb-profile-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.hcb-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--velvet-red);
+  color: var(--gold-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 24px;
+  border: 2px solid var(--gold-primary);
+}
+
+.hcb-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #17111a;
+  line-height: 1.2;
+}
+
+.hcb-handle {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #615450;
+  margin-top: 2px;
+}
+
+.hcb-status-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--success-green);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.btn-disconnect {
+  background: transparent;
+  border: 1px solid #b8a688;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b5c54;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-disconnect:hover {
+  background: #f3e9d7;
+  color: var(--velvet-bright);
+  border-color: var(--velvet-bright);
+}
+
+/* ==========================================================================
+   STEP 2: HACKATIME PROJECT LINKING ELEMENTS
+   ========================================================================== */
+.hackatime-search-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.ht-input {
+  flex: 1;
+  min-width: 260px;
+  padding: 12px 18px;
+  background: #ffffff;
+  border: 2px solid var(--ticket-border);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--ticket-text);
+  transition: border-color 0.2s ease;
+}
+
+.ht-input:focus {
+  border-color: var(--velvet-red);
+  outline: none;
+}
+
+.btn-fetch-projects {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #241a29;
+  color: var(--gold-light);
+  border: 2px solid var(--gold-primary);
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-fetch-projects:hover {
+  background: #34263b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+.projects-list-title {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ticket-muted);
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.project-options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+@media (min-width: 650px) {
+  .project-options-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.project-card-option {
+  background: #ffffff;
+  border: 2px solid var(--ticket-border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.project-card-option:hover {
+  border-color: var(--velvet-red);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.project-card-option.selected {
+  border-color: var(--velvet-bright);
+  background: #fffdf7;
+  box-shadow:
+    0 0 0 2px var(--velvet-bright),
+    0 8px 24px rgba(143, 25, 36, 0.15);
+}
+
+.option-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.option-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #17111a;
+  line-height: 1.3;
+}
+
+.radio-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #b8a688;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.project-card-option.selected .radio-circle {
+  border-color: var(--velvet-bright);
+  background: var(--velvet-bright);
+}
+
+.radio-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: none;
+}
+
+.project-card-option.selected .radio-dot {
+  display: block;
+}
+
+.option-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #f1e7d2;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.hours-badge {
+  color: #4a3c44;
+  font-weight: 700;
+}
+
+.grant-estimate-badge {
+  color: var(--velvet-red);
+  font-weight: 700;
+}
+
+/* Selected Confirmation Strip */
+.confirmed-project-strip {
+  background: #fdfaf3;
+  border: 2px solid var(--gold-dark);
+  border-radius: 10px;
+  padding: 18px 22px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.confirmed-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.confirmed-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ticket-muted);
+}
+
+.confirmed-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #17111a;
+}
+
+.confirmed-grant-sum {
+  font-family: var(--font-display);
+  font-size: 32px;
+  color: var(--velvet-red);
+  line-height: 1;
+}
+
+/* ==========================================================================
+   STEP 3: PROJECT DETAILS FORM
+   ========================================================================== */
+.project-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 650px) {
+  .form-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #211923;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-hint {
+  font-size: 12px;
+  color: var(--ticket-muted);
+  margin-top: 2px;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 14px 18px;
+  background: #ffffff;
+  border: 2px solid var(--ticket-border);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--ticket-text);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  border-color: var(--velvet-red);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(143, 25, 36, 0.15);
+}
+
+.form-textarea {
+  min-height: 110px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #f7efe1;
+  border: 1px solid #e2d6bf;
+  border-radius: 8px;
+  padding: 18px 20px;
+  margin-top: 6px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.checkbox-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  accent-color: var(--velvet-red);
+  cursor: pointer;
+}
+
+.checkbox-text {
+  font-size: 14px;
+  color: #2f252b;
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.btn-submit-project {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: linear-gradient(135deg, var(--velvet-bright), var(--velvet-deep));
+  color: var(--text-white);
+  font-family: var(--font-display);
+  font-size: 28px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 16px 48px;
+  border-radius: 8px;
+  border: 2px solid var(--gold-primary);
+  box-shadow: 0 10px 32px rgba(143, 25, 36, 0.5);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  max-width: 440px;
+}
+
+.btn-submit-project:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #cc293a, var(--velvet-red));
+  box-shadow:
+    0 14px 36px rgba(143, 25, 36, 0.65),
+    0 0 24px var(--gold-glow);
+}
+
+.error-banner {
+  background: #ffebee;
+  border: 2px solid #ef5350;
+  color: #c62828;
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  display: none;
+  width: 100%;
+}
+
+/* ==========================================================================
+   SUBMISSION CONFIRMATION / GOLDEN TICKET RECEIPT
+   ========================================================================== */
+.receipt-section {
+  display: none;
+  padding: 20px 0 60px;
+}
+
+.golden-ticket-pass {
+  max-width: 760px;
+  margin: 0 auto;
+  background-color: var(--ticket-cream);
+  color: var(--ticket-text);
+  border-radius: 16px;
+  border: 4px solid var(--gold-primary);
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.95),
+    0 0 45px var(--gold-glow);
+  overflow: hidden;
+  position: relative;
+}
+
+.receipt-header {
+  background: linear-gradient(135deg, var(--velvet-bright), var(--velvet-deep));
+  color: var(--text-white);
+  padding: 26px 32px;
+  text-align: center;
+  border-bottom: 3px dashed var(--gold-primary);
+  position: relative;
+}
+
+.receipt-title {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 6vw, 56px);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 8px;
+  color: var(--gold-light);
+}
+
+.receipt-sub {
+  font-size: 16px;
+  color: var(--text-white);
+  font-weight: 500;
+}
+
+.receipt-body {
+  padding: 36px 32px;
+  background: radial-gradient(circle at top, #ffffff, var(--ticket-cream) 80%);
+}
+
+.receipt-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+@media (min-width: 600px) {
+  .receipt-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.receipt-data-card {
+  background: #ffffff;
+  border: 1px solid var(--ticket-border);
+  border-radius: 8px;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.receipt-field-name {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ticket-muted);
+}
+
+.receipt-field-val {
+  font-size: 16px;
+  font-weight: 700;
+  color: #17111a;
+  word-break: break-word;
+}
+
+.grant-highlight-box {
+  background: #fcf6eb;
+  border: 2px solid var(--gold-primary);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.grant-total-num {
+  font-family: var(--font-display);
+  font-size: 54px;
+  color: var(--velvet-bright);
+  line-height: 1;
+}
+
+.grant-total-desc {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: #5d4f55;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+.receipt-barcode-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding-top: 20px;
+  border-top: 2px dashed #cfc2aa;
+}
+
+.receipt-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #231b26;
+  color: var(--gold-light);
+  border: 2px solid var(--gold-primary);
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-secondary:hover {
+  background: #36293a;
+  color: var(--text-white);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   FOOTER (AUTHENTIC HACK CLUB FOOTER)
+   ========================================================================== */
 .site-footer {
   background-color: #08060a;
   border-top: 1px solid rgba(230, 183, 100, 0.2);
@@ -995,6 +1981,12 @@ summary:focus-visible {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .footer-nav {
+    justify-content: flex-end;
+  }
 }
 
 .footer-nav-link {
