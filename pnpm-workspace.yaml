@@ -1,0 +1,8 @@
+packages:
+  - frontend
+  - backend
+allowBuilds:
+  '@parcel/watcher': true
+  '@scarf/scarf': true
+  argon2: true
+  esbuild: true

@@ -1,0 +1,25 @@
+{
+  "name": "ticket-ysws",
+  "version": "1.0.0",
+  "description": "Build a website themed around a movie, we ship you tickets to go watch more movies",
+  "homepage": "https://github.com/mumuniazeez/ticket-ysws#readme",
+  "bugs": {
+    "url": "https://github.com/mumuniazeez/ticket-ysws/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mumuniazeez/ticket-ysws.git"
+  },
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"pnpm --filter frontend dev\" \"pnpm --filer backend start:dev\"",
+    "frontend": "pnpm --filer frontend dev",
+    "backend": "pnpm --filer backend start:dev",
+    "build": "pnpm --filer frontend build &&  pnpm --filer backend build"
+  },
+  "dependencies": {
+    "concurrently": "^10.0.7",
+    "dotenv": "^18.0.10"
+  }
+}
