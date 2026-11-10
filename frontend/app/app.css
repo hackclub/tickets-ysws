@@ -1218,9 +1218,9 @@ summary:focus-visible {
 }
 
 /* ==========================================================================
-   STEP 1: HCB SIGN IN ELEMENTS
+   STEP 1: hca SIGN IN ELEMENTS
    ========================================================================== */
-.hcb-box {
+.hca-box {
   border: 2px solid var(--ticket-border);
   border-radius: 12px;
   padding: 24px;
@@ -1229,7 +1229,7 @@ summary:focus-visible {
   margin-bottom: 16px;
 }
 
-.hcb-box-header {
+.hca-box-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1238,7 +1238,7 @@ summary:focus-visible {
   border-bottom: 1px solid #e8dec8;
 }
 
-.hcb-brand-title {
+.hca-brand-title {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1248,7 +1248,7 @@ summary:focus-visible {
   color: #17111a;
 }
 
-.btn-hcb-auth {
+.btn-hca-auth {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1270,7 +1270,7 @@ summary:focus-visible {
   max-width: 380px;
 }
 
-.btn-hcb-auth:hover {
+.btn-hca-auth:hover {
   transform: translateY(-2px);
   background: linear-gradient(135deg, #cc293a, var(--velvet-red));
   box-shadow:
@@ -1323,7 +1323,7 @@ summary:focus-visible {
 }
 
 /* Connected User Profile View */
-.hcb-profile-card {
+.hca-profile-card {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -1335,13 +1335,13 @@ summary:focus-visible {
   padding: 18px 22px;
 }
 
-.hcb-profile-info {
+.hca-profile-info {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.hcb-avatar {
+.hca-avatar {
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -1355,21 +1355,21 @@ summary:focus-visible {
   border: 2px solid var(--gold-primary);
 }
 
-.hcb-name {
+.hca-name {
   font-size: 18px;
   font-weight: 700;
   color: #17111a;
   line-height: 1.2;
 }
 
-.hcb-handle {
+.hca-handle {
   font-family: var(--font-mono);
   font-size: 13px;
   color: #615450;
   margin-top: 2px;
 }
 
-.hcb-status-badge {
+.hca-status-badge {
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.08em;

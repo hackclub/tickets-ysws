@@ -1,7 +1,10 @@
-import { Circle, LogIn } from "lucide-react";
+import { Circle, Lock, LogIn } from "lucide-react";
 import React from "react";
 
 export default function SubmitPage() {
+  const handleAddCustomProject = () => {
+    (window as any).TicketsSubmit?.addCustomProject();
+  };
   return (
     <main className="container">
       <div id="submissionView">
@@ -64,16 +67,16 @@ export default function SubmitPage() {
 
             <div className="step-card-body">
               {/* <!-- Unauthenticated State --> */}
-              <div id="hcbLoggedOut">
+              <div id="hcaLoggedOut">
                 <p className="step-instruction">
                   Hack Club Bank handles grants for teen makers. Sign in with
                   your HCA account so we know where to deposit your cinema
                   ticket grant.
                 </p>
 
-                <div className="hcb-box">
-                  <div className="hcb-box-header">
-                    <div className="hcb-brand-title">
+                <div className="hca-box">
+                  <div className="hca-box-header">
+                    <div className="hca-brand-title">
                       <svg
                         width="28"
                         height="28"
@@ -118,8 +121,8 @@ export default function SubmitPage() {
                   >
                     <button
                       type="button"
-                      className="btn-hcb-auth"
-                      id="btnHcbLogin"
+                      className="btn-hca-auth"
+                      id="btnhcaLogin"
                     >
                       <LogIn />
                       <span>Sign in with Hack Club</span>
@@ -133,7 +136,7 @@ export default function SubmitPage() {
               </div>
 
               {/* <!-- Authenticated State (Hidden until signed in) --> */}
-              <div id="hcbLoggedIn" style={{ display: "none" }}>
+              <div id="hcaLoggedIn" style={{ display: "none" }}>
                 <p
                   className="step-instruction"
                   style={{ color: "#2e7d32", fontWeight: 600 }}
@@ -142,19 +145,19 @@ export default function SubmitPage() {
                   ready to receive your grant.
                 </p>
 
-                <div className="hcb-profile-card">
-                  <div className="hcb-profile-info">
-                    <div className="hcb-avatar" id="hcbAvatarText">
+                <div className="hca-profile-card">
+                  <div className="hca-profile-info">
+                    <div className="hca-avatar" id="hcaAvatarText">
                       O
                     </div>
                     <div>
-                      <div className="hcb-name" id="hcbUserName">
+                      <div className="hca-name" id="hcaUserName">
                         Orpheus Dino
                       </div>
-                      <div className="hcb-handle" id="hcbUserHandle">
+                      <div className="hca-handle" id="hcaUserHandle">
                         @orpheus · orpheus@hackclub.com
                       </div>
-                      <div className="hcb-status-badge">
+                      <div className="hca-status-badge">
                         <svg
                           width="14"
                           height="14"
@@ -175,7 +178,7 @@ export default function SubmitPage() {
                   <button
                     type="button"
                     className="btn-disconnect"
-                    id="btnHcbDisconnect"
+                    id="btnhcaDisconnect"
                   >
                     Switch Account
                   </button>
@@ -197,26 +200,7 @@ export default function SubmitPage() {
                 className="step-status-pill status-locked"
                 id="step2StatusPill"
               >
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <rect
-                    x="3"
-                    y="11"
-                    width="18"
-                    height="11"
-                    rx="2"
-                    ry="2"
-                  ></rect>
-                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                </svg>
+                <Lock size={16} />
                 <span>Locked</span>
               </span>
             </div>
@@ -225,26 +209,7 @@ export default function SubmitPage() {
               {/* <!-- Locked Notification --> */}
               <div className="locked-notice" id="step2LockNotice">
                 <div className="locked-notice-icon">
-                  <svg
-                    width="32"
-                    height="32"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <rect
-                      x="3"
-                      y="11"
-                      width="18"
-                      height="11"
-                      rx="2"
-                      ry="2"
-                    ></rect>
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                  </svg>
+                  <Lock size={32} />
                 </div>
                 <h3
                   style={{
@@ -256,7 +221,7 @@ export default function SubmitPage() {
                   Step 2 is currently locked
                 </h3>
                 <p>
-                  Please sign in with Hack Club Bank in Step 1 above to load
+                  Please sign in with Hack Club Auth in Step 1 above to load
                   your Hackatime coding activity and projects.
                 </p>
               </div>
@@ -536,6 +501,242 @@ export default function SubmitPage() {
                   </button>
                 </div>
               </div>
+            </div>
+          </section>
+
+          {/* third step */}
+          <section className="step-card locked" id="stepCard3">
+            <div className="step-card-header">
+              <div className="step-header-left">
+                <span className="step-tag">Step 03</span>
+                <h2 className="step-header-title">Input Project Details</h2>
+              </div>
+              <span
+                className="step-status-pill status-locked"
+                id="step3StatusPill"
+              >
+                <Lock size={16} />
+                <span>Locked</span>
+              </span>
+            </div>
+
+            <div className="step-card-body">
+              {/* <!-- Locked Notification --> */}
+              <div className="locked-notice" id="step3LockNotice">
+                <div className="locked-notice-icon">
+                  <Lock size={32} />
+                </div>
+                <h3
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: 22,
+                    color: "var(--gold-light)",
+                  }}
+                >
+                  Step 3 is currently locked
+                </h3>
+                <p>
+                  Please complete Step 1 (Sign in with HCA) and Step 2 (Select
+                  Hackatime Project) above to unlock this submission form.
+                </p>
+              </div>
+
+              {/* <!-- Unlocked Submission Form --> */}
+              <form
+                id="projectSubmissionForm"
+                className="project-form"
+                style={{ display: "none" }}
+                // onsubmit="window.TicketsSubmit.handleFormSubmit(event)"
+              >
+                <p className="step-instruction">
+                  Fill in the details for your film web experience. Make sure
+                  your live link is accessible and your code repository is
+                  public so the review crew can examine your project.
+                </p>
+
+                {/* <!-- Error Alert Banner --> */}
+                <div
+                  className="error-banner"
+                  id="formErrorBanner"
+                  role="alert"
+                ></div>
+
+                {/* <!-- Row 1: Movie Title & Project Name --> */}
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="movieTitle" className="form-label">
+                      <span>Movie Title</span>
+                      <span style={{ color: "var(--velvet-bright)" }}>*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="movieTitle"
+                      className="form-input"
+                      placeholder="e.g. Interstellar, Spirited Away, The Matrix"
+                      required
+                    />
+                    <span className="form-hint">
+                      The motion picture your website celebrates.
+                    </span>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="projectName" className="form-label">
+                      <span>Project Name</span>
+                      <span style={{ color: "var(--velvet-bright)" }}>*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="projectName"
+                      className="form-input"
+                      placeholder="e.g. Endurance Flight Computer"
+                      required
+                    />
+                    <span className="form-hint">
+                      The public title of your web application.
+                    </span>
+                  </div>
+                </div>
+
+                {/* <!-- Row 2: Live Link & Public Repo Link --> */}
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="liveUrl" className="form-label">
+                      <span>Live Website Address</span>
+                      <span style={{ color: "var(--velvet-bright)" }}>*</span>
+                    </label>
+                    <input
+                      type="url"
+                      id="liveUrl"
+                      className="form-input"
+                      placeholder="https://yourmoviesite.vercel.app"
+                      required
+                    />
+                    <span className="form-hint">
+                      Public URL hosted on Vercel, GitHub Pages, or any host.
+                    </span>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="repoUrl" className="form-label">
+                      <span>Public GitHub Repository</span>
+                      <span style={{ color: "var(--velvet-bright)" }}>*</span>
+                    </label>
+                    <input
+                      type="url"
+                      id="repoUrl"
+                      className="form-input"
+                      placeholder="https://github.com/username/repository"
+                      required
+                    />
+                    <span className="form-hint">
+                      Source repository with code authored by you.
+                    </span>
+                  </div>
+                </div>
+
+                {/* <!-- Row 3: Description of creative elements --> */}
+                <div className="form-group">
+                  <label htmlFor="projectDescription" className="form-label">
+                    <span>How does your website celebrate the movie?</span>
+                    <span style={{ color: "var(--velvet-bright)" }}>*</span>
+                  </label>
+                  <textarea
+                    id="projectDescription"
+                    className="form-textarea"
+                    placeholder="Describe your creative choices: custom interactive scenes, original audio soundtracks, cinematic visuals, easter eggs, or storyline reenactments."
+                    required
+                  ></textarea>
+                  <span className="form-hint">
+                    Be specific about what you created and what makes it
+                    special.
+                  </span>
+                </div>
+
+                {/* <!-- Row 4: Cinema Choice & Watchlist --> */}
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="cinemaVenue" className="form-label">
+                      <span>Your Local Cinema Venue</span>
+                      <span style={{ color: "var(--velvet-bright)" }}>*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="cinemaVenue"
+                      className="form-input"
+                      placeholder="e.g. Alamo Drafthouse, AMC Empire, local indie cinema"
+                      required
+                    />
+                    <span className="form-hint">
+                      Where you plan to spend your cinema ticket grant.
+                    </span>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="nextMovie" className="form-label">
+                      <span>What movie do you plan to watch next?</span>
+                      <span style={{ color: "var(--velvet-bright)" }}>*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="nextMovie"
+                      className="form-input"
+                      placeholder="e.g. Dune Part Two, Tron Ares"
+                      required
+                    />
+                    <span className="form-hint">
+                      Tell us what you are excited to see on the big screen.
+                    </span>
+                  </div>
+                </div>
+
+                {/* <!-- Eligibility Checkboxes --> */}
+                <div className="checkbox-group">
+                  <label className="checkbox-item">
+                    <input type="checkbox" id="checkAge" required />
+                    <span className="checkbox-text">
+                      I confirm that I am a teenager 18 years old or younger.
+                    </span>
+                  </label>
+
+                  <label className="checkbox-item">
+                    <input type="checkbox" id="checkAuthor" required />
+                    <span className="checkbox-text">
+                      I authored this project myself, my site is live, and my
+                      repository is public.
+                    </span>
+                  </label>
+
+                  <label className="checkbox-item">
+                    <input type="checkbox" id="checkTime" required />
+                    <span className="checkbox-text">
+                      My hours were authentically recorded with Hackatime during
+                      development.
+                    </span>
+                  </label>
+                </div>
+
+                {/* <!-- Submit Button --> */}
+                <div className="form-actions">
+                  <button
+                    type="submit"
+                    className="btn-submit-project"
+                    id="btnSubmitForm"
+                  >
+                    <span>Submit Project For Review</span>
+                  </button>
+                  <p
+                    style={{
+                      fontSize: 13,
+                      color: "var(--ticket-muted)",
+                      textAlign: "center",
+                    }}
+                  >
+                    Once submitted, the Hack Club team reviews your project and
+                    verifies tracked hours before grant payout.
+                  </p>
+                </div>
+              </form>
             </div>
           </section>
         </div>
