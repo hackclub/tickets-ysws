@@ -12,6 +12,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start --env-file .env",
     "start:dev": "nest start --watch --env-file .env",
+    "dev": "concurrently -n front,back -c blue,green \"npm --prefix ../frontend run dev:build\" \"nodemon\"",
     "start:debug": "nest start --debug --watch --env-file .env",
     "start:prod": "node dist/main",
     "lint": "oxlint --type-aware src/ test/",
@@ -41,6 +42,7 @@
     "cookie-parser": "^1.4.7",
     "dotenv": "^18.0.10",
     "helmet": "^8.3.0",
+    "nodemon": "^3.1.14",
     "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"

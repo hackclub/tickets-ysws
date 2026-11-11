@@ -20,6 +20,14 @@ export class UserService {
       headers: { Authorization: `Bearer ${access_token}` },
     });
 
-    return hackclubUserData.data;
+    const slackUserData = await axios.get<{
+      displayName: string;
+      imageUrl: string;
+      userId: string;
+    }>(
+      `https://cachet.dunkirk.sh/users/${hackclubUserData.data.identity.slack_id}`,
+    );
+
+    return { ...hackclubUserData.data.identity, ...slackUserData.data };
   }
 }

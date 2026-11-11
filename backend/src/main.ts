@@ -47,6 +47,7 @@ async function bootstrap() {
         directives: {
           ...helmet.contentSecurityPolicy.getDefaultDirectives(),
           'script-src': ["'self'", ...hashes],
+          'img-src': ["'self'", 'data:', 'https://avatars.slack-edge.com'],
         },
       },
     }),

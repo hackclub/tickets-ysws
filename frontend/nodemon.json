@@ -1,0 +1,6 @@
+{
+  "watch": ["app", "public", "vite.config.ts", "react-router.config.ts"],
+  "ext": "ts,tsx,css,json",
+  "exec": "react-router build && node -e \"require('fs').writeFileSync('../backend/.frontend-built.trigger', Date.now().toString())\"",
+  "delay": 500
+}

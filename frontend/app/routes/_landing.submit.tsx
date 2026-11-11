@@ -1,4 +1,4 @@
-import { Circle, Lock, LogIn } from "lucide-react";
+import { Check, Circle, Lock, LogIn } from "lucide-react";
 import React, { useEffect } from "react";
 import type { Route } from "./+types/_landing.submit";
 import axios from "axios";
@@ -75,13 +75,23 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                   Sign in with Hack Club Auth
                 </h2>
               </div>
-              <span
-                className="step-status-pill status-pending"
-                id="step1StatusPill"
-              >
-                <Circle size={15} />
-                <span>Awaiting Sign In</span>
-              </span>
+              {loaderData == null || !loaderData.userData ? (
+                <span
+                  className="step-status-pill status-pending"
+                  id="step1StatusPill"
+                >
+                  <Circle size={15} />
+                  <span>Awaiting Sign In</span>
+                </span>
+              ) : (
+                <span
+                  className="step-status-pill status-completed"
+                  id="step1StatusPill"
+                >
+                  <Check size={15} />
+                  <span>Completed</span>
+                </span>
+              )}
             </div>
 
             <div className="step-card-body">
@@ -162,36 +172,30 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                     className="step-instruction"
                     style={{ color: "#2e7d32", fontWeight: 600 }}
                   >
-                    Step 1 Complete: Your Hack Club Bank account is connected
-                    and ready to receive your grant.
+                    Step 1 Complete: Your Hack Club account is connected and
+                    ready to ship your project
                   </p>
 
                   <div className="hca-profile-card">
                     <div className="hca-profile-info">
-                      <div className="hca-avatar" id="hcaAvatarText">
-                        O
-                      </div>
+                      <img
+                        className="hca-avatar"
+                        id="hcaAvatarText"
+                        src={loaderData.userData.imageUrl}
+                        alt=""
+                      />
+
                       <div>
                         <div className="hca-name" id="hcaUserName">
-                          {loaderData.userData.identify.first_name}{" "}
-                          {loaderData.userData.identify.last_name}
+                          {loaderData.userData.first_name}{" "}
+                          {loaderData.userData.last_name}
                         </div>
                         <div className="hca-handle" id="hcaUserHandle">
-                          @orpheus · orpheus@hackclub.com
+                          @{loaderData.userData.displayName} ·{" "}
+                          {loaderData.userData.primary_email}
                         </div>
                         <div className="hca-status-badge">
-                          <svg
-                            width="14"
-                            height="14"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="3"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          >
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                          </svg>
+                          <Check color="green" size={18} />
                           <span>Verified Active Teen Account</span>
                         </div>
                       </div>
@@ -202,7 +206,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                       className="btn-disconnect"
                       id="btnhcaDisconnect"
                     >
-                      Switch Account
+                      Logout
                     </button>
                   </div>
                 </div>
