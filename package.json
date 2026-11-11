@@ -13,13 +13,14 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"pnpm --filter frontend dev\" \"pnpm --filer backend start:dev\"",
-    "frontend": "pnpm --filer frontend dev",
-    "backend": "pnpm --filer backend start:dev",
-    "build": "pnpm --filer frontend build &&  pnpm --filer backend build"
+    "dev": "concurrently \"pnpm --filter frontend dev\" \"pnpm --filter backend start:dev\"",
+    "frontend": "pnpm --filter frontend dev",
+    "backend": "pnpm --filter backend start:dev",
+    "build": "pnpm --filter frontend build &&  pnpm --filter backend build"
   },
   "dependencies": {
     "concurrently": "^10.0.7",
     "dotenv": "^18.0.10"
-  }
+  },
+  "packageManager": "pnpm@12.18.0+sha512.9d7882d5dc82147ecfc4e062aa34834e0ad0296710a1837a1115ae012127d36b7109e321ac1598a1dd0a65597681b1e99917e12ed0d749eae91187943363beb3"
 }

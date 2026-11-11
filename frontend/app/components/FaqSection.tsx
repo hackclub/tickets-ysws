@@ -55,9 +55,8 @@ export default function FaqSection() {
         </div>
 
         <div className="faq-container">
-          {/* <!-- Item 1: Eligibility --> */}
-          {faqs.map((faq, idx) => (
-            <details className="faq-item" key={idx}>
+          {faqs.map((faq) => (
+            <details className="faq-item" key={faq.question}>
               <summary className="faq-summary">
                 <div className="faq-question-wrap">
                   <span className="faq-stub-notch" aria-hidden="true"></span>
