@@ -11,25 +11,23 @@ import axios from 'axios';
 export class AuthService {
   constructor(private readonly config: ConfigService) {}
 
-  hackclubAuth(redirect_uri: string) {
-    if (!redirect_uri)
-      throw new BadRequestException('redirect_uri is required');
-
+  hackclubAuth() {
+    const redirect_uri = `${this.config.get('APP_URL')}/api/auth/hackclub/callback`;
     const client_id = this.config.get('HACKCLUB_AUTH_CLIENTID');
 
+    return {
+      url: `/submit`,
+    };
     return {
       url: `https://auth.hackclub.com/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&response_type=code&scope=slack_id+verification_status`,
     };
   }
 
-  async hackclubAuthCallback(code: string, redirect_uri: string) {
-    //
+  async hackclubAuthCallback(code: string) {
     if (!code) throw new BadRequestException('code is required');
-    if (!redirect_uri)
-      throw new BadRequestException('redirect_uri is required');
 
-    const client_id = this.config.get<string>('HACKCLUB_AUTH_CLIENT_ID');
-
+    const redirect_uri = `${this.config.get('APP_URL')}/api/auth/hackclub/callback`;
+    const client_id = this.config.get<string>('HACKCLUB_AUTH_CLIENTID');
     const client_secret = this.config.get<string>('HACKCLUB_AUTH_SECRET');
 
     const reqBody = {
