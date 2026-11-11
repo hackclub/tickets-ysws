@@ -4,6 +4,7 @@ import { createObserveModule } from '@nestjs/observe';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { AuthModule } from './auth/auth.module.js';
+import { SubmitModule } from './submit/submit.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -31,6 +32,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     }),
     ConfigModule.forRoot({ isGlobal: true }),
     AuthModule,
+    SubmitModule,
   ],
 })
 export class AppModule {}
