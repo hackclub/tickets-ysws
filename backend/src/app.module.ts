@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module.js';
 import { SubmitModule } from './submit/submit.module.js';
 import { UserModule } from './user/user.module.js';
 import { AirtableModule } from './airtable/airtable.module.js';
+import { HackatimeModule } from './hackatime/hackatime.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -37,6 +38,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     SubmitModule,
     UserModule,
     AirtableModule,
+    HackatimeModule,
   ],
 })
 export class AppModule {}

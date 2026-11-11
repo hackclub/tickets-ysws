@@ -1,9 +1,28 @@
 import { Circle, Lock, LogIn } from "lucide-react";
-import React from "react";
+import React, { useEffect } from "react";
+import type { Route } from "./+types/_landing.submit";
+import axios from "axios";
 
-export default function SubmitPage() {
+export async function clientLoader({ request }: Route.LoaderArgs) {
+  const userDataRes = await axios.get("/api/user/me");
+
+  console.log(userDataRes);
+  if (userDataRes.status !== 200) return null;
+
+  console.log(userDataRes.data);
+
+  return { userData: userDataRes.data };
+}
+
+export default function SubmitPage({ loaderData }: Route.ComponentProps) {
   const handleAddCustomProject = () => {
     (window as any).TicketsSubmit?.addCustomProject();
+  };
+  useEffect(() => {
+    console.log(loaderData?.userData);
+  }, []);
+  const handleHCA = () => {
+    window.location.replace("/api/auth/hca");
   };
   return (
     <main className="container">
@@ -67,123 +86,127 @@ export default function SubmitPage() {
 
             <div className="step-card-body">
               {/* <!-- Unauthenticated State --> */}
-              <div id="hcaLoggedOut">
-                <p className="step-instruction">
-                  Hack Club Bank handles grants for teen makers. Sign in with
-                  your HCA account so we know where to deposit your cinema
-                  ticket grant.
-                </p>
+              {loaderData == null || !loaderData.userData ? (
+                <div id="hcaLoggedOut">
+                  <p className="step-instruction">
+                    Hack Club Bank handles grants for teen makers. Sign in with
+                    your HCA account so we know where to deposit your cinema
+                    ticket grant.
+                  </p>
 
-                <div className="hca-box">
-                  <div className="hca-box-header">
-                    <div className="hca-brand-title">
-                      <svg
-                        width="28"
-                        height="28"
-                        viewBox="0 0 32 32"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true"
+                  <div className="hca-box">
+                    <div className="hca-box-header">
+                      <div className="hca-brand-title">
+                        <svg
+                          width="28"
+                          height="28"
+                          viewBox="0 0 32 32"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          aria-hidden="true"
+                        >
+                          <rect width="32" height="32" rx="6" fill="#8F1924" />
+                          <path d="M8 8H24V14H8V8Z" fill="#E6B764" />
+                          <rect
+                            x="8"
+                            y="18"
+                            width="16"
+                            height="6"
+                            rx="2"
+                            fill="#FCFBF9"
+                          />
+                        </svg>
+                        <span>Hack Club Auth</span>
+                      </div>
+                      <span
+                        style={{
+                          fontFamily: "var(--font-mono)",
+                          fontSize: 12,
+                          color: "var(ticket-muted)",
+                        }}
                       >
-                        <rect width="32" height="32" rx="6" fill="#8F1924" />
-                        <path d="M8 8H24V14H8V8Z" fill="#E6B764" />
-                        <rect
-                          x="8"
-                          y="18"
-                          width="16"
-                          height="6"
-                          rx="2"
-                          fill="#FCFBF9"
-                        />
-                      </svg>
-                      <span>Hack Club Auth</span>
+                        Secure Auth
+                      </span>
                     </div>
-                    <span
+
+                    <div
                       style={{
-                        fontFamily: "var(--font-mono)",
-                        fontSize: 12,
-                        color: "var(ticket-muted)",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        gap: 14,
+                        textAlign: "center",
+                        padding: "10px 0",
                       }}
                     >
-                      Secure Auth
-                    </span>
+                      <button
+                        type="button"
+                        className="btn-hca-auth"
+                        id="btnhcaLogin"
+                        onClick={handleHCA}
+                      >
+                        <LogIn />
+                        <span>Sign in with Hack Club</span>
+                      </button>
+                      <p style={{ fontSize: 13, color: "var(--ticket-muted)" }}>
+                        Don't have an HCA account yet? A free teen account will
+                        be initiated during verification.
+                      </p>
+                    </div>
                   </div>
-
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      gap: 14,
-                      textAlign: "center",
-                      padding: "10px 0",
-                    }}
+                </div>
+              ) : (
+                /* <!-- Unauthenticated State --> */
+                <div id="hcaLoggedIn">
+                  <p
+                    className="step-instruction"
+                    style={{ color: "#2e7d32", fontWeight: 600 }}
                   >
+                    Step 1 Complete: Your Hack Club Bank account is connected
+                    and ready to receive your grant.
+                  </p>
+
+                  <div className="hca-profile-card">
+                    <div className="hca-profile-info">
+                      <div className="hca-avatar" id="hcaAvatarText">
+                        O
+                      </div>
+                      <div>
+                        <div className="hca-name" id="hcaUserName">
+                          {loaderData.userData.identify.first_name}{" "}
+                          {loaderData.userData.identify.last_name}
+                        </div>
+                        <div className="hca-handle" id="hcaUserHandle">
+                          @orpheus · orpheus@hackclub.com
+                        </div>
+                        <div className="hca-status-badge">
+                          <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="3"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                          <span>Verified Active Teen Account</span>
+                        </div>
+                      </div>
+                    </div>
+
                     <button
                       type="button"
-                      className="btn-hca-auth"
-                      id="btnhcaLogin"
+                      className="btn-disconnect"
+                      id="btnhcaDisconnect"
                     >
-                      <LogIn />
-                      <span>Sign in with Hack Club</span>
+                      Switch Account
                     </button>
-                    <p style={{ fontSize: 13, color: "var(--ticket-muted)" }}>
-                      Don't have an HCA account yet? A free teen account will be
-                      initiated during verification.
-                    </p>
                   </div>
                 </div>
-              </div>
-
-              {/* <!-- Authenticated State (Hidden until signed in) --> */}
-              <div id="hcaLoggedIn" style={{ display: "none" }}>
-                <p
-                  className="step-instruction"
-                  style={{ color: "#2e7d32", fontWeight: 600 }}
-                >
-                  Step 1 Complete: Your Hack Club Bank account is connected and
-                  ready to receive your grant.
-                </p>
-
-                <div className="hca-profile-card">
-                  <div className="hca-profile-info">
-                    <div className="hca-avatar" id="hcaAvatarText">
-                      O
-                    </div>
-                    <div>
-                      <div className="hca-name" id="hcaUserName">
-                        Orpheus Dino
-                      </div>
-                      <div className="hca-handle" id="hcaUserHandle">
-                        @orpheus · orpheus@hackclub.com
-                      </div>
-                      <div className="hca-status-badge">
-                        <svg
-                          width="14"
-                          height="14"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="3"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                        <span>Verified Active Teen Account</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <button
-                    type="button"
-                    className="btn-disconnect"
-                    id="btnhcaDisconnect"
-                  >
-                    Switch Account
-                  </button>
-                </div>
-              </div>
+              )}
             </div>
           </section>
 
