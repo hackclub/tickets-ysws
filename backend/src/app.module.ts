@@ -5,6 +5,8 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { AuthModule } from './auth/auth.module.js';
 import { SubmitModule } from './submit/submit.module.js';
+import { UserModule } from './user/user.module.js';
+import { AirtableModule } from './airtable/airtable.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -33,6 +35,8 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     ConfigModule.forRoot({ isGlobal: true }),
     AuthModule,
     SubmitModule,
+    UserModule,
+    AirtableModule,
   ],
 })
 export class AppModule {}

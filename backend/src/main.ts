@@ -38,7 +38,7 @@ async function bootstrap() {
       'build',
       'client',
       'index.html',
-    ), // adjust to your build output
+    ),
   );
 
   app.use(
@@ -53,6 +53,7 @@ async function bootstrap() {
   );
 
   app.set('trust proxy', 1);
+
   app.use(cookieParser());
 
   app.setGlobalPrefix('api');
