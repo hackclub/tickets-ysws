@@ -42,6 +42,22 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
     HackatimeProject[]
   >([]);
 
+  const [formData, setFormData] = useState<{
+    movieName: string;
+    projectName: string;
+    siteUrl: string;
+    githubUrl: string;
+    description: string;
+    plannedMovie: string;
+  }>({
+    description: "",
+    githubUrl: "",
+    movieName: "",
+    plannedMovie: "",
+    projectName: "",
+    siteUrl: "",
+  });
+  
   const [search, setSearch] = useState("");
   const revalidator = useRevalidator();
   const user = loaderData.userData;
@@ -100,7 +116,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
           </div>
 
           <div
-            className={`progress-frame ${!step3Locked ? "completed" : "active"}`}
+            className={`progress-frame ${!step3Locked ? "completed" : !step2Locked ? "active" : ""}`}
             id="progressFrame2"
           >
             <div className="frame-number">
@@ -252,8 +268,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
 
                       <div>
                         <div className="hca-name" id="hcaUserName">
-                          {loaderData.userData.first_name}{" "}
-                          {loaderData.userData.last_name}
+                          {loaderData.userData.first_name}
                         </div>
                         <div className="hca-handle" id="hcaUserHandle">
                           @{loaderData.userData.displayName} ·{" "}
@@ -712,25 +727,84 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                     </span>
                   </div>
 
-                  {/* <!-- Row 4: Cinema Choice & Watchlist --> */}
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label htmlFor="cinemaVenue" className="form-label">
-                        <span>Your Local Cinema Venue</span>
-                        <span style={{ color: "var(--velvet-bright)" }}>*</span>
-                      </label>
-                      <input
-                        type="text"
-                        id="cinemaVenue"
-                        className="form-input"
-                        placeholder="e.g. Alamo Drafthouse, AMC Empire, local indie cinema"
-                        required
-                      />
-                      <span className="form-hint">
-                        Where you plan to spend your cinema ticket grant.
+                  <div className="form-group">
+                    <label className="form-label" htmlFor="screenshotFileInput">
+                      <span>Website Screenshots</span>
+                      <span
+                        style={{
+                          fontSize: 12,
+                          color: "var(--ticket-muted)",
+                          fontWeight: 500,
+                        }}
+                      >
+                        (Optional)
                       </span>
+                    </label>
+
+                    <input
+                      type="file"
+                      id="screenshotFileInput"
+                      accept="image/*"
+                      multiple
+                      style={{ display: "none" }}
+                    />
+
+                    <div
+                      className="screenshot-dropzone"
+                      id="screenshotDropzone"
+                      role="button"
+                      tabIndex={0}
+                      aria-label="Upload screenshots"
+                    >
+                      <div
+                        className="screenshot-dropzone-icon"
+                        aria-hidden="true"
+                      >
+                        <svg
+                          width="32"
+                          height="32"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <rect
+                            x="3"
+                            y="3"
+                            width="18"
+                            height="18"
+                            rx="2"
+                            ry="2"
+                          ></rect>
+                          <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                          <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                      </div>
+                      <div className="screenshot-dropzone-prompt">
+                        Select screenshots or drag and drop image files here
+                      </div>
+                      <div className="screenshot-dropzone-note">
+                        PNG, JPG, or WebP up to 10MB each
+                      </div>
                     </div>
 
+                    <span className="form-hint">
+                      Upload visual captures of your website design, interactive
+                      scenes, or animations.
+                    </span>
+
+                    {/* <!-- Preview container for uploaded screenshots --> */}
+                    <div
+                      className="screenshot-previews-grid"
+                      id="screenshotPreviewsGrid"
+                      style={{ display: "none" }}
+                    ></div>
+                  </div>
+
+                  {/* <!-- Row 4: Cinema Choice & Watchlist --> */}
+                  <div className="form-row">
                     <div className="form-group">
                       <label htmlFor="nextMovie" className="form-label">
                         <span>What movie do you plan to watch next?</span>
