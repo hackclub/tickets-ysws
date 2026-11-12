@@ -1,26 +1,58 @@
-import { Check, Circle, Clock, Lock, LogIn } from "lucide-react";
-import React, { useEffect } from "react";
+import { Check, Circle, Clock, Lock, LogIn, RefreshCcw } from "lucide-react";
+import React, { useEffect, useState } from "react";
 import type { Route } from "./+types/_landing.submit";
 import axios from "axios";
 
+export interface HackatimeProject {
+  name: string;
+  total_seconds: number;
+  most_recent_heartbeat: string; // ISO 8601, e.g. "2026-11-09T00:03:09Z"
+  languages: string[];
+  archived: boolean;
+}
+
 export async function clientLoader() {
   try {
-    const res = await axios.get("/api/user/me");
-    console.log(res);
-    if (res.status !== 200 || (res.data.status && res.data.status !== 200))
+    const userRes = await axios.get("/api/user/me");
+    console.log(userRes);
+    if (
+      userRes.status !== 200 ||
+      (userRes.data.status && userRes.data.status !== 200)
+    )
       throw new Error();
-    return { userData: res.data };
+
+    const hackatimeRes = await axios.get("/api/hackatime/projects");
+    console.log(hackatimeRes);
+    if (
+      hackatimeRes.status !== 200 ||
+      (hackatimeRes.data.status && hackatimeRes.data.status !== 200)
+    )
+      throw new Error();
+    return {
+      userData: userRes.data,
+      hackatimeProjects: hackatimeRes.data as HackatimeProject[] | null,
+    };
   } catch {
-    return { userData: null };
+    return { userData: null, hackatimeProjects: null };
   }
 }
 export default function SubmitPage({ loaderData }: Route.ComponentProps) {
-  const handleAddCustomProject = () => {
-    (window as any).TicketsSubmit?.addCustomProject();
-  };
+  const user = loaderData.userData;
+  const hackatimeProjects = loaderData.hackatimeProjects;
+  const step = !user ? 1 : user ? 2 : 1;
+  const step2Locked = step < 2;
+
+  const [selectedHackatimeProjects, setSelectedHackatimeProjects] = useState<
+    HackatimeProject[]
+  >([]);
+
+  const [search, setSearch] = useState("");
+
   useEffect(() => {
     console.log(loaderData?.userData);
+    console.log(loaderData?.hackatimeProjects);
   }, []);
+
   const handleHCA = () => {
     window.location.replace("/api/auth/hca");
   };
@@ -28,10 +60,9 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
     window.location.replace("/api/auth/hackatime");
   };
 
-  const user = loaderData.userData;
-  const hackatimeProjects = null;
-  const step = !user ? 1 : user ? 2 : 1;
-  const step2Locked = step < 2;
+  function formatHours(seconds: number): string {
+    return `${(seconds / 3600).toFixed(1)}h`;
+  }
 
   return (
     <main className="container">
@@ -333,50 +364,39 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                     </div>
                   </div>
                 ) : (
-                  <div id="step2Content" style={{ display: "none" }}>
+                  <div id="step2Content">
                     <p className="step-instruction">
-                      Enter your Hackatime username to retrieve projects coded
-                      in your editor. Select the project you built for your
-                      movie website to calculate your ticket grant ($5 per hour,
-                      up to 10 hours maximum).
+                      Select the project you built for your movie website to
+                      calculate your ticket grant ($5 per hour, up to 10 hours
+                      maximum).
                     </p>
 
                     {/* <!-- Hackatime Username Search Input --> */}
                     <div className="hackatime-search-box">
                       <input
                         type="text"
-                        id="hackatimeUsernameInput"
+                        id="hackatimeProjectSearchInput"
                         className="ht-input"
-                        placeholder="Hackatime username (e.g. orpheus)"
-                        value="orpheus"
+                        placeholder="super cool project"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
                       />
                       <button
                         type="button"
                         className="btn-fetch-projects"
                         id="btnFetchHackatime"
                       >
-                        <svg
-                          width="18"
-                          height="18"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <polyline points="23 4 23 10 17 10"></polyline>
-                          <polyline points="1 20 1 14 7 14"></polyline>
-                          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
-                        </svg>
+                        <RefreshCcw />
                         <span>Fetch Projects</span>
                       </button>
                     </div>
 
                     {/* <!-- Available Detected Projects Grid --> */}
                     <div className="projects-list-title">
-                      <span>Select your movie website project:</span>
-                      <span id="projectsCountLabel">4 projects found</span>
+                      <span>Select your movie website/game project:</span>
+                      <span id="projectsCountLabel">
+                        {hackatimeProjects.length} projects found
+                      </span>
                     </div>
 
                     <div
@@ -384,159 +404,51 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                       id="projectOptionsGrid"
                     >
                       {/* <!-- Project 1 --> */}
-                      <div
-                        className="project-card-option selected"
-                        data-project="interstellar flight computer"
-                        data-hours="8.4"
-                        data-grant="42.00"
-                      >
-                        <div className="option-top">
-                          <div>
-                            <div className="option-name">
-                              interstellar flight computer
+                      {hackatimeProjects
+                        .filter((p) =>
+                          p.name
+                            .toLocaleLowerCase()
+                            .includes(search.toLocaleLowerCase()),
+                        )
+                        .map((project: HackatimeProject) => (
+                          <div
+                            key={project.name}
+                            className={`project-card-option ${selectedHackatimeProjects.find((p) => p.name === project.name) && "selected"}`}
+                            data-project="interstellar flight computer"
+                            data-hours={formatHours(project.total_seconds)}
+                            data-grant="42.00"
+                            onClick={() =>
+                              setSelectedHackatimeProjects((prev) =>
+                                prev.find((p) => p.name === project.name)
+                                  ? prev.filter((p) => p.name !== project.name)
+                                  : [...prev, project],
+                              )
+                            }
+                          >
+                            <div className="option-top">
+                              <div>
+                                <div className="option-name">
+                                  {project.name}
+                                </div>
+                              </div>
+                              <div className="radio-circle">
+                                <div className="radio-dot"></div>
+                              </div>
                             </div>
-                            <div
-                              style={{
-                                fontSize: 13,
-                                color: "var(--ticket-muted)",
-                                marginTop: 2,
-                              }}
-                            >
-                              Movie: Interstellar
-                            </div>
-                          </div>
-                          <div className="radio-circle">
-                            <div className="radio-dot"></div>
-                          </div>
-                        </div>
-                        <div className="option-meta">
-                          <span className="hours-badge">8.4 hours logged</span>
-                          <span className="grant-estimate-badge">
-                            $42.00 grant
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* <!-- Project 2 --> */}
-                      <div
-                        className="project-card-option"
-                        data-project="spirited away bathhouse site"
-                        data-hours="10.0"
-                        data-grant="50.00"
-                      >
-                        <div className="option-top">
-                          <div>
-                            <div className="option-name">
-                              spirited away bathhouse site
-                            </div>
-                            <div
-                              style={{
-                                fontSize: 13,
-                                color: "var(--ticket-muted)",
-                                marginTop: 2,
-                              }}
-                            >
-                              Movie: Spirited Away
+                            <div className="option-meta">
+                              <span className="hours-badge">
+                                {formatHours(project.total_seconds)} logged
+                              </span>
+                              <span className="grant-estimate-badge">
+                                $
+                                {((project.total_seconds / 3600) * 5).toFixed(
+                                  2,
+                                )}{" "}
+                                grant
+                              </span>
                             </div>
                           </div>
-                          <div className="radio-circle">
-                            <div className="radio-dot"></div>
-                          </div>
-                        </div>
-                        <div className="option-meta">
-                          <span className="hours-badge">10.0 hours logged</span>
-                          <span className="grant-estimate-badge">
-                            $50.00 max grant
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* <!-- Project 3 --> */}
-                      <div
-                        className="project-card-option"
-                        data-project="truman show live broadcast"
-                        data-hours="6.2"
-                        data-grant="31.00"
-                      >
-                        <div className="option-top">
-                          <div>
-                            <div className="option-name">
-                              truman show live broadcast
-                            </div>
-                            <div
-                              style={{
-                                fontSize: 13,
-                                color: "var(--ticket-muted)",
-                                marginTop: 2,
-                              }}
-                            >
-                              Movie: The Truman Show
-                            </div>
-                          </div>
-                          <div className="radio-circle">
-                            <div className="radio-dot"></div>
-                          </div>
-                        </div>
-                        <div className="option-meta">
-                          <span className="hours-badge">6.2 hours logged</span>
-                          <span className="grant-estimate-badge">
-                            $31.00 grant
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* <!-- Project 4 --> */}
-                      <div
-                        className="project-card-option"
-                        data-project="spider verse multi universe web"
-                        data-hours="4.8"
-                        data-grant="24.00"
-                      >
-                        <div className="option-top">
-                          <div>
-                            <div className="option-name">
-                              spider verse multi universe web
-                            </div>
-                            <div
-                              style={{
-                                fontSize: 13,
-                                color: "var(--ticket-muted)",
-                                marginTop: 2,
-                              }}
-                            >
-                              Movie: Spider Verse
-                            </div>
-                          </div>
-                          <div className="radio-circle">
-                            <div className="radio-dot"></div>
-                          </div>
-                        </div>
-                        <div className="option-meta">
-                          <span className="hours-badge">4.8 hours logged</span>
-                          <span className="grant-estimate-badge">
-                            $24.00 grant
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Manual project entry link */}
-                    <div style={{ textAlign: "right", marginBottom: 16 }}>
-                      <button
-                        type="button"
-                        // onClick={handleAddCustomProject}
-                        style={{
-                          background: "none",
-                          border: "none",
-                          fontSize: 13,
-                          fontWeight: 700,
-                          color: "var(--velvet-bright)",
-                          textDecoration: "underline",
-                          cursor: "pointer",
-                        }}
-                      >
-                        Project not listed? Add custom Hackatime project name
-                      </button>
+                        ))}
                     </div>
 
                     {/* Selected Confirmation Summary Strip */}
@@ -552,7 +464,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                           className="confirmed-title"
                           id="confirmedProjectTitle"
                         >
-                          interstellar flight computer
+                          {selectedHackatimeProjects.length} projects selected
                         </div>
                         <div
                           style={{
