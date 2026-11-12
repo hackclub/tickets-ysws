@@ -2,6 +2,7 @@ import { Check, Circle, Clock, Lock, LogIn, RefreshCcw } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import type { Route } from "./+types/_landing.submit";
 import axios from "axios";
+import { useRevalidator } from "react-router";
 
 export interface HackatimeProject {
   name: string;
@@ -37,16 +38,23 @@ export async function clientLoader() {
   }
 }
 export default function SubmitPage({ loaderData }: Route.ComponentProps) {
-  const user = loaderData.userData;
-  const hackatimeProjects = loaderData.hackatimeProjects;
-  const step = !user ? 1 : user ? 2 : 1;
-  const step2Locked = step < 2;
-
   const [selectedHackatimeProjects, setSelectedHackatimeProjects] = useState<
     HackatimeProject[]
   >([]);
 
   const [search, setSearch] = useState("");
+  const revalidator = useRevalidator();
+  const user = loaderData.userData;
+  const hackatimeProjects = loaderData.hackatimeProjects;
+  const step = !user
+    ? 1
+    : user && selectedHackatimeProjects.length === 0
+      ? 2
+      : user && selectedHackatimeProjects.length > 0
+        ? 3
+        : 1;
+  const step2Locked = step < 2;
+  const step3Locked = step < 3;
 
   useEffect(() => {
     console.log(loaderData?.userData);
@@ -81,7 +89,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
         {/* <!-- 3 Frame Progress Filmstrip --> */}
         <div className="progress-filmstrip" aria-label="Submission Progress">
           <div
-            className={`progress-frame ${user ? "completed" : "active"}`}
+            className={`progress-frame ${!step2Locked ? "completed" : "active"}`}
             id="progressFrame1"
           >
             <div className="frame-number">
@@ -92,20 +100,31 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
           </div>
 
           <div
-            className={`progress-frame ${user ? "completed" : "active"}`}
+            className={`progress-frame ${!step3Locked ? "completed" : "active"}`}
             id="progressFrame2"
           >
             <div className="frame-number">
               <span>Frame 02</span>
-              <span id="frame2BadgeText">Locked</span>
+              <span id="frame2BadgeText">
+                {step2Locked
+                  ? "Locked"
+                  : !step3Locked
+                    ? "Completed"
+                    : "Required"}
+              </span>
             </div>
             <div className="frame-title">2. Link Hackatime</div>
           </div>
 
-          <div className="progress-frame" id="progressFrame3">
+          <div
+            className={`progress-frame ${!step3Locked && "active"}`}
+            id="progressFrame3"
+          >
             <div className="frame-number">
               <span>Frame 03</span>
-              <span id="frame3BadgeText">Locked</span>
+              <span id="frame3BadgeText">
+                {!step3Locked ? "Required" : "Locked"}
+              </span>
             </div>
             <div className="frame-title">3. Project Details</div>
           </div>
@@ -280,6 +299,14 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                   <Lock size={16} />
                   <span>Locked</span>
                 </span>
+              ) : !step3Locked ? (
+                <span
+                  className="step-status-pill status-completed"
+                  id="step2StatusPill"
+                >
+                  <Check size={16} />
+                  <span>Completed</span>
+                </span>
               ) : (
                 <span
                   className="step-status-pill status-active"
@@ -385,8 +412,12 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                         type="button"
                         className="btn-fetch-projects"
                         id="btnFetchHackatime"
+                        onClick={() => revalidator.revalidate()}
+                        disabled={revalidator.state === "loading"}
                       >
-                        <RefreshCcw />
+                        <RefreshCcw
+                          className={`${revalidator.state === "loading" && "animate-spin"}`}
+                        />
                         <span>Fetch Projects</span>
                       </button>
                     </div>
@@ -474,7 +505,13 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                           }}
                           id="confirmedProjectHours"
                         >
-                          8.4 verified coding hours recorded via Hackatime
+                          {(
+                            selectedHackatimeProjects.reduce(
+                              (sum, p) => sum + p.total_seconds,
+                              0,
+                            ) / 3600
+                          ).toFixed(1)}{" "}
+                          verified coding hours recorded via Hackatime
                         </div>
                       </div>
 
@@ -483,7 +520,15 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                           className="confirmed-grant-sum"
                           id="confirmedGrantSum"
                         >
-                          $42.00
+                          $
+                          {(
+                            (selectedHackatimeProjects.reduce(
+                              (sum, p) => sum + p.total_seconds,
+                              0,
+                            ) /
+                              3600) *
+                            5
+                          ).toFixed(2)}
                         </div>
                         <span
                           style={{
@@ -498,279 +543,260 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                         </span>
                       </div>
                     </div>
-
-                    <div
-                      style={{
-                        marginTop: 20,
-                        display: "flex",
-                        justifyContent: "flex-end",
-                      }}
-                    >
-                      <button
-                        type="button"
-                        className="btn-fetch-projects"
-                        id="btnConfirmProject"
-                        // onClick={handleConfirmProject}
-                        style={{
-                          background:
-                            "linear-gradient(135deg, var(--velvet-bright), var(--velvet-deep))",
-                          borderColor: "var(--gold-primary)",
-                        }}
-                      >
-                        <span>Confirm Project and Proceed to Step 3</span>
-                        <svg
-                          width="18"
-                          height="18"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="3"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <line x1="5" y1="12" x2="19" y2="12"></line>
-                          <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
-                      </button>
-                    </div>
                   </div>
                 ))}
             </div>
           </section>
 
           {/* third step */}
-          <section className="step-card locked" id="stepCard3">
+          <section
+            className={`step-card ${step3Locked && "locked"}`}
+            id="stepCard3"
+          >
             <div className="step-card-header">
               <div className="step-header-left">
                 <span className="step-tag">Step 03</span>
                 <h2 className="step-header-title">Input Project Details</h2>
               </div>
-              <span
-                className="step-status-pill status-locked"
-                id="step3StatusPill"
-              >
-                <Lock size={16} />
-                <span>Locked</span>
-              </span>
+              {step3Locked ? (
+                <span
+                  className="step-status-pill status-locked"
+                  id="step2StatusPill"
+                >
+                  <Lock size={16} />
+                  <span>Locked</span>
+                </span>
+              ) : (
+                <span
+                  className="step-status-pill status-active"
+                  id="step2StatusPill"
+                >
+                  <Circle size={16} />
+                  <span>Enter details</span>
+                </span>
+              )}
             </div>
 
             <div className="step-card-body">
               {/* <!-- Locked Notification --> */}
-              <div className="locked-notice" id="step3LockNotice">
-                <div className="locked-notice-icon">
-                  <Lock size={32} />
-                </div>
-                <h3
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: 22,
-                    color: "var(--gold-light)",
-                  }}
-                >
-                  Step 3 is currently locked
-                </h3>
-                <p>
-                  Please complete Step 1 (Sign in with HCA) and Step 2 (Select
-                  Hackatime Project) above to unlock this submission form.
-                </p>
-              </div>
-
-              {/* <!-- Unlocked Submission Form --> */}
-              <form
-                id="projectSubmissionForm"
-                className="project-form"
-                style={{ display: "none" }}
-                // onsubmit="window.TicketsSubmit.handleFormSubmit(event)"
-              >
-                <p className="step-instruction">
-                  Fill in the details for your film web experience. Make sure
-                  your live link is accessible and your code repository is
-                  public so the review crew can examine your project.
-                </p>
-
-                {/* <!-- Error Alert Banner --> */}
-                <div
-                  className="error-banner"
-                  id="formErrorBanner"
-                  role="alert"
-                ></div>
-
-                {/* <!-- Row 1: Movie Title & Project Name --> */}
-                <div className="form-row">
-                  <div className="form-group">
-                    <label htmlFor="movieTitle" className="form-label">
-                      <span>Movie Title</span>
-                      <span style={{ color: "var(--velvet-bright)" }}>*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="movieTitle"
-                      className="form-input"
-                      placeholder="e.g. Interstellar, Spirited Away, The Matrix"
-                      required
-                    />
-                    <span className="form-hint">
-                      The motion picture your website celebrates.
-                    </span>
+              {step3Locked && (
+                <div className="locked-notice" id="step3LockNotice">
+                  <div className="locked-notice-icon">
+                    <Lock size={32} />
                   </div>
-
-                  <div className="form-group">
-                    <label htmlFor="projectName" className="form-label">
-                      <span>Project Name</span>
-                      <span style={{ color: "var(--velvet-bright)" }}>*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="projectName"
-                      className="form-input"
-                      placeholder="e.g. Endurance Flight Computer"
-                      required
-                    />
-                    <span className="form-hint">
-                      The public title of your web application.
-                    </span>
-                  </div>
-                </div>
-
-                {/* <!-- Row 2: Live Link & Public Repo Link --> */}
-                <div className="form-row">
-                  <div className="form-group">
-                    <label htmlFor="liveUrl" className="form-label">
-                      <span>Live Website Address</span>
-                      <span style={{ color: "var(--velvet-bright)" }}>*</span>
-                    </label>
-                    <input
-                      type="url"
-                      id="liveUrl"
-                      className="form-input"
-                      placeholder="https://yourmoviesite.vercel.app"
-                      required
-                    />
-                    <span className="form-hint">
-                      Public URL hosted on Vercel, GitHub Pages, or any host.
-                    </span>
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="repoUrl" className="form-label">
-                      <span>Public GitHub Repository</span>
-                      <span style={{ color: "var(--velvet-bright)" }}>*</span>
-                    </label>
-                    <input
-                      type="url"
-                      id="repoUrl"
-                      className="form-input"
-                      placeholder="https://github.com/username/repository"
-                      required
-                    />
-                    <span className="form-hint">
-                      Source repository with code authored by you.
-                    </span>
-                  </div>
-                </div>
-
-                {/* <!-- Row 3: Description of creative elements --> */}
-                <div className="form-group">
-                  <label htmlFor="projectDescription" className="form-label">
-                    <span>How does your website celebrate the movie?</span>
-                    <span style={{ color: "var(--velvet-bright)" }}>*</span>
-                  </label>
-                  <textarea
-                    id="projectDescription"
-                    className="form-textarea"
-                    placeholder="Describe your creative choices: custom interactive scenes, original audio soundtracks, cinematic visuals, easter eggs, or storyline reenactments."
-                    required
-                  ></textarea>
-                  <span className="form-hint">
-                    Be specific about what you created and what makes it
-                    special.
-                  </span>
-                </div>
-
-                {/* <!-- Row 4: Cinema Choice & Watchlist --> */}
-                <div className="form-row">
-                  <div className="form-group">
-                    <label htmlFor="cinemaVenue" className="form-label">
-                      <span>Your Local Cinema Venue</span>
-                      <span style={{ color: "var(--velvet-bright)" }}>*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="cinemaVenue"
-                      className="form-input"
-                      placeholder="e.g. Alamo Drafthouse, AMC Empire, local indie cinema"
-                      required
-                    />
-                    <span className="form-hint">
-                      Where you plan to spend your cinema ticket grant.
-                    </span>
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="nextMovie" className="form-label">
-                      <span>What movie do you plan to watch next?</span>
-                      <span style={{ color: "var(--velvet-bright)" }}>*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="nextMovie"
-                      className="form-input"
-                      placeholder="e.g. Dune Part Two, Tron Ares"
-                      required
-                    />
-                    <span className="form-hint">
-                      Tell us what you are excited to see on the big screen.
-                    </span>
-                  </div>
-                </div>
-
-                {/* <!-- Eligibility Checkboxes --> */}
-                <div className="checkbox-group">
-                  <label className="checkbox-item">
-                    <input type="checkbox" id="checkAge" required />
-                    <span className="checkbox-text">
-                      I confirm that I am a teenager 18 years old or younger.
-                    </span>
-                  </label>
-
-                  <label className="checkbox-item">
-                    <input type="checkbox" id="checkAuthor" required />
-                    <span className="checkbox-text">
-                      I authored this project myself, my site is live, and my
-                      repository is public.
-                    </span>
-                  </label>
-
-                  <label className="checkbox-item">
-                    <input type="checkbox" id="checkTime" required />
-                    <span className="checkbox-text">
-                      My hours were authentically recorded with Hackatime during
-                      development.
-                    </span>
-                  </label>
-                </div>
-
-                {/* <!-- Submit Button --> */}
-                <div className="form-actions">
-                  <button
-                    type="submit"
-                    className="btn-submit-project"
-                    id="btnSubmitForm"
-                  >
-                    <span>Submit Project For Review</span>
-                  </button>
-                  <p
+                  <h3
                     style={{
-                      fontSize: 13,
-                      color: "var(--ticket-muted)",
-                      textAlign: "center",
+                      fontFamily: "var(--font-display)",
+                      fontSize: 22,
+                      color: "var(--gold-light)",
                     }}
                   >
-                    Once submitted, the Hack Club team reviews your project and
-                    verifies tracked hours before grant payout.
+                    Step 3 is currently locked
+                  </h3>
+                  <p>
+                    Please complete Step 1 (Sign in with HCA) and Step 2 (Select
+                    Hackatime Project) above to unlock this submission form.
                   </p>
                 </div>
-              </form>
+              )}
+
+              {/* <!-- Unlocked Submission Form --> */}
+              {!step3Locked && (
+                <form
+                  id="projectSubmissionForm"
+                  className="project-form"
+                  // onsubmit="window.TicketsSubmit.handleFormSubmit(event)"
+                >
+                  <p className="step-instruction">
+                    Fill in the details for your film web experience. Make sure
+                    your live link is accessible and your code repository is
+                    public so the review crew can examine your project.
+                  </p>
+
+                  {/* <!-- Error Alert Banner --> */}
+                  <div
+                    className="error-banner"
+                    id="formErrorBanner"
+                    role="alert"
+                  ></div>
+
+                  {/* <!-- Row 1: Movie Title & Project Name --> */}
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label htmlFor="movieTitle" className="form-label">
+                        <span>Movie Title</span>
+                        <span style={{ color: "var(--velvet-bright)" }}>*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="movieTitle"
+                        className="form-input"
+                        placeholder="e.g. Interstellar, Spirited Away, The Matrix"
+                        required
+                      />
+                      <span className="form-hint">
+                        The motion picture your website celebrates.
+                      </span>
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="projectName" className="form-label">
+                        <span>Project Name</span>
+                        <span style={{ color: "var(--velvet-bright)" }}>*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="projectName"
+                        className="form-input"
+                        placeholder="e.g. Endurance Flight Computer"
+                        required
+                      />
+                      <span className="form-hint">
+                        The public title of your web application.
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* <!-- Row 2: Live Link & Public Repo Link --> */}
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label htmlFor="liveUrl" className="form-label">
+                        <span>Live Website Address</span>
+                        <span style={{ color: "var(--velvet-bright)" }}>*</span>
+                      </label>
+                      <input
+                        type="url"
+                        id="liveUrl"
+                        className="form-input"
+                        placeholder="https://yourmoviesite.vercel.app"
+                        required
+                      />
+                      <span className="form-hint">
+                        Public URL hosted on Vercel, GitHub Pages, or any host.
+                      </span>
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="repoUrl" className="form-label">
+                        <span>Public GitHub Repository</span>
+                        <span style={{ color: "var(--velvet-bright)" }}>*</span>
+                      </label>
+                      <input
+                        type="url"
+                        id="repoUrl"
+                        className="form-input"
+                        placeholder="https://github.com/username/repository"
+                        required
+                      />
+                      <span className="form-hint">
+                        Source repository with code authored by you.
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* <!-- Row 3: Description of creative elements --> */}
+                  <div className="form-group">
+                    <label htmlFor="projectDescription" className="form-label">
+                      <span>How does your website celebrate the movie?</span>
+                      <span style={{ color: "var(--velvet-bright)" }}>*</span>
+                    </label>
+                    <textarea
+                      id="projectDescription"
+                      className="form-textarea"
+                      placeholder="Describe your creative choices: custom interactive scenes, original audio soundtracks, cinematic visuals, easter eggs, or storyline reenactments."
+                      required
+                    ></textarea>
+                    <span className="form-hint">
+                      Be specific about what you created and what makes it
+                      special.
+                    </span>
+                  </div>
+
+                  {/* <!-- Row 4: Cinema Choice & Watchlist --> */}
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label htmlFor="cinemaVenue" className="form-label">
+                        <span>Your Local Cinema Venue</span>
+                        <span style={{ color: "var(--velvet-bright)" }}>*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="cinemaVenue"
+                        className="form-input"
+                        placeholder="e.g. Alamo Drafthouse, AMC Empire, local indie cinema"
+                        required
+                      />
+                      <span className="form-hint">
+                        Where you plan to spend your cinema ticket grant.
+                      </span>
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="nextMovie" className="form-label">
+                        <span>What movie do you plan to watch next?</span>
+                        <span style={{ color: "var(--velvet-bright)" }}>*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="nextMovie"
+                        className="form-input"
+                        placeholder="e.g. Dune Part Two, Tron Ares"
+                        required
+                      />
+                      <span className="form-hint">
+                        Tell us what you are excited to see on the big screen.
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* <!-- Eligibility Checkboxes --> */}
+                  <div className="checkbox-group">
+                    <label className="checkbox-item">
+                      <input type="checkbox" id="checkAge" required />
+                      <span className="checkbox-text">
+                        I confirm that I am a teenager 18 years old or younger.
+                      </span>
+                    </label>
+
+                    <label className="checkbox-item">
+                      <input type="checkbox" id="checkAuthor" required />
+                      <span className="checkbox-text">
+                        I authored this project myself, my site is live, and my
+                        repository is public.
+                      </span>
+                    </label>
+
+                    <label className="checkbox-item">
+                      <input type="checkbox" id="checkTime" required />
+                      <span className="checkbox-text">
+                        My hours were authentically recorded with Hackatime
+                        during development.
+                      </span>
+                    </label>
+                  </div>
+
+                  {/* <!-- Submit Button --> */}
+                  <div className="form-actions">
+                    <button
+                      type="submit"
+                      className="btn-submit-project"
+                      id="btnSubmitForm"
+                    >
+                      <span>Submit Project For Review</span>
+                    </button>
+                    <p
+                      style={{
+                        fontSize: 13,
+                        color: "var(--ticket-muted)",
+                        textAlign: "center",
+                      }}
+                    >
+                      Once submitted, the Hack Club team reviews your project
+                      and verifies tracked hours before grant payout.
+                    </p>
+                  </div>
+                </form>
+              )}
             </div>
           </section>
         </div>
