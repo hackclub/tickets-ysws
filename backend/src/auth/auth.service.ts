@@ -111,7 +111,7 @@ export class AuthService {
   }
 
   logout(req: Request, res: Response) {
-    res.cookie('hca_access_token', {
+    res.clearCookie('hca_access_token', {
       httpOnly: true,
       secure: this.config.get('NODE_ENV') === 'production',
       sameSite: 'lax',

@@ -93,12 +93,6 @@ export class UserService {
       }
     }
 
-    console.log({
-      ...identity,
-      displayName: slack.displayName ?? null,
-      imageUrl: slack.imageUrl ?? null,
-      userId: slack.userId ?? null,
-    });
     return {
       ...identity,
       displayName: slack.displayName ?? null,

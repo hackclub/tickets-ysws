@@ -38,7 +38,6 @@ export class SubmitService {
       hackatimeProjectNames,
     } = submitProjectDto;
 
-    console.log(hackatimeProjectNames);
     const hackatimeProjects = await Promise.all(
       hackatimeProjectNames.map(
         async (projectName) =>
@@ -49,15 +48,6 @@ export class SubmitService {
       ),
     );
 
-    console.log('hackatId', hackatime_id);
-    console.log(
-      hackatimeProjects
-        .map(
-          (project) =>
-            `${project.name} ${project.first_heartbeat}-${project.last_heartbeat}`,
-        )
-        .toString(),
-    );
 
     const address = addresses ? addresses[0] : undefined;
 
@@ -98,7 +88,6 @@ export class SubmitService {
         ).toFixed(1),
       ),
     };
-    console.log(recordPayload);
 
     const created = await this.airtable.createProjectRecord(recordPayload);
     const record = Array.isArray(created) ? created[0] : created;
