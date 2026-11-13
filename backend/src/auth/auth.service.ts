@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 
 @Injectable()
 export class AuthService {
@@ -55,36 +55,6 @@ export class AuthService {
       maxAge: 1000 * 60 * 60 * 24, // 1 day
       path: '/',
     });
-
-    // const hackclubUserData = await axios.get<{
-    //   identity: {
-    //     ysws_eligible: boolean;
-    //     id: string;
-    //     verification_status: boolean;
-    //     slack_id: string;
-    //   };
-    // }>('https://auth.hackclub.com/api/v1/me', {
-    //   headers: { Authorization: `Bearer ${oauthRes.data.access_token}` },
-    // });
-
-    // if (
-    //   !hackclubUserData.data.identity.verification_status ||
-    //   !hackclubUserData.data.identity.ysws_eligible
-    // )
-    //   throw new ForbiddenException(
-    //     "You are not eligible for Hackachat, it's either you haven't done your id verification, or your already pass 18",
-    //   );
-
-    // const slackUserData = await axios.get<{
-    //   displayName: string;
-    //   imageUrl: string;
-    //   userId: string;
-    // }>(
-    //   `https://cachet.dunkirk.sh/users/${hackclubUserData.data.identity.slack_id}`,
-    // );
-
-    // if (slackUserData.status !== 200)
-    //   throw new InternalServerErrorException('Unable to retrieve  user data');
 
     return {
       url: '/submit',
@@ -135,35 +105,26 @@ export class AuthService {
       path: '/',
     });
 
-    // const hackclubUserData = await axios.get<{
-    //   identity: {
-    //     ysws_eligible: boolean;
-    //     id: string;
-    //     verification_status: boolean;
-    //     slack_id: string;
-    //   };
-    // }>('https://auth.hackclub.com/api/v1/me', {
-    //   headers: { Authorization: `Bearer ${oauthRes.data.access_token}` },
-    // });
+    return {
+      url: '/submit',
+    };
+  }
 
-    // if (
-    //   !hackclubUserData.data.identity.verification_status ||
-    //   !hackclubUserData.data.identity.ysws_eligible
-    // )
-    //   throw new ForbiddenException(
-    //     "You are not eligible for Hackachat, it's either you haven't done your id verification, or your already pass 18",
-    //   );
-
-    // const slackUserData = await axios.get<{
-    //   displayName: string;
-    //   imageUrl: string;
-    //   userId: string;
-    // }>(
-    //   `https://cachet.dunkirk.sh/users/${hackclubUserData.data.identity.slack_id}`,
-    // );
-
-    // if (slackUserData.status !== 200)
-    //   throw new InternalServerErrorException('Unable to retrieve  user data');
+  logout(req: Request, res: Response) {
+    res.cookie('hca_access_token', {
+      httpOnly: true,
+      secure: this.config.get('NODE_ENV') === 'production',
+      sameSite: 'lax',
+      maxAge: 1000 * 60 * 60 * 24, // 1 day
+      path: '/',
+    });
+    res.clearCookie('hackatime_access_token', {
+      httpOnly: true,
+      secure: this.config.get('NODE_ENV') === 'production',
+      sameSite: 'lax',
+      maxAge: 1000 * 60 * 60 * 24, // 1 day
+      path: '/',
+    });
 
     return {
       url: '/submit',

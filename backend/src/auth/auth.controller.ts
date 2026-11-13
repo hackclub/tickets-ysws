@@ -1,6 +1,14 @@
-import { Controller, Get, Param, Query, Redirect, Res } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Query,
+  Redirect,
+  Req,
+  Res,
+} from '@nestjs/common';
 import { AuthService } from './auth.service.js';
-import { type Response } from 'express';
+import type { Request, Response } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -34,5 +42,11 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response,
   ) {
     return this.authService.hackatimeCallback(code, res);
+  }
+
+  @Redirect()
+  @Get('logout')
+  logout(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
+    return this.authService.logout(req, res);
   }
 }

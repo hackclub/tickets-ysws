@@ -50,6 +50,7 @@ export class SubmitService {
       Email: primary_email,
       Description: description,
       'GitHub Username': github_username,
+
       'Address (Line 1)': 'fill this later',
       'Address (Line 2)': 'fill this later',
       City: 'fill this later',
@@ -57,6 +58,7 @@ export class SubmitService {
       Country: 'fill this later',
       'ZIP / Postal Code': 'fill this later',
       Birthday: 'fill this later',
+
       'Justification - Submitter Hackatime ID': hackatime_id,
       'Justification - Hackatime Project Name(s) + Date Range(s)':
         hackatimeProjects
@@ -65,6 +67,9 @@ export class SubmitService {
               `${project.name} ${project.first_heartbeat}-${project.last_heartbeat}`,
           )
           .toString(),
+
+      'Movie Planned to Watch': plannedMovieToWatch,
+      'Slack Id': slack_id,
     });
 
     await this.airtable.uploadAttachment(
