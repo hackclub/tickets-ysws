@@ -6,22 +6,85 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
-import { Request, Response } from 'express';
+import { randomBytes, timingSafeEqual } from 'node:crypto';
+import type { Request, Response } from 'express';
+
+const OAUTH_STATE_MAX_AGE = 5 * 60 * 1000;
 
 @Injectable()
 export class AuthService {
   constructor(private readonly config: ConfigService) {}
 
-  hackclubAuth() {
-    const redirect_uri = `${this.config.get('APP_URL')}/api/auth/hca/callback`;
-    const client_id = this.config.get('HACKCLUB_AUTH_CLIENTID');
-
+  private cookieOptions() {
     return {
-      url: `https://auth.hackclub.com/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&response_type=code&scope=email+name+profile+verification_status+slack_id${this.config.get('NODE_ENV') === 'production' ? '+basic_info+addresses' : ''}`,
+      httpOnly: true,
+      secure: this.config.get('NODE_ENV') === 'production',
+      sameSite: 'lax' as const,
+      path: '/',
     };
   }
 
-  async hackclubAuthCallback(code: string, res: Response) {
+  private createOAuthState(res: Response, cookieName: string): string {
+    const state = randomBytes(32).toString('hex');
+    res.cookie(cookieName, state, {
+      ...this.cookieOptions(),
+      maxAge: OAUTH_STATE_MAX_AGE,
+    });
+    return state;
+  }
+
+  private validateOAuthState(
+    req: Request,
+    res: Response,
+    cookieName: string,
+    state: string | undefined,
+  ): void {
+    const cookieState = req.cookies?.[cookieName];
+    res.clearCookie(cookieName, this.cookieOptions());
+
+    if (
+      typeof cookieState !== 'string' ||
+      typeof state !== 'string' ||
+      !cookieState ||
+      !state
+    ) {
+      throw new ForbiddenException('Invalid OAuth state');
+    }
+
+    const expected = Buffer.from(cookieState);
+    const received = Buffer.from(state);
+    if (
+      expected.length !== received.length ||
+      !timingSafeEqual(expected, received)
+    ) {
+      throw new ForbiddenException('Invalid OAuth state');
+    }
+  }
+
+  hackclubAuth(res: Response) {
+    const redirect_uri = `${this.config.get('APP_URL')}/api/auth/hca/callback`;
+    const client_id = this.config.get('HACKCLUB_AUTH_CLIENTID');
+    const state = this.createOAuthState(res, 'hca_oauth_state');
+    const params = new URLSearchParams({
+      client_id: client_id ?? '',
+      redirect_uri,
+      response_type: 'code',
+      scope: `email name profile verification_status slack_id${this.config.get('NODE_ENV') === 'production' ? ' basic_info addresses' : ''}`,
+      state,
+    });
+
+    return {
+      url: `https://auth.hackclub.com/oauth/authorize?${params}`,
+    };
+  }
+
+  async hackclubAuthCallback(
+    code: string,
+    state: string | undefined,
+    req: Request,
+    res: Response,
+  ) {
+    this.validateOAuthState(req, res, 'hca_oauth_state', state);
     if (!code) throw new BadRequestException('code is required');
 
     const redirect_uri = `${this.config.get('APP_URL')}/api/auth/hca/callback`;
@@ -49,11 +112,8 @@ export class AuthService {
       );
 
     res.cookie('hca_access_token', oauthRes.data.access_token, {
-      httpOnly: true,
-      secure: this.config.get('NODE_ENV') === 'production',
-      sameSite: 'lax',
+      ...this.cookieOptions(),
       maxAge: 1000 * 60 * 60 * 24, // 1 day
-      path: '/',
     });
 
     return {
@@ -61,16 +121,30 @@ export class AuthService {
     };
   }
 
-  hackatime() {
+  hackatime(res: Response) {
     const client_id = this.config.get('HACKATIME_UID');
     const redirect_uri = `${this.config.get('APP_URL')}/api/auth/hackatime/callback`;
+    const state = this.createOAuthState(res, 'hackatime_oauth_state');
+    const params = new URLSearchParams({
+      client_id: client_id ?? '',
+      redirect_uri,
+      scope: 'profile read',
+      response_type: 'code',
+      state,
+    });
 
     return {
-      url: `https://hackatime.hackclub.com/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=profile+read&response_type=code`,
+      url: `https://hackatime.hackclub.com/oauth/authorize?${params}`,
     };
   }
 
-  async hackatimeCallback(code: string, res: Response) {
+  async hackatimeCallback(
+    code: string,
+    state: string | undefined,
+    req: Request,
+    res: Response,
+  ) {
+    this.validateOAuthState(req, res, 'hackatime_oauth_state', state);
     if (!code) throw new BadRequestException('code is required');
 
     const redirect_uri = `${this.config.get('APP_URL')}/api/auth/hackatime/callback`;
@@ -98,11 +172,8 @@ export class AuthService {
       );
 
     res.cookie('hackatime_access_token', oauthRes.data.access_token, {
-      httpOnly: true,
-      secure: this.config.get('NODE_ENV') === 'production',
-      sameSite: 'lax',
+      ...this.cookieOptions(),
       maxAge: 1000 * 60 * 60 * 24, // 1 day
-      path: '/',
     });
 
     return {
@@ -112,18 +183,10 @@ export class AuthService {
 
   logout(req: Request, res: Response) {
     res.clearCookie('hca_access_token', {
-      httpOnly: true,
-      secure: this.config.get('NODE_ENV') === 'production',
-      sameSite: 'lax',
-      maxAge: 1000 * 60 * 60 * 24, // 1 day
-      path: '/',
+      ...this.cookieOptions(),
     });
     res.clearCookie('hackatime_access_token', {
-      httpOnly: true,
-      secure: this.config.get('NODE_ENV') === 'production',
-      sameSite: 'lax',
-      maxAge: 1000 * 60 * 60 * 24, // 1 day
-      path: '/',
+      ...this.cookieOptions(),
     });
 
     return {

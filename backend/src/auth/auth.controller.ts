@@ -1,7 +1,6 @@
 import {
   Controller,
   Get,
-  Param,
   Query,
   Redirect,
   Req,
@@ -16,32 +15,36 @@ export class AuthController {
 
   @Redirect()
   @Get('hca')
-  hackclubAuth() {
-    return this.authService.hackclubAuth();
+  hackclubAuth(@Res({ passthrough: true }) res: Response) {
+    return this.authService.hackclubAuth(res);
   }
 
   @Redirect()
   @Get('/hca/callback')
   hackclubCallback(
     @Query('code') code: string,
+    @Query('state') state: string,
+    @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
-    return this.authService.hackclubAuthCallback(code, res);
+    return this.authService.hackclubAuthCallback(code, state, req, res);
   }
 
   @Redirect()
   @Get('hackatime')
-  hackatime() {
-    return this.authService.hackatime();
+  hackatime(@Res({ passthrough: true }) res: Response) {
+    return this.authService.hackatime(res);
   }
 
   @Redirect()
   @Get('/hackatime/callback')
   hackatimeCallback(
     @Query('code') code: string,
+    @Query('state') state: string,
+    @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
-    return this.authService.hackatimeCallback(code, res);
+    return this.authService.hackatimeCallback(code, state, req, res);
   }
 
   @Redirect()
