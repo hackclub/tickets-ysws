@@ -5,5 +5,6 @@ import { HackatimeController } from './hackatime.controller.js';
 @Module({
   controllers: [HackatimeController],
   providers: [HackatimeService],
+  exports: [HackatimeService],
 })
 export class HackatimeModule {}

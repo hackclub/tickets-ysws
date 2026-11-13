@@ -13,30 +13,36 @@ export interface HackatimeProject {
 }
 
 export async function clientLoader() {
+  let userData = null;
   try {
     const userRes = await axios.get("/api/user/me");
-    console.log(userRes);
     if (
       userRes.status !== 200 ||
-      (userRes.data.status && userRes.data.status !== 200)
-    )
-      throw new Error();
-
-    const hackatimeRes = await axios.get("/api/hackatime/projects");
-    console.log(hackatimeRes);
-    if (
-      hackatimeRes.status !== 200 ||
-      (hackatimeRes.data.status && hackatimeRes.data.status !== 200)
-    )
-      throw new Error();
-    return {
-      userData: userRes.data,
-      hackatimeProjects: hackatimeRes.data as HackatimeProject[] | null,
-    };
+      (userRes.data?.status && userRes.data.status !== 200)
+    ) {
+      return { userData: null, hackatimeProjects: null };
+    }
+    userData = userRes.data;
   } catch {
     return { userData: null, hackatimeProjects: null };
   }
+
+  let hackatimeProjects: HackatimeProject[] | null = null;
+  try {
+    const hackatimeRes = await axios.get("/api/hackatime/projects");
+    if (
+      hackatimeRes.status === 200 &&
+      !(hackatimeRes.data?.status && hackatimeRes.data.status !== 200)
+    ) {
+      hackatimeProjects = hackatimeRes.data as HackatimeProject[];
+    }
+  } catch {
+    hackatimeProjects = null;
+  }
+
+  return { userData, hackatimeProjects };
 }
+
 export default function SubmitPage({ loaderData }: Route.ComponentProps) {
   const [selectedHackatimeProjects, setSelectedHackatimeProjects] = useState<
     HackatimeProject[]

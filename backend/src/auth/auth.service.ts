@@ -17,7 +17,7 @@ export class AuthService {
     const client_id = this.config.get('HACKCLUB_AUTH_CLIENTID');
 
     return {
-      url: `https://auth.hackclub.com/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&response_type=code&scope=email+name+profile+verification_status+slack_id`,
+      url: `https://auth.hackclub.com/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&response_type=code&scope=email+name+profile+verification_status+slack_id${this.config.get('NODE_ENV') === 'production' ? '+basic_info+addresses' : ''}`,
     };
   }
 

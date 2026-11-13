@@ -5,5 +5,6 @@ import { AirtableController } from './airtable.controller.js';
 @Module({
   controllers: [AirtableController],
   providers: [AirtableService],
+  exports: [AirtableService],
 })
 export class AirtableModule {}
