@@ -16,4 +16,6 @@ export class SubmitProjectDto {
   description: string;
   @IsString()
   plannedMovieToWatch: string;
+  @IsString({ each: true })
+  hackatimeProjectNames: string[];
 }

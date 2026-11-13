@@ -12,7 +12,11 @@ export class SubmitService {
     private readonly hackatimeService: HackatimeService,
     private readonly userService: UserService,
   ) {}
-  async submitProject(submitProjectDto: SubmitProjectDto, request: Request) {
+  async submitProject(
+    submitProjectDto: SubmitProjectDto,
+    request: Request,
+    screenshotFile: Express.Multer.File,
+  ) {
     const {
       first_name,
       last_name,
@@ -20,7 +24,7 @@ export class SubmitService {
       slack_id,
       primary_email,
     } = await this.userService.me(request);
-    const { id: hackatime_id } =
+    const { id: hackatime_id, github_username } =
       await this.hackatimeService.getUserProfile(request);
     const {
       codeUrl,
@@ -29,14 +33,48 @@ export class SubmitService {
       plannedMovieToWatch,
       playableUrl,
       projectName,
+      hackatimeProjectNames,
     } = submitProjectDto;
 
-    this.airtable.createProjectRecord({
+    const hackatimeProjects = await Promise.all(
+      hackatimeProjectNames.map((projectName) =>
+        this.hackatimeService.getProjectFullDetails(projectName, slack_id),
+      ),
+    );
+
+    const record = await this.airtable.createProjectRecord({
       'Code URL': codeUrl,
       'Playable URL': playableUrl,
       'First Name': first_name,
       'Last Name': last_name,
       Email: primary_email,
+      Description: description,
+      'GitHub Username': github_username,
+      'Address (Line 1)': 'fill this later',
+      'Address (Line 2)': 'fill this later',
+      City: 'fill this later',
+      'State / Province': 'fill this later',
+      Country: 'fill this later',
+      'ZIP / Postal Code': 'fill this later',
+      Birthday: 'fill this later',
+      'Justification - Submitter Hackatime ID': hackatime_id,
+      'Justification - Hackatime Project Name(s) + Date Range(s)':
+        hackatimeProjects
+          .map(
+            (project) =>
+              `${project.name} ${project.first_heartbeat}-${project.last_heartbeat}`,
+          )
+          .toString(),
     });
+
+    await this.airtable.uploadAttachment(
+      record[0].id,
+      'Screenshot',
+      screenshotFile,
+    );
+
+    return {
+      message: 'Project submitted successfully',
+    };
   }
 }

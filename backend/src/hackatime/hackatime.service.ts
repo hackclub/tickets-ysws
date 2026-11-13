@@ -14,6 +14,18 @@ interface HackatimeUser {
   github_username: string;
   trust_factor: TrustFactor;
 }
+
+interface HackatimeProject {
+  name: string;
+  total_seconds: number;
+  languages: string[];
+  repo_url: string | null;
+  total_heartbeats: number;
+  first_heartbeat: string;
+  last_heartbeat: string;
+  most_recent_heartbeat: string;
+  archived: boolean;
+}
 @Injectable()
 export class HackatimeService {
   async getProjects(request: Request) {
@@ -44,5 +56,16 @@ export class HackatimeService {
     );
 
     return userRes.data;
+  }
+
+  async getProjectFullDetails(
+    projectName: string,
+    slackId: string,
+  ): Promise<HackatimeProject> {
+    const projectDetail = await axios.get<HackatimeProject>(
+      `https://hackatime.hackclub.com/api/v1/users/${slackId}/project/${projectName}`,
+    );
+
+    return projectDetail.data;
   }
 }
