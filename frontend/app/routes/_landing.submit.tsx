@@ -6,14 +6,16 @@ import {
   Lock,
   LogIn,
   RefreshCcw,
+  Shield,
 } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import type { Route } from "./+types/_landing.submit";
-import axios from "axios";
-import { useRevalidator } from "react-router";
+import axios, { isAxiosError } from "axios";
+import { useNavigate, useRevalidator } from "react-router";
 import { FileUploader } from "react-drag-drop-files";
 
 const fileTypes = ["JPG", "PNG", "WEBP"];
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
 export interface HackatimeProject {
   name: string;
@@ -21,6 +23,29 @@ export interface HackatimeProject {
   most_recent_heartbeat: string; // ISO 8601, e.g. "2026-11-09T00:03:09Z"
   languages: string[];
   archived: boolean;
+}
+
+function getErrorMessage(err: unknown): string {
+  if (isAxiosError(err)) {
+    // No response means the request never reached the server
+    if (!err.response) {
+      return err.code === "ECONNABORTED"
+        ? "The request timed out. Please try again."
+        : "Could not reach the server. Check your connection and try again.";
+    }
+
+    const message = err.response.data?.message;
+
+    // Nest validation errors come back as an array of strings
+    if (Array.isArray(message) && message.length > 0) return message.join(". ");
+    if (typeof message === "string" && message) return message;
+
+    if (err.response.status === 413) return "That file is too large.";
+    if (err.response.status >= 500) {
+      return "Something went wrong on our end. Please try again shortly.";
+    }
+  }
+  return "Something went wrong. Please try again.";
 }
 
 export async function clientLoader() {
@@ -59,26 +84,30 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
     HackatimeProject[]
   >([]);
 
-  const [formData, setFormData] = useState<{
+  const [formInputData, setFormInputData] = useState<{
     movieName: string;
     projectName: string;
-    siteUrl: string;
-    githubUrl: string;
+    playableUrl: string;
+    codeUrl: string;
     description: string;
     plannedMovie: string;
     screenshotFile: File | null;
   }>({
     description: "",
-    githubUrl: "",
+    codeUrl: "",
     movieName: "",
     plannedMovie: "",
     projectName: "",
-    siteUrl: "",
+    playableUrl: "",
     screenshotFile: null,
   });
 
   const [screenshotUrl, setScreenshotUrl] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
+  const [submitted, setSubmitted] = useState(false);
 
+  const nav = useNavigate();
   const [search, setSearch] = useState("");
   const revalidator = useRevalidator();
   const user = loaderData.userData;
@@ -93,11 +122,6 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
   const step2Locked = step < 2;
   const step3Locked = step < 3;
 
-  useEffect(() => {
-    console.log(loaderData?.userData);
-    console.log(loaderData?.hackatimeProjects);
-  }, []);
-
   const handleHCA = () => {
     window.location.replace("/api/auth/hca");
   };
@@ -110,10 +134,65 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
   }
 
   const handleFileUpload = (file: File) => {
-    setFormData((prev) => ({ ...prev, screenshotFile: file }));
+    if (screenshotUrl) URL.revokeObjectURL(screenshotUrl);
 
-    const url = URL.createObjectURL(file);
-    setScreenshotUrl(url);
+    setFormInputData((prev) => ({ ...prev, screenshotFile: file }));
+    setScreenshotUrl(URL.createObjectURL(file));
+  };
+
+  const handleRemoveScreenshot = () => {
+    if (screenshotUrl) URL.revokeObjectURL(screenshotUrl);
+
+    setFormInputData((prev) => ({ ...prev, screenshotFile: null }));
+    setScreenshotUrl("");
+  };
+
+  const handleProjectSubmission = async (e: React.SubmitEvent) => {
+    e.preventDefault();
+    if (submitting) return;
+
+    setFormError(null);
+
+    const { screenshotFile } = formInputData;
+
+    if (!screenshotFile) {
+      setFormError("Please upload a screenshot of your website.");
+      return;
+    }
+    if (screenshotFile.size > MAX_FILE_SIZE) {
+      setFormError("Your screenshot must be 5MB or smaller.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("projectName", formInputData.projectName);
+    formData.append("codeUrl", formInputData.codeUrl);
+    formData.append("playableUrl", formInputData.playableUrl);
+    formData.append("description", formInputData.description);
+    formData.append("plannedMovieToWatch", formInputData.plannedMovie);
+    formData.append("movieName", formInputData.movieName);
+    formData.append("screenshotFile", screenshotFile);
+    selectedHackatimeProjects.forEach((p) =>
+      formData.append("hackatimeProjectNames", p.name),
+    );
+
+    setSubmitting(true);
+    try {
+      await axios.post("/api/submit", formData);
+      setSubmitted(true);
+    } catch (err) {
+      if (isAxiosError(err) && err.response?.status === 401) {
+        setFormError("Your session has expired. Please sign in again.");
+        revalidator.revalidate(); // reloads user data so the steps reflect it
+      } else {
+        setFormError(getErrorMessage(err));
+      }
+      document
+        .getElementById("formErrorBanner")
+        ?.scrollIntoView({ behavior: "smooth", block: "center" });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -161,13 +240,13 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
           </div>
 
           <div
-            className={`progress-frame ${!step3Locked && "active"}`}
+            className={`progress-frame ${submitted ? "completed" : !step3Locked ? "active" : ""}`}
             id="progressFrame3"
           >
             <div className="frame-number">
               <span>Frame 03</span>
               <span id="frame3BadgeText">
-                {!step3Locked ? "Required" : "Locked"}
+                {submitted ? "Submitted" : !step3Locked ? "Required" : "Locked"}
               </span>
             </div>
             <div className="frame-title">3. Project Details</div>
@@ -216,25 +295,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                   <div className="hca-box">
                     <div className="hca-box-header">
                       <div className="hca-brand-title">
-                        <svg
-                          width="28"
-                          height="28"
-                          viewBox="0 0 32 32"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          aria-hidden="true"
-                        >
-                          <rect width="32" height="32" rx="6" fill="#8F1924" />
-                          <path d="M8 8H24V14H8V8Z" fill="#E6B764" />
-                          <rect
-                            x="8"
-                            y="18"
-                            width="16"
-                            height="6"
-                            rx="2"
-                            fill="#FCFBF9"
-                          />
-                        </svg>
+                        <Shield />
                         <span>Hack Club Auth</span>
                       </div>
                       <span
@@ -275,7 +336,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                   </div>
                 </div>
               ) : (
-                /* <!-- Unauthenticated State --> */
+                /* <!-- Authenticated State --> */
                 <div id="hcaLoggedIn">
                   <p
                     className="step-instruction"
@@ -313,6 +374,9 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                       type="button"
                       className="btn-disconnect"
                       id="btnhcaDisconnect"
+                      onClick={() =>
+                        window.location.replace("/api/auth/logout")
+                      }
                     >
                       Logout
                     </button>
@@ -477,7 +541,6 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                       className="project-options-grid"
                       id="projectOptionsGrid"
                     >
-                      {/* <!-- Project 1 --> */}
                       {hackatimeProjects
                         .filter((p) =>
                           p.name
@@ -604,15 +667,23 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
               {step3Locked ? (
                 <span
                   className="step-status-pill status-locked"
-                  id="step2StatusPill"
+                  id="step3StatusPill"
                 >
                   <Lock size={16} />
                   <span>Locked</span>
                 </span>
+              ) : submitted ? (
+                <span
+                  className="step-status-pill status-completed"
+                  id="step3StatusPill"
+                >
+                  <Check size={16} />
+                  <span>Submitted</span>
+                </span>
               ) : (
                 <span
                   className="step-status-pill status-active"
-                  id="step2StatusPill"
+                  id="step3StatusPill"
                 >
                   <Circle size={16} />
                   <span>Enter details</span>
@@ -643,12 +714,30 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                 </div>
               )}
 
+              {/* <!-- Success State --> */}
+              {!step3Locked && submitted && (
+                <div className="locked-notice" role="status">
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: 22,
+                    }}
+                  >
+                    Project submitted
+                  </h3>
+                  <p>
+                    Thanks for shipping. The Hack Club team will review your
+                    project and verify your tracked hours before grant payout.
+                  </p>
+                </div>
+              )}
+
               {/* <!-- Unlocked Submission Form --> */}
-              {!step3Locked && (
+              {!step3Locked && !submitted && (
                 <form
                   id="projectSubmissionForm"
                   className="project-form"
-                  // onsubmit="window.TicketsSubmit.handleFormSubmit(event)"
+                  onSubmit={handleProjectSubmission}
                 >
                   <p className="step-instruction">
                     Fill in the details for your film web experience. Make sure
@@ -657,11 +746,15 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                   </p>
 
                   {/* <!-- Error Alert Banner --> */}
+
                   <div
                     className="error-banner"
                     id="formErrorBanner"
                     role="alert"
-                  ></div>
+                    style={{ display: formError ? "block" : "none" }}
+                  >
+                    {formError}
+                  </div>
 
                   {/* <!-- Row 1: Movie Title & Project Name --> */}
                   <div className="form-row">
@@ -675,9 +768,9 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                         id="movieTitle"
                         className="form-input"
                         placeholder="e.g. Interstellar, Spirited Away, The Matrix"
-                        value={formData.movieName}
+                        value={formInputData.movieName}
                         onChange={(e) =>
-                          setFormData((prev) => ({
+                          setFormInputData((prev) => ({
                             ...prev,
                             movieName: e.target.value,
                           }))
@@ -699,9 +792,9 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                         id="projectName"
                         className="form-input"
                         placeholder="e.g. Endurance Flight Computer"
-                        value={formData.projectName}
+                        value={formInputData.projectName}
                         onChange={(e) =>
-                          setFormData((prev) => ({
+                          setFormInputData((prev) => ({
                             ...prev,
                             projectName: e.target.value,
                           }))
@@ -726,11 +819,11 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                         id="liveUrl"
                         className="form-input"
                         placeholder="https://yourmoviesite.vercel.app"
-                        value={formData.siteUrl}
+                        value={formInputData.playableUrl}
                         onChange={(e) =>
-                          setFormData((prev) => ({
+                          setFormInputData((prev) => ({
                             ...prev,
-                            siteUrl: e.target.value,
+                            playableUrl: e.target.value,
                           }))
                         }
                         required
@@ -750,11 +843,11 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                         id="repoUrl"
                         className="form-input"
                         placeholder="https://github.com/username/repository"
-                        value={formData.githubUrl}
+                        value={formInputData.codeUrl}
                         onChange={(e) =>
-                          setFormData((prev) => ({
+                          setFormInputData((prev) => ({
                             ...prev,
-                            githubUrl: e.target.value,
+                            codeUrl: e.target.value,
                           }))
                         }
                         required
@@ -775,9 +868,9 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                       id="projectDescription"
                       className="form-textarea"
                       placeholder="Describe your creative choices: custom interactive scenes, original audio soundtracks, cinematic visuals, easter eggs, or storyline reenactments."
-                      value={formData.description}
+                      value={formInputData.description}
                       onChange={(e) =>
-                        setFormData((prev) => ({
+                        setFormInputData((prev) => ({
                           ...prev,
                           description: e.target.value,
                         }))
@@ -794,25 +887,19 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                   <div className="form-group">
                     <label className="form-label" htmlFor="screenshotFileInput">
                       <span>Website Screenshots</span>
-                      <span
-                        style={{
-                          fontSize: 12,
-                          color: "var(--ticket-muted)",
-                          fontWeight: 500,
-                        }}
-                      >
-                        (Optional)
-                      </span>
+                      <span style={{ color: "var(--velvet-bright)" }}>*</span>
                     </label>
 
                     <FileUploader
                       name="screenshotFileInput"
+                      fileOrFiles={formInputData.screenshotFile}
                       handleChange={(file: File | File[]) => {
                         const single = Array.isArray(file) ? file[0] : file;
                         if (single) handleFileUpload(single);
                       }}
                       multiple={false}
                       types={fileTypes}
+                      required
                     >
                       <div
                         className="screenshot-dropzone"
@@ -831,7 +918,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                           Select screenshots or drag and drop image files here
                         </div>
                         <div className="screenshot-dropzone-note">
-                          PNG, JPG, or WebP up to 10MB each
+                          PNG, JPG, or WebP up to 5MB
                         </div>
                       </div>
                     </FileUploader>
@@ -845,7 +932,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                     <div
                       className="screenshot-previews-grid"
                       id="screenshotPreviewsGrid"
-                      style={{ display: !screenshotUrl?  "none" : "grid" }}
+                      style={{ display: !screenshotUrl ? "none" : "grid" }}
                     >
                       <div className="screenshot-preview-card">
                         <img
@@ -856,8 +943,8 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                         <button
                           type="button"
                           className="screenshot-remove-btn"
-                          data-index="' + idx + '"
                           aria-label="Remove screenshot"
+                          onClick={handleRemoveScreenshot}
                         >
                           Remove
                         </button>
@@ -877,9 +964,9 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                         id="nextMovie"
                         className="form-input"
                         placeholder="e.g. Dune Part Two, Tron Ares"
-                        value={formData.plannedMovie}
+                        value={formInputData.plannedMovie}
                         onChange={(e) =>
-                          setFormData((prev) => ({
+                          setFormInputData((prev) => ({
                             ...prev,
                             plannedMovie: e.target.value,
                           }))
@@ -924,8 +1011,13 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                       type="submit"
                       className="btn-submit-project"
                       id="btnSubmitForm"
+                      disabled={submitting}
                     >
-                      <span>Submit Project For Review</span>
+                      <span>
+                        {submitting
+                          ? "Submitting..."
+                          : "Submit Project For Review"}
+                      </span>
                     </button>
                     <p
                       style={{

@@ -15,9 +15,15 @@ export class AirtableService extends Airtable {
     );
   }
   async createProjectRecord(fields: Record<string, unknown>) {
-    return this.base(this.config.get('AIRTABLE_BASE_ID')!)
-      .table(this.config.get('AIRTABLE_TABLE')!)
-      .create(fields as never);
+    try {
+      const data = await this.base(this.config.get('AIRTABLE_BASE_ID')!)
+        .table(this.config.get('AIRTABLE_TABLE')!)
+        .create(fields as never);
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw new InternalServerErrorException('Failed to submit project');
+    }
   }
 
   async uploadAttachment(

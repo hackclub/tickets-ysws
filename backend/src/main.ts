@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import { createHash } from 'crypto';
 import { readFileSync } from 'fs';
 import { join } from 'path';
+import { ValidationPipe } from '@nestjs/common';
 
 function inlineScriptHashes(htmlPath: string): string[] {
   const html = readFileSync(htmlPath, 'utf8');
@@ -62,6 +63,13 @@ async function bootstrap() {
   app.use(cookieParser());
 
   app.setGlobalPrefix('api');
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+    }),
+  );
 
   await app.listen(process.env.PORT ?? 3000);
 }

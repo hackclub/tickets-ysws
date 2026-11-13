@@ -7,7 +7,7 @@ export class HackatimeController {
   constructor(private readonly hackatimeService: HackatimeService) {}
 
   @Get('projects')
-  getProjects(@Req() request: Request) {
+  getProjects(@Req() request: Request): Promise<unknown> {
     return this.hackatimeService.getProjects(request);
   }
 }

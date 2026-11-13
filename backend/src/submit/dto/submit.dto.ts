@@ -1,3 +1,4 @@
+import { Transform } from 'class-transformer';
 import { IsString, IsUrl } from 'class-validator';
 
 export class SubmitProjectDto {
@@ -6,8 +7,11 @@ export class SubmitProjectDto {
   @IsUrl({ require_tld: true })
   playableUrl: string;
   @IsUrl(
-    { protocols: ['https'], host_whitelist: ['github.com', 'gitlab.com'] },
-    { message: 'Must be a valid https://github.com or https://gitlab.com URL' },
+    { protocols: ['https'], host_whitelist: ['github.com'] },
+    {
+      message:
+        'Public GitHub Repository must be a valid https://github.com URL',
+    },
   )
   codeUrl: string;
   @IsString()
@@ -16,6 +20,8 @@ export class SubmitProjectDto {
   description: string;
   @IsString()
   plannedMovieToWatch: string;
+
+  @Transform(({ value }) => (Array.isArray(value) ? value : [value]))
   @IsString({ each: true })
   hackatimeProjectNames: string[];
 }

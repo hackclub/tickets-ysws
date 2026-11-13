@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Post,
@@ -17,13 +18,21 @@ export class SubmitController {
 
   @Post()
   @UseInterceptors(
-    FileInterceptor('file', { limits: { fileSize: 5 * 1024 * 1024 } }),
+    FileInterceptor('screenshotFile', {
+      limits: { fileSize: 5 * 1024 * 1024 },
+    }),
   )
   submitProject(
     @Body() submitProjectDto: SubmitProjectDto,
     @Req() request: Request,
     @UploadedFile() screenshotFile: Express.Multer.File,
   ) {
-    this.submitService.submitProject(submitProjectDto, request, screenshotFile);
+    if (!screenshotFile)
+      throw new BadRequestException('screenshot is required');
+    return this.submitService.submitProject(
+      submitProjectDto,
+      request,
+      screenshotFile,
+    );
   }
 }

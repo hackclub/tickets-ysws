@@ -6,8 +6,8 @@ import { type Request } from 'express';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Get("me")
-  me(@Req() request: Request){
-    return this.userService.me(request)
+  @Get('me')
+  me(@Req() request: Request): Promise<any> {
+    return this.userService.me(request);
   }
 }

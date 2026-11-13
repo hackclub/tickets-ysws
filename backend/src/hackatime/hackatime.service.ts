@@ -1,5 +1,11 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import axios from 'axios';
+import {
+  BadGatewayException,
+  Injectable,
+  Logger,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
+import axios, { isAxiosError } from 'axios';
 import { Request } from 'express';
 
 interface TrustFactor {
@@ -26,46 +32,87 @@ interface HackatimeProject {
   most_recent_heartbeat: string;
   archived: boolean;
 }
+
+const HACKATIME_BASE = 'https://hackatime.hackclub.com/api/v1';
+
 @Injectable()
 export class HackatimeService {
-  async getProjects(request: Request) {
-    const access_token = request.cookies['hackatime_access_token'];
+  private readonly logger = new Logger(HackatimeService.name);
 
-    if (!access_token) throw new UnauthorizedException('user not signed in');
-
-    const projectsRes = await axios.get<{ projects: [] }>(
-      'https://hackatime.hackclub.com/api/v1/authenticated/projects?start_date=2026-11-01',
-      {
-        headers: { Authorization: `Bearer ${access_token}` },
-      },
-    );
-
-    return projectsRes.data.projects;
+  private getToken(request: Request): string {
+    const token = request.cookies?.['hackatime_access_token'];
+    if (!token) throw new UnauthorizedException('user not signed in');
+    return token;
   }
 
-  async getUserProfile(request: Request) {
-    const access_token = request.cookies['hackatime_access_token'];
+  private handleError(err: unknown, context: string): never {
+    if (isAxiosError(err)) {
+      const status = err.response?.status;
 
-    if (!access_token) throw new UnauthorizedException('user not signed in');
+      if (status === 401 || status === 403) {
+        throw new UnauthorizedException(
+          'hackatime session expired, sign in again',
+        );
+      }
+      if (status === 404) {
+        throw new NotFoundException('not found on hackatime');
+      }
 
-    const userRes = await axios.get<HackatimeUser>(
-      'https://hackatime.hackclub.com/api/v1/authenticated/me',
-      {
-        headers: { Authorization: `Bearer ${access_token}` },
-      },
-    );
+      this.logger.error(`${context} failed: ${err.code ?? ''} ${status ?? ''}`);
+    } else {
+      this.logger.error(`${context} failed`, err as Error);
+    }
 
-    return userRes.data;
+    throw new BadGatewayException('could not reach hackatime right now, please try again');
+  }
+
+  async getProjects(request: Request): Promise<HackatimeProject[]> {
+    const token = this.getToken(request);
+
+    try {
+      const res = await axios.get<{ projects: HackatimeProject[] }>(
+        `${HACKATIME_BASE}/authenticated/projects`,
+        {
+          params: { start_date: '2026-11-01' },
+          headers: { Authorization: `Bearer ${token}` },
+          timeout: 20000,
+        },
+      );
+      return res.data.projects ?? [];
+    } catch (err) {
+      this.handleError(err, 'Fetching hackatime projects');
+    }
+  }
+
+  async getUserProfile(request: Request): Promise<HackatimeUser> {
+    const token = this.getToken(request);
+
+    try {
+      const res = await axios.get<HackatimeUser>(
+        `${HACKATIME_BASE}/authenticated/me`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+          timeout: 20000,
+        },
+      );
+      return res.data;
+    } catch (err) {
+      this.handleError(err, 'Fetching hackatime profile');
+    }
   }
 
   async getProjectFullDetails(
     projectName: string,
     slackId: string,
   ): Promise<HackatimeProject> {
-    const projectDetail = await axios.get<HackatimeProject>(
-      `https://hackatime.hackclub.com/api/v1/users/${slackId}/project/${projectName}`,
-    );
-
-    return projectDetail.data;
+    try {
+      const res = await axios.get<HackatimeProject>(
+        `${HACKATIME_BASE}/users/${encodeURIComponent(slackId)}/project/${encodeURIComponent(projectName)}`,
+        { timeout: 20000 },
+      );
+      return res.data;
+    } catch (err) {
+      this.handleError(err, `Fetching hackatime project "${projectName}"`);
+    }
   }
 }
