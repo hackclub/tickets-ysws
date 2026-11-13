@@ -8,7 +8,9 @@ export class AirtableService extends Airtable {
     super({ apiKey: config.get('AIRTABLE_ACCESS_TOKEN') });
   }
 
-  getTicketYsWsBase() {
-    return this.base('');
+  getTicketYsWsBaseTable() {
+    return this.base(this.config.get('AIRTABLE_BASE_ID')!).table(
+      this.config.get('AIRTABLE_TABLE')!,
+    );
   }
 }
