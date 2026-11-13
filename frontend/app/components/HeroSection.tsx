@@ -6,6 +6,7 @@ import {
   Barcode,
   Star,
 } from "lucide-react";
+import { Link } from "react-router";
 
 export default function HeroSection() {
   return (
@@ -27,15 +28,15 @@ export default function HeroSection() {
 
                 {/* <!-- Headline (No hyphens, no em dashes) --> */}
                 <h1 className="hero-headline">
-                  Build a movie website.
+                  Build a movie project.
                   <span className="highlight">Watch more movies on us.</span>
                 </h1>
 
                 {/* <!-- One sentence subheading explaining the offer --> */}
                 <p className="hero-subheading">
-                  Pick a film you love, build an extraordinary web experience
-                  around it, ship it live, and earn ticket grants to spend at
-                  your local cinema.
+                  Pick a film you love, build a website, game, or other creative
+                  project around it, share it with the world, and earn ticket
+                  grants to spend at your local cinema.
                 </p>
               </div>
 
@@ -43,15 +44,10 @@ export default function HeroSection() {
               <div className="hero-actions">
                 {/* <!-- Primary RSVP Button linking to external form URL -->
                   <!-- [RSVP_FORM_URL] placeholder configurable via href --> */}
-                <a
-                  href="https://rsvp.soon.it/tickets"
-                  className="btn-rsvp"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span>RSVP</span>
+                <Link to="/submit" className="btn-rsvp">
+                  <span>SUBMIT PROJECT</span>
                   <ArrowRight />
-                </a>
+                </Link>
 
                 {/* <!-- Secondary text link to join the Slack channel -->
                   <!-- [SLACK_CHANNEL_URL] placeholder configurable via href --> */}
@@ -88,7 +84,7 @@ export default function HeroSection() {
                     marginTop: 6,
                   }}
                 >
-                  Up to 10 hours grant
+                  $5 per tracked hour
                 </div>
               </div>
 

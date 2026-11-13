@@ -26,6 +26,7 @@ export const links: Route.LinksFunction = () => [
     rel: "stylesheet",
     href: "https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap",
   },
+  { rel: "icon", href: "/logo.png" },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -64,8 +65,11 @@ export function HydrateFallback() {
         gap: 14,
       }}
     >
-      <img src="/logo.png" className="hackclub-logo" />
-      <Loader2 className="animate-spin" size={36} aria-hidden="true" />
+      <img
+        src="/logo.png"
+        className="animate-bounce hackclub-logo"
+        style={{ position: "unset" }}
+      />
       <p style={{ fontSize: 15, color: "var(--ticket-muted)" }}>Loading</p>
     </main>
   );

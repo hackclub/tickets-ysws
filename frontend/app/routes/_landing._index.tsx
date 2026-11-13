@@ -6,8 +6,8 @@ import FaqSection from "~/components/FaqSection";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Tickets - Hack club" },
+    { name: "description", content: "Build a website, game, or other project themed around a movie and earn ticket grants to go watch more movies with Tickets." },
   ];
 }
 

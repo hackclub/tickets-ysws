@@ -48,6 +48,17 @@ function getErrorMessage(err: unknown): string {
   return "Something went wrong. Please try again.";
 }
 
+export function meta({}: Route.MetaArgs) {
+  return [
+    { title: "Submit - Tickets - Hack club" },
+    {
+      name: "description",
+      content:
+        "Build a website, game, or other project themed around a movie and earn ticket grants to go watch more movies with Tickets.",
+    },
+  ];
+}
+
 export async function clientLoader() {
   let userData = null;
   try {
@@ -156,7 +167,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
     const { screenshotFile } = formInputData;
 
     if (!screenshotFile) {
-      setFormError("Please upload a screenshot of your website.");
+      setFormError("Please upload a screenshot of your project.");
       return;
     }
     if (screenshotFile.size > MAX_FILE_SIZE) {
@@ -201,7 +212,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
         {/* <!-- Hero Header --> */}
         <section className="submission-hero">
           <h1 className="sub-title">
-            Submit Your <span className="gold-accent">Movie Website</span>
+            Submit Your <span className="gold-accent">Movie Project</span>
           </h1>
           <p className="sub-lead">
             Sign in with Hack Club Auth, connect your Hackatime coding hours,
@@ -500,9 +511,9 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                 ) : (
                   <div id="step2Content">
                     <p className="step-instruction">
-                      Select the project you built for your movie website to
-                      calculate your ticket grant ($5 per hour, up to 10 hours
-                      maximum).
+                      Select the project you built around your movie to
+                      calculate your ticket grant ($5 for every hour of
+                      tracked build time).
                     </p>
 
                     {/* <!-- Hackatime Username Search Input --> */}
@@ -531,7 +542,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
 
                     {/* <!-- Available Detected Projects Grid --> */}
                     <div className="projects-list-title">
-                      <span>Select your movie website/game project:</span>
+                      <span>Select your movie project:</span>
                       <span id="projectsCountLabel">
                         {hackatimeProjects.length} projects found
                       </span>
@@ -740,8 +751,8 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                   onSubmit={handleProjectSubmission}
                 >
                   <p className="step-instruction">
-                    Fill in the details for your film web experience. Make sure
-                    your live link is accessible and your code repository is
+                    Fill in the details for your movie-themed project. Make
+                    sure your project link is accessible and your code repository is
                     public so the review crew can examine your project.
                   </p>
 
@@ -778,7 +789,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                         required
                       />
                       <span className="form-hint">
-                        The motion picture your website celebrates.
+                        The motion picture your project celebrates.
                       </span>
                     </div>
 
@@ -802,7 +813,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                         required
                       />
                       <span className="form-hint">
-                        The public title of your web application.
+                        The public title of your project.
                       </span>
                     </div>
                   </div>
@@ -811,14 +822,14 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                   <div className="form-row">
                     <div className="form-group">
                       <label htmlFor="liveUrl" className="form-label">
-                        <span>Live Website Address</span>
+                        <span>Live Project URL</span>
                         <span style={{ color: "var(--velvet-bright)" }}>*</span>
                       </label>
                       <input
                         type="url"
                         id="liveUrl"
                         className="form-input"
-                        placeholder="https://yourmoviesite.vercel.app"
+                        placeholder="https://yourproject.vercel.app"
                         value={formInputData.playableUrl}
                         onChange={(e) =>
                           setFormInputData((prev) => ({
@@ -829,7 +840,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                         required
                       />
                       <span className="form-hint">
-                        Public URL hosted on Vercel, GitHub Pages, or any host.
+                        Public link to try or view your project, hosted on any platform.
                       </span>
                     </div>
 
@@ -861,7 +872,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                   {/* <!-- Row 3: Description of creative elements --> */}
                   <div className="form-group">
                     <label htmlFor="projectDescription" className="form-label">
-                      <span>How does your website celebrate the movie?</span>
+                      <span>How does your project celebrate the movie?</span>
                       <span style={{ color: "var(--velvet-bright)" }}>*</span>
                     </label>
                     <textarea
@@ -886,7 +897,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                   {/* File upload */}
                   <div className="form-group">
                     <label className="form-label" htmlFor="screenshotFileInput">
-                      <span>Website Screenshots</span>
+                      <span>Project Screenshot</span>
                       <span style={{ color: "var(--velvet-bright)" }}>*</span>
                     </label>
 
@@ -924,8 +935,8 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                     </FileUploader>
 
                     <span className="form-hint">
-                      Upload visual captures of your website design, interactive
-                      scenes, or animations.
+                      Upload a screenshot of your website, game, or other
+                      project.
                     </span>
 
                     {/* <!-- Preview container for uploaded screenshots --> */}
@@ -991,7 +1002,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                     <label className="checkbox-item">
                       <input type="checkbox" id="checkAuthor" required />
                       <span className="checkbox-text">
-                        I authored this project myself, my site is live, and my
+                        I authored this project myself, it is live, and my
                         repository is public.
                       </span>
                     </label>

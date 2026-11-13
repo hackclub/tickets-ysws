@@ -48,11 +48,11 @@ export default function HowItWorksSection() {
             </div>
             <div className="step-ticket-content">
               <div>
-                <h3 className="step-title">Build a website themed around it</h3>
+                <h3 className="step-title">Build a project themed around it</h3>
                 <p className="step-desc">
                   Be creative: design, interactivity, soundtrack, scenes,
-                  anything goes. Bring the mood, quotes, lore, or characters to
-                  life on the web canvas.
+                  gameplay, anything goes. Bring the mood, quotes, lore, or
+                  characters to life in a website, game, or other project.
                 </p>
               </div>
               <div className="step-footer-meta">
@@ -77,7 +77,7 @@ export default function HowItWorksSection() {
                 <h3 className="step-title">Ship it live and submit</h3>
                 <p className="step-desc">
                   Publish your project to the world on GitHub Pages or Vercel.
-                  Submit your public source repository and working site URL
+                  Submit your public source repository and working project URL
                   through the submission portal.
                 </p>
               </div>
@@ -102,14 +102,14 @@ export default function HowItWorksSection() {
               <div>
                 <h3 className="step-title">Get your ticket grants</h3>
                 <p className="step-desc">
-                  Get ticket grants of $5 per hour of build time, up to 10
-                  hours, to go watch more movies. Use the grant at your
-                  neighborhood cinema with friends.
+                  Get ticket grants of $5 for every hour of build time to go
+                  watch more movies. Use the grant at your neighborhood cinema
+                  with friends.
                 </p>
               </div>
               <div className="step-footer-meta">
                 <span>Phase: Showtime</span>
-                <span>$50 maximum</span>
+                <span>Per tracked hour</span>
               </div>
             </div>
           </article>
