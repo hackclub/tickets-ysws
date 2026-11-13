@@ -57,7 +57,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
     projectName: "",
     siteUrl: "",
   });
-  
+
   const [search, setSearch] = useState("");
   const revalidator = useRevalidator();
   const user = loaderData.userData;
@@ -647,6 +647,13 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                         id="movieTitle"
                         className="form-input"
                         placeholder="e.g. Interstellar, Spirited Away, The Matrix"
+                        value={formData.movieName}
+                        onChange={(e) =>
+                          setFormData((prev) => ({
+                            ...prev,
+                            movieName: e.target.value,
+                          }))
+                        }
                         required
                       />
                       <span className="form-hint">
@@ -664,6 +671,13 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                         id="projectName"
                         className="form-input"
                         placeholder="e.g. Endurance Flight Computer"
+                        value={formData.projectName}
+                        onChange={(e) =>
+                          setFormData((prev) => ({
+                            ...prev,
+                            projectName: e.target.value,
+                          }))
+                        }
                         required
                       />
                       <span className="form-hint">
@@ -684,6 +698,13 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                         id="liveUrl"
                         className="form-input"
                         placeholder="https://yourmoviesite.vercel.app"
+                        value={formData.siteUrl}
+                        onChange={(e) =>
+                          setFormData((prev) => ({
+                            ...prev,
+                            siteUrl: e.target.value,
+                          }))
+                        }
                         required
                       />
                       <span className="form-hint">
@@ -701,6 +722,13 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                         id="repoUrl"
                         className="form-input"
                         placeholder="https://github.com/username/repository"
+                        value={formData.githubUrl}
+                        onChange={(e) =>
+                          setFormData((prev) => ({
+                            ...prev,
+                            githubUrl: e.target.value,
+                          }))
+                        }
                         required
                       />
                       <span className="form-hint">
@@ -719,6 +747,13 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                       id="projectDescription"
                       className="form-textarea"
                       placeholder="Describe your creative choices: custom interactive scenes, original audio soundtracks, cinematic visuals, easter eggs, or storyline reenactments."
+                      value={formData.description}
+                      onChange={(e) =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          description: e.target.value,
+                        }))
+                      }
                       required
                     ></textarea>
                     <span className="form-hint">
@@ -815,6 +850,13 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                         id="nextMovie"
                         className="form-input"
                         placeholder="e.g. Dune Part Two, Tron Ares"
+                        value={formData.plannedMovie}
+                        onChange={(e) =>
+                          setFormData((prev) => ({
+                            ...prev,
+                            plannedMovie: e.target.value,
+                          }))
+                        }
                         required
                       />
                       <span className="form-hint">
