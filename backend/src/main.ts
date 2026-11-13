@@ -47,12 +47,16 @@ async function bootstrap() {
         directives: {
           ...helmet.contentSecurityPolicy.getDefaultDirectives(),
           'script-src': ["'self'", ...hashes],
-          'img-src': ["'self'", 'data:', 'https://avatars.slack-edge.com'],
+          'img-src': [
+            "'self'",
+            'data:',
+            'blob:',
+            'https://avatars.slack-edge.com',
+          ],
         },
       },
     }),
   );
-
   app.set('trust proxy', 1);
 
   app.use(cookieParser());

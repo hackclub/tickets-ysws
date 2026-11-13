@@ -1,8 +1,19 @@
-import { Check, Circle, Clock, Lock, LogIn, RefreshCcw } from "lucide-react";
+import {
+  Check,
+  Circle,
+  Clock,
+  FileImage,
+  Lock,
+  LogIn,
+  RefreshCcw,
+} from "lucide-react";
 import React, { useEffect, useState } from "react";
 import type { Route } from "./+types/_landing.submit";
 import axios from "axios";
 import { useRevalidator } from "react-router";
+import { FileUploader } from "react-drag-drop-files";
+
+const fileTypes = ["JPG", "PNG", "WEBP"];
 
 export interface HackatimeProject {
   name: string;
@@ -55,6 +66,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
     githubUrl: string;
     description: string;
     plannedMovie: string;
+    screenshotFile: File | null;
   }>({
     description: "",
     githubUrl: "",
@@ -62,7 +74,10 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
     plannedMovie: "",
     projectName: "",
     siteUrl: "",
+    screenshotFile: null,
   });
+
+  const [screenshotUrl, setScreenshotUrl] = useState("");
 
   const [search, setSearch] = useState("");
   const revalidator = useRevalidator();
@@ -93,6 +108,13 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
   function formatHours(seconds: number): string {
     return `${(seconds / 3600).toFixed(1)}h`;
   }
+
+  const handleFileUpload = (file: File) => {
+    setFormData((prev) => ({ ...prev, screenshotFile: file }));
+
+    const url = URL.createObjectURL(file);
+    setScreenshotUrl(url);
+  };
 
   return (
     <main className="container">
@@ -768,6 +790,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                     </span>
                   </div>
 
+                  {/* File upload */}
                   <div className="form-group">
                     <label className="form-label" htmlFor="screenshotFileInput">
                       <span>Website Screenshots</span>
@@ -782,54 +805,36 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                       </span>
                     </label>
 
-                    <input
-                      type="file"
-                      id="screenshotFileInput"
-                      accept="image/*"
-                      multiple
-                      style={{ display: "none" }}
-                    />
-
-                    <div
-                      className="screenshot-dropzone"
-                      id="screenshotDropzone"
-                      role="button"
-                      tabIndex={0}
-                      aria-label="Upload screenshots"
+                    <FileUploader
+                      name="screenshotFileInput"
+                      handleChange={(file: File | File[]) => {
+                        const single = Array.isArray(file) ? file[0] : file;
+                        if (single) handleFileUpload(single);
+                      }}
+                      multiple={false}
+                      types={fileTypes}
                     >
                       <div
-                        className="screenshot-dropzone-icon"
-                        aria-hidden="true"
+                        className="screenshot-dropzone"
+                        id="screenshotDropzone"
+                        role="button"
+                        tabIndex={0}
+                        aria-label="Upload screenshots"
                       >
-                        <svg
-                          width="32"
-                          height="32"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                        <div
+                          className="screenshot-dropzone-icon"
+                          aria-hidden="true"
                         >
-                          <rect
-                            x="3"
-                            y="3"
-                            width="18"
-                            height="18"
-                            rx="2"
-                            ry="2"
-                          ></rect>
-                          <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                          <polyline points="21 15 16 10 5 21"></polyline>
-                        </svg>
+                          <FileImage />
+                        </div>
+                        <div className="screenshot-dropzone-prompt">
+                          Select screenshots or drag and drop image files here
+                        </div>
+                        <div className="screenshot-dropzone-note">
+                          PNG, JPG, or WebP up to 10MB each
+                        </div>
                       </div>
-                      <div className="screenshot-dropzone-prompt">
-                        Select screenshots or drag and drop image files here
-                      </div>
-                      <div className="screenshot-dropzone-note">
-                        PNG, JPG, or WebP up to 10MB each
-                      </div>
-                    </div>
+                    </FileUploader>
 
                     <span className="form-hint">
                       Upload visual captures of your website design, interactive
@@ -840,8 +845,24 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                     <div
                       className="screenshot-previews-grid"
                       id="screenshotPreviewsGrid"
-                      style={{ display: "none" }}
-                    ></div>
+                      style={{ display: !screenshotUrl?  "none" : "grid" }}
+                    >
+                      <div className="screenshot-preview-card">
+                        <img
+                          className="screenshot-preview-img"
+                          src={screenshotUrl}
+                          alt="Project Screenshot"
+                        />
+                        <button
+                          type="button"
+                          className="screenshot-remove-btn"
+                          data-index="' + idx + '"
+                          aria-label="Remove screenshot"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    </div>
                   </div>
 
                   {/* <!-- Row 4: Cinema Choice & Watchlist --> */}
