@@ -112,10 +112,6 @@ export class AuthService {
         `Failed to exchange code for token: ${oauthRes.status} ${oauthRes.statusText}`,
       );
 
-    res.cookie('hca_access_token', oauthRes.data.access_token, {
-      ...this.cookieOptions(),
-      maxAge: 1000 * 60 * 60 * 24, // 1 day
-    });
     const userRes = await axios.get<{ identity: HackclubIdentity }>(
       'https://auth.hackclub.com/api/v1/me',
       {
@@ -124,7 +120,7 @@ export class AuthService {
       },
     );
 
-    if (!userRes.data.identity.verification_status)
+    if (userRes.data.identity.verification_status !== "verified")
       return {
         url: "/error?error=You haven't done ID verification yet. Head https://auth.hackclub.com to resolve this.",
       };
@@ -132,6 +128,12 @@ export class AuthService {
       return {
         url: "/error?error=You can't participate in YSWS, cause you aren't eligible.",
       };
+
+    res.cookie('hca_access_token', oauthRes.data.access_token, {
+      ...this.cookieOptions(),
+      maxAge: 1000 * 60 * 60 * 24, // 1 day
+    });
+
     return {
       url: '/submit',
     };
