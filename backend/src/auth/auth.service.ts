@@ -120,9 +120,9 @@ export class AuthService {
       },
     );
 
-    if (userRes.data.identity.verification_status !== "verified")
+    if (userRes.data.identity.verification_status !== 'verified')
       return {
-        url: "/error?error=You haven't done ID verification yet. Head https://auth.hackclub.com to resolve this.",
+        url: "/error?error=You haven't done your ID verification yet. Head https://auth.hackclub.com to resolve this.",
       };
     if (!userRes.data.identity.ysws_eligible)
       return {
