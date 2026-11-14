@@ -1,4 +1,4 @@
-# Ticket YSWS
+# Tickets YSWS
 
 Tickets is a Hack Club YSWS where you ship a website or game themed around a movie, and we ship you tickets (grants) to go watch more movies
 
