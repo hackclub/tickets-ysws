@@ -68,7 +68,7 @@ export function HydrateFallback() {
       <img
         src="/logo.png"
         className="animate-bounce hackclub-logo"
-        style={{ position: "unset" }}
+        style={{ position: "unset", width: 200 }}
       />
       <p style={{ fontSize: 15, color: "var(--ticket-muted)" }}>Loading</p>
     </main>
