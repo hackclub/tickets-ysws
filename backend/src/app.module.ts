@@ -8,6 +8,8 @@ import { SubmitModule } from './submit/submit.module.js';
 import { UserModule } from './user/user.module.js';
 import { AirtableModule } from './airtable/airtable.module.js';
 import { HackatimeModule } from './hackatime/hackatime.module.js';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -34,11 +36,20 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
       serveStaticOptions: { fallthrough: true },
     }),
     ConfigModule.forRoot({ isGlobal: true }),
+    ThrottlerModule.forRoot({
+      throttlers: [
+        { name: 'short', ttl: 1000, limit: 5 }, // 5 requests per second
+        { name: 'default', ttl: 60_000, limit: 60 }, // 60 requests per minute
+      ],
+    }),
+
     AuthModule,
     SubmitModule,
     UserModule,
     AirtableModule,
     HackatimeModule,
   ],
+
+  providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })
 export class AppModule {}
