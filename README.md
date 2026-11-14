@@ -1,6 +1,41 @@
 # Ticket YSWS
 
-Build a website themed around a movie, we ship you tickets to go watch more movies
+Tickets is a YSWS where you ship a website or game themed around a movie, and we ship you tickets (grants) to go watch more movies
+
+## Run locally
+
+You need Node.js 24 and pnpm 12. From the repository root, install dependencies
+and create a local backend environment file:
+
+```sh
+pnpm install
+cp .env.example backend/.env
+```
+
+Edit `backend/.env` and set at least the Airtable credentials. Set `APP_URL` to
+`http://localhost:3000` (or the origin matching your `PORT`). Hack Club Auth and
+Hackatime credentials are needed to try those login flows; register their
+callbacks as `http://localhost:3000/api/auth/hca/callback` and
+`http://localhost:3000/api/auth/hackatime/callback`. Observe credentials are
+optional.
+
+Start the app in development mode:
+
+```sh
+pnpm --filter backend dev
+```
+
+This builds the frontend and watches for changes, then serves the frontend and
+API from the backend. Open `http://localhost:3000` (or the port configured in
+`backend/.env`). Stop the process with Ctrl+C.
+
+To allow the backend auto build the frontend when changes are made, run:
+
+```bash
+pnpm --filter frontend dev:build
+```
+
+Running both commands together allows the backend to reload the frontend static files whenever changes are made to it.
 
 ## Deploy with Docker
 
