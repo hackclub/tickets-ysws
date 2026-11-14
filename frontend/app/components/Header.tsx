@@ -2,14 +2,14 @@ import React from "react";
 
 export default function Header() {
   return (
-    <header
-      style={{
-        width: "100%",
-        padding: "12px 20px 0",
-      }}
-    >
-      <a href="https://hackclub.com" target="_blank">
-        <img src="/logo.png" className="hackclub-logo" />
+    <header className="site-header">
+      <a
+        href="https://hackclub.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="site-header-brand"
+      >
+        <img src="/logo.png" className="hackclub-logo" alt="Hack Club" />
       </a>
       <div className="container">
         <div className="bulb-row" aria-hidden="true">

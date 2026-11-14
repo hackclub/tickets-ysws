@@ -107,12 +107,22 @@ summary:focus-visible {
   max-width: 980px;
 }
 
+.site-header {
+  width: 100%;
+  padding: 12px 20px 0;
+}
+
+.site-header-brand {
+  display: block;
+  width: min(100%, 1100px);
+  margin: 0 auto 8px;
+  line-height: 0;
+}
+
 .hackclub-logo {
-  width: 200px;
-  position: absolute;
-  top: 20;
-  left: 20;
-  z-index: 999999;
+  display: block;
+  width: clamp(80px, 14vw, 128px);
+  height: auto;
 }
 
 /* ==========================================================================
