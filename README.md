@@ -1,6 +1,6 @@
 # Ticket YSWS
 
-Tickets is a YSWS where you ship a website or game themed around a movie, and we ship you tickets (grants) to go watch more movies
+Tickets is a Hack Club YSWS where you ship a website or game themed around a movie, and we ship you tickets (grants) to go watch more movies
 
 ## Run locally
 
@@ -67,3 +67,5 @@ To view logs or stop the service:
 docker compose logs -f app
 docker compose down
 ```
+
+![ticket logo](/frontend/public/logo.png)
