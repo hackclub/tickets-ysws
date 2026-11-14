@@ -7,7 +7,7 @@ import {
 import axios, { isAxiosError } from 'axios';
 import { Request } from 'express';
 
-interface HackclubAddress {
+export interface HackclubAddress {
   id: string;
   first_name: string;
   last_name: string;
@@ -21,7 +21,7 @@ interface HackclubAddress {
   primary: boolean;
 }
 
-interface HackclubIdentity {
+export interface HackclubIdentity {
   id: string;
   ysws_eligible: boolean;
   verification_status: string;
@@ -36,7 +36,7 @@ interface HackclubIdentity {
   addresses?: HackclubAddress[];
 }
 
-interface SlackProfile {
+export interface SlackProfile {
   displayName: string;
   imageUrl: string;
   userId: string;

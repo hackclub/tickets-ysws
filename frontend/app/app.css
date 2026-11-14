@@ -102,6 +102,10 @@ summary:focus-visible {
   padding-right: 20px;
 }
 
+main.container {
+  flex: 1;
+}
+
 /* Narrower variant used by the submission page */
 .container--narrow {
   max-width: 980px;

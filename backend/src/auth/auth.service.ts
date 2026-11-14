@@ -8,6 +8,7 @@ import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
 import { randomBytes, timingSafeEqual } from 'node:crypto';
 import type { Request, Response } from 'express';
+import { HackclubIdentity } from '../user/user.service.js';
 
 const OAUTH_STATE_MAX_AGE = 5 * 60 * 1000;
 
@@ -115,7 +116,22 @@ export class AuthService {
       ...this.cookieOptions(),
       maxAge: 1000 * 60 * 60 * 24, // 1 day
     });
+    const userRes = await axios.get<{ identity: HackclubIdentity }>(
+      'https://auth.hackclub.com/api/v1/me',
+      {
+        headers: { Authorization: `Bearer ${oauthRes.data.access_token}` },
+        timeout: 20000,
+      },
+    );
 
+    if (!userRes.data.identity.verification_status)
+      return {
+        url: "/error?error=You haven't done ID verification yet. Head https://auth.hackclub.com to resolve this.",
+      };
+    if (!userRes.data.identity.ysws_eligible)
+      return {
+        url: "/error?error=You can't participate in YSWS, cause you aren't eligible.",
+      };
     return {
       url: '/submit',
     };
