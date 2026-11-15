@@ -75,7 +75,7 @@ export class HackatimeService {
       const res = await axios.get<{ projects: HackatimeProject[] }>(
         `${HACKATIME_BASE}/authenticated/projects`,
         {
-          params: { start_date: '2026-11-01' },
+          params: { start_date: '2026-11-11' },
           headers: { Authorization: `Bearer ${token}` },
           timeout: 20000,
         },
@@ -112,7 +112,7 @@ export class HackatimeService {
         `${HACKATIME_BASE}/users/${encodeURIComponent(slackId)}/project/${encodeURIComponent(projectName)}`,
         {
           timeout: 20000,
-          params: { start: '2026-11-01', start_date: '2026-11-01' },
+          params: { start: '2026-11-11', start_date: '2026-11-11' },
         },
       );
       return res.data;
