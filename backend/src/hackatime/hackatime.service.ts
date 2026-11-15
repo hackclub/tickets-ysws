@@ -63,7 +63,9 @@ export class HackatimeService {
       this.logger.error(`${context} failed`, err as Error);
     }
 
-    throw new BadGatewayException('could not reach hackatime right now, please try again');
+    throw new BadGatewayException(
+      'could not reach hackatime right now, please try again',
+    );
   }
 
   async getProjects(request: Request): Promise<HackatimeProject[]> {
@@ -108,7 +110,10 @@ export class HackatimeService {
     try {
       const res = await axios.get<HackatimeProject>(
         `${HACKATIME_BASE}/users/${encodeURIComponent(slackId)}/project/${encodeURIComponent(projectName)}`,
-        { timeout: 20000 },
+        {
+          timeout: 20000,
+          params: { start: '2026-11-01', start_date: '2026-11-01' },
+        },
       );
       return res.data;
     } catch (err) {
