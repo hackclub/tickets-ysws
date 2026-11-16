@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 export default function Footer() {
   return (
@@ -14,45 +15,62 @@ export default function Footer() {
             </p>
 
             <p className="footer-credit">
-              Made with care by teenagers in the Hack Club community
+              Made with {"<3"} by{" "}
+              <Link
+                to={"https://hackclub.enterprise.slack.com/team/U0AEXPQNM5W"}
+                target="_blank"
+                className="footer-nav-link"
+              >
+                @AzCodes
+              </Link>
+              , sponsored by{" "}
+              <Link
+                to={
+                  "https://hackclub.enterprise.slack.com/archives/D0C8RJHBZQC"
+                }
+                target="_blank"
+                className="footer-nav-link"
+              >
+                @Brendan
+              </Link>
             </p>
           </div>
 
           {/* <!-- Right: Links to Hack Club, Slack, GitHub, Code of Conduct --> */}
           <div className="footer-links-group">
             <nav className="footer-nav" aria-label="Footer Navigation">
-              <a
-                href="https://hackclub.com"
+              <Link
+                to="https://hackclub.com"
                 className="footer-nav-link"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Hack Club
-              </a>
-              <a
-                href="https://hackclub.com/slack"
+              </Link>
+              <Link
+                to="https://hackclub.com/privacy-and-terms"
                 className="footer-nav-link"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Slack
-              </a>
-              <a
-                href="https://github.com/hackclub"
+                Terms & Privacy Policy
+              </Link>
+              <Link
+                to="https://forms.hackclub.com/bounty"
                 className="footer-nav-link"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                GitHub
-              </a>
-              <a
-                href="https://hackclub.com/conduct"
+                Fulfillment Bounty
+              </Link>
+              <Link
+                to="https://hackclub.com/conduct"
                 className="footer-nav-link"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Code of Conduct
-              </a>
+              </Link>
             </nav>
           </div>
         </div>
