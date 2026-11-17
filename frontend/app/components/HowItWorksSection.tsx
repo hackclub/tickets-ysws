@@ -29,10 +29,7 @@ export default function HowItWorksSection() {
                   or a summer blockbuster.
                 </p>
               </div>
-              <div className="step-footer-meta">
-                <span>Phase: Inspiration</span>
-                <span>Entry pass</span>
-              </div>
+              
             </div>
           </article>
 
@@ -55,10 +52,7 @@ export default function HowItWorksSection() {
                   characters to life in a website, game, or other project.
                 </p>
               </div>
-              <div className="step-footer-meta">
-                <span>Phase: Craft</span>
-                <span>Tracked time</span>
-              </div>
+            
             </div>
           </article>
 
@@ -81,10 +75,7 @@ export default function HowItWorksSection() {
                   through the submission portal.
                 </p>
               </div>
-              <div className="step-footer-meta">
-                <span>Phase: Release</span>
-                <span>Public link</span>
-              </div>
+           
             </div>
           </article>
 
@@ -107,10 +98,7 @@ export default function HowItWorksSection() {
                   with friends.
                 </p>
               </div>
-              <div className="step-footer-meta">
-                <span>Phase: Showtime</span>
-                <span>Per tracked hour</span>
-              </div>
+          
             </div>
           </article>
         </div>

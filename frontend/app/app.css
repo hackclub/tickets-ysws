@@ -636,7 +636,7 @@ main.container {
 }
 
 .step-ticket-top {
-  background: linear-gradient(135deg, #1c1520, #2c1a24);
+  background-color: #1f1918;
   color: var(--gold-light);
   padding: 14px 20px;
   display: flex;
@@ -769,7 +769,7 @@ main.container {
 }
 
 .faq-item {
-  background: var(--bg-card);
+  background-color: #1f1918;
   border: 2px solid rgba(230, 183, 100, 0.25);
   border-radius: 10px;
   overflow: hidden;
@@ -1044,7 +1044,7 @@ main.container {
 }
 
 .step-card-header {
-  background: linear-gradient(135deg, #1d1522, #291724);
+  background-color: #1f1918;
   color: var(--gold-light);
   padding: 18px 26px;
   display: flex;

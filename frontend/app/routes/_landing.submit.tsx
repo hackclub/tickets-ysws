@@ -1,4 +1,5 @@
 import {
+  ArrowLeft,
   Check,
   Circle,
   Clock,
@@ -11,7 +12,7 @@ import {
 import React, { useState } from "react";
 import type { Route } from "./+types/_landing.submit";
 import axios, { isAxiosError } from "axios";
-import { useNavigate, useRevalidator } from "react-router";
+import { Link, useNavigate, useRevalidator } from "react-router";
 import { FileUploader } from "react-drag-drop-files";
 
 const fileTypes = ["JPG", "PNG", "WEBP"];
