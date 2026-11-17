@@ -76,10 +76,10 @@ export default function FaqSection() {
 
         {/* <!-- RSVP Call to Action Banner --> */}
         <div className="cta-banner">
-          <h3 className="cta-title">Your Cinema Grant Awaits</h3>
+          <h3 className="cta-title">Ready For Showtime</h3>
           <p className="cta-desc">
-            Grab your popcorn, open your text editor, and build the movie
-            project of your dreams today.
+            Come up with an idea, open your editor, and send in your site once
+            it is live.
           </p>
           <Link to="/submit" className="btn-rsvp">
             <span>Submit Project</span>

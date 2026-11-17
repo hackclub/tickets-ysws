@@ -56,23 +56,12 @@ html {
 
 body {
   background-color: var(--bg-black);
-  background-image:
-    radial-gradient(
-      circle at 50% 0%,
-      rgba(143, 25, 36, 0.35) 0%,
-      transparent 60%
-    ),
-    radial-gradient(
-      circle at 15% 30%,
-      rgba(230, 183, 100, 0.08) 0%,
-      transparent 40%
-    ),
-    radial-gradient(
-      circle at 85% 70%,
-      rgba(143, 25, 36, 0.2) 0%,
-      transparent 50%
-    );
-  background-attachment: fixed;
+  background-image: linear-gradient(
+    180deg,
+    rgba(104, 16, 24, 0.24) 0%,
+    var(--bg-black) 360px
+  );
+  background-repeat: no-repeat;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -114,6 +103,10 @@ main.container {
 .site-header {
   width: 100%;
   padding: 12px 20px 0;
+}
+
+.site-header .hackclub-logo {
+  margin-top: 10px;
 }
 
 .site-header-brand {
@@ -296,7 +289,7 @@ main.container {
    HERO SECTION
    ========================================================================== */
 .hero-section {
-  padding-top: 80px;
+  padding-top: 10px;
   padding-bottom: 30px;
   display: flex;
   flex-direction: column;
@@ -315,7 +308,6 @@ main.container {
   border: 1px solid var(--gold-primary);
   padding: 6px 16px;
   border-radius: 4px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
 /* The Large Hero Ticket Stub */
@@ -331,16 +323,11 @@ main.container {
   color: var(--ticket-text);
   border-radius: 14px;
   border: 3px solid var(--ticket-border);
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.9),
-    0 0 40px rgba(230, 183, 100, 0.2);
   display: flex;
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  transition:
-    transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
-    box-shadow 0.4s ease;
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   margin-top: 30px;
 }
 
@@ -351,10 +338,7 @@ main.container {
 }
 
 .hero-ticket:hover {
-  transform: translateY(-4px) rotate(-0.3deg);
-  box-shadow:
-    0 28px 70px rgba(0, 0, 0, 0.95),
-    0 0 50px rgba(230, 183, 100, 0.3);
+  transform: rotate(-0.3deg);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -378,27 +362,6 @@ main.container {
   position: relative;
 }
 
-.ticket-header-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-  border-bottom: 2px solid rgba(143, 25, 36, 0.2);
-  padding-bottom: 12px;
-}
-
-.ticket-badge-admit {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--velvet-red);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
 .ticket-serial {
   font-family: var(--font-mono);
   font-size: 12px;
@@ -418,7 +381,6 @@ main.container {
 
 .hero-headline .highlight {
   color: var(--velvet-bright);
-  text-shadow: 2px 2px 0 rgba(230, 183, 100, 0.3);
 }
 
 .hero-subheading {
@@ -443,7 +405,7 @@ main.container {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: linear-gradient(135deg, var(--velvet-bright), var(--velvet-deep));
+  background: var(--velvet-bright);
   color: var(--text-white);
   text-decoration: none;
   font-family: var(--font-display);
@@ -453,22 +415,14 @@ main.container {
   padding: 12px 36px;
   border-radius: 8px;
   border: 2px solid var(--gold-primary);
-  box-shadow:
-    0 8px 24px rgba(143, 25, 36, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
   cursor: pointer;
   transition:
     transform 0.15s ease,
-    box-shadow 0.15s ease,
     background 0.15s ease;
 }
 
 .btn-rsvp:hover {
-  transform: translateY(-2px);
-  background: linear-gradient(135deg, #cc293a, var(--velvet-red));
-  box-shadow:
-    0 12px 28px rgba(143, 25, 36, 0.65),
-    0 0 20px var(--gold-glow);
+  background: #cc293a;
 }
 
 .btn-rsvp:active {
@@ -646,9 +600,6 @@ main.container {
   text-transform: uppercase;
   color: var(--text-white);
   line-height: 1;
-  text-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.8),
-    0 0 30px rgba(230, 183, 100, 0.2);
 }
 
 .section-description {
@@ -678,27 +629,10 @@ main.container {
   color: var(--ticket-text);
   border-radius: 12px;
   border: 2px solid var(--ticket-border);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
   display: flex;
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
-}
-
-.step-ticket:hover {
-  transform: translateY(-6px);
-  box-shadow:
-    0 20px 40px rgba(0, 0, 0, 0.85),
-    0 0 25px rgba(230, 183, 100, 0.25);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .step-ticket:hover {
-    transform: none;
-  }
 }
 
 .step-ticket-top {
@@ -806,7 +740,6 @@ main.container {
   display: flex;
   align-items: center;
   gap: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
 .notice-icon-holder {
@@ -840,9 +773,7 @@ main.container {
   border: 2px solid rgba(230, 183, 100, 0.25);
   border-radius: 10px;
   overflow: hidden;
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+  transition: border-color 0.2s ease;
   position: relative;
 }
 
@@ -852,9 +783,6 @@ main.container {
 
 .faq-item[open] {
   border-color: var(--gold-primary);
-  box-shadow:
-    0 8px 28px rgba(0, 0, 0, 0.7),
-    0 0 15px rgba(230, 183, 100, 0.15);
 }
 
 .faq-summary {
@@ -956,14 +884,9 @@ main.container {
 .cta-banner {
   margin: 60px auto 20px;
   max-width: 860px;
-  background: linear-gradient(135deg, var(--velvet-red), var(--velvet-deep));
-  border: 2px solid var(--gold-primary);
-  border-radius: 14px;
+
   padding: 40px 30px;
   text-align: center;
-  box-shadow:
-    0 16px 48px rgba(0, 0, 0, 0.8),
-    0 0 35px var(--gold-glow);
   position: relative;
   overflow: hidden;
 }
@@ -1018,9 +941,6 @@ main.container {
   color: var(--text-white);
   letter-spacing: 0.02em;
   margin-bottom: 16px;
-  text-shadow:
-    0 4px 24px rgba(0, 0, 0, 0.8),
-    0 0 30px rgba(230, 183, 100, 0.2);
 }
 
 .sub-title .gold-accent {
@@ -1045,7 +965,6 @@ main.container {
   background: #150f19;
   border: 2px solid rgba(230, 183, 100, 0.3);
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
 .progress-frame {
@@ -1063,7 +982,6 @@ main.container {
 .progress-frame.active {
   background: rgba(143, 25, 36, 0.4);
   border-color: var(--gold-primary);
-  box-shadow: 0 0 15px rgba(230, 183, 100, 0.25);
 }
 
 .progress-frame.completed {
@@ -1112,7 +1030,6 @@ main.container {
   color: var(--ticket-text);
   border-radius: 14px;
   border: 3px solid var(--ticket-border);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.85);
   position: relative;
   overflow: hidden;
   transition:
@@ -1239,7 +1156,6 @@ main.container {
   border-radius: 12px;
   padding: 24px;
   background: #ffffff;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
   margin-bottom: 16px;
 }
 
@@ -1267,7 +1183,7 @@ main.container {
   align-items: center;
   justify-content: center;
   gap: 12px;
-  background: linear-gradient(135deg, var(--velvet-bright), var(--velvet-deep));
+  background: var(--velvet-bright);
   color: var(--text-white);
   font-family: var(--font-display);
   font-size: 22px;
@@ -1276,7 +1192,6 @@ main.container {
   padding: 14px 32px;
   border-radius: 8px;
   border: 2px solid var(--gold-primary);
-  box-shadow: 0 8px 24px rgba(143, 25, 36, 0.4);
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
@@ -1285,11 +1200,7 @@ main.container {
 }
 
 .btn-hca-auth:hover {
-  transform: translateY(-2px);
-  background: linear-gradient(135deg, #cc293a, var(--velvet-red));
-  box-shadow:
-    0 12px 28px rgba(143, 25, 36, 0.55),
-    0 0 18px var(--gold-glow);
+  background: #cc293a;
 }
 
 /* Demo Account Switcher */
@@ -1376,19 +1287,6 @@ main.container {
   margin-top: 2px;
 }
 
-.hca-status-badge {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--success-green);
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 4px;
-}
-
 .btn-disconnect {
   background: transparent;
   border: 1px solid #b8a688;
@@ -1455,8 +1353,6 @@ main.container {
 
 .btn-fetch-projects:hover {
   background: #34263b;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
 }
 
 .projects-list-title {
@@ -1500,16 +1396,13 @@ main.container {
 
 .project-card-option:hover {
   border-color: var(--velvet-red);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
 
 .project-card-option.selected {
   border-color: var(--velvet-bright);
   background: #fffdf7;
-  box-shadow:
-    0 0 0 2px var(--velvet-bright),
-    0 8px 24px rgba(143, 25, 36, 0.15);
+  outline: 2px solid var(--velvet-bright);
+  outline-offset: -4px;
 }
 
 .option-top {
@@ -1669,16 +1562,14 @@ main.container {
   font-family: var(--font-body);
   font-size: 15px;
   color: var(--ticket-text);
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+  transition: border-color 0.2s ease;
 }
 
 .form-input:focus,
 .form-textarea:focus {
   border-color: var(--velvet-red);
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(143, 25, 36, 0.15);
+  outline: 3px solid rgba(143, 25, 36, 0.35);
+  outline-offset: 2px;
 }
 
 .form-textarea {
@@ -1697,8 +1588,7 @@ main.container {
   cursor: pointer;
   transition:
     border-color 0.2s ease,
-    background 0.2s ease,
-    box-shadow 0.2s ease;
+    background 0.2s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1710,7 +1600,6 @@ main.container {
 .screenshot-dropzone.drag-active {
   border-color: var(--velvet-bright);
   background: #fffdf5;
-  box-shadow: 0 4px 18px rgba(143, 25, 36, 0.1);
 }
 
 .screenshot-dropzone-icon {
@@ -1747,7 +1636,6 @@ main.container {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .screenshot-preview-img {
@@ -1827,7 +1715,7 @@ main.container {
   align-items: center;
   justify-content: center;
   gap: 12px;
-  background: linear-gradient(135deg, var(--velvet-bright), var(--velvet-deep));
+  background: var(--velvet-bright);
   color: var(--text-white);
   font-family: var(--font-display);
   font-size: 28px;
@@ -1836,7 +1724,6 @@ main.container {
   padding: 16px 48px;
   border-radius: 8px;
   border: 2px solid var(--gold-primary);
-  box-shadow: 0 10px 32px rgba(143, 25, 36, 0.5);
   cursor: pointer;
   transition: all 0.2s ease;
   width: 100%;
@@ -1844,11 +1731,7 @@ main.container {
 }
 
 .btn-submit-project:hover {
-  transform: translateY(-2px);
-  background: linear-gradient(135deg, #cc293a, var(--velvet-red));
-  box-shadow:
-    0 14px 36px rgba(143, 25, 36, 0.65),
-    0 0 24px var(--gold-glow);
+  background: #cc293a;
 }
 
 .error-banner {
@@ -1878,9 +1761,6 @@ main.container {
   color: var(--ticket-text);
   border-radius: 16px;
   border: 4px solid var(--gold-primary);
-  box-shadow:
-    0 24px 70px rgba(0, 0, 0, 0.95),
-    0 0 45px var(--gold-glow);
   overflow: hidden;
   position: relative;
 }
@@ -2016,7 +1896,6 @@ main.container {
 .btn-secondary:hover {
   background: #36293a;
   color: var(--text-white);
-  transform: translateY(-2px);
 }
 
 /* ==========================================================================

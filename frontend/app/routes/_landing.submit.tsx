@@ -374,10 +374,6 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                           @{loaderData.userData.displayName} ·{" "}
                           {loaderData.userData.primary_email}
                         </div>
-                        <div className="hca-status-badge">
-                          <Check color="green" size={18} />
-                          <span>Verified Active Teen Account</span>
-                        </div>
                       </div>
                     </div>
 
@@ -512,8 +508,8 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                   <div id="step2Content">
                     <p className="step-instruction">
                       Select the project you built around your movie to
-                      calculate your ticket grant ($5 for every hour of
-                      tracked build time).
+                      calculate your ticket grant ($5 for every hour of tracked
+                      build time).
                     </p>
 
                     {/* <!-- Hackatime Username Search Input --> */}
@@ -751,8 +747,8 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                   onSubmit={handleProjectSubmission}
                 >
                   <p className="step-instruction">
-                    Fill in the details for your movie-themed project. Make
-                    sure your project link is accessible and your code repository is
+                    Fill in the details for your movie-themed project. Make sure
+                    your project link is accessible and your code repository is
                     public so the review crew can examine your project.
                   </p>
 
@@ -840,7 +836,8 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                         required
                       />
                       <span className="form-hint">
-                        Public link to try or view your project, hosted on any platform.
+                        Public link to try or view your project, hosted on any
+                        platform.
                       </span>
                     </div>
 

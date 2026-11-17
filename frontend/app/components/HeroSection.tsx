@@ -18,17 +18,9 @@ export default function HeroSection() {
             {/* <!-- Main Ticket Body --> */}
             <div className="hero-ticket-main">
               <div>
-                <div className="ticket-header-meta">
-                  <div className="ticket-badge-admit">
-                    <Star />
-                    <span>Admit One Teen Maker</span>
-                  </div>
-                  <span className="ticket-serial">NO. 840291</span>
-                </div>
-
                 {/* <!-- Headline (No hyphens, no em dashes) --> */}
                 <h1 className="hero-headline">
-                  Build a movie project.
+                  Build a movie project.{" "}
                   <span className="highlight">Watch more movies on us.</span>
                 </h1>
 
@@ -51,15 +43,15 @@ export default function HeroSection() {
 
                 {/* <!-- Secondary text link to join the Slack channel -->
                   <!-- [SLACK_CHANNEL_URL] placeholder configurable via href --> */}
-                <a
-                  href="https://hackclub.enterprise.slack.com/archives/C0C8FKNHNV9"
+                <Link
+                  to="https://hackclub.enterprise.slack.com/archives/C0C8FKNHNV9"
                   className="slack-link"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <span>Join the Slack channel</span>
                   <ArrowUpRightSquare />
-                </a>
+                </Link>
               </div>
             </div>
 
