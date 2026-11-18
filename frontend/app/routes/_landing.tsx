@@ -1,9 +1,11 @@
 import { useEffect } from "react";
-import { Outlet } from "react-router";
+import { Outlet, useLocation } from "react-router";
 import Footer from "~/components/Footer";
 import Header from "~/components/Header";
 
 export default function layout() {
+  const isHome = useLocation().pathname === "/";
+
   useEffect(() => {
     (function () {
       // Respect prefers-reduced-motion
@@ -76,7 +78,7 @@ export default function layout() {
   }, []);
   return (
     <>
-      <Header />
+      {!isHome && <Header />}
       <Outlet />
       <Footer />
     </>

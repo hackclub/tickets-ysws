@@ -38,7 +38,6 @@ export default function HeroSection() {
                   <!-- [RSVP_FORM_URL] placeholder configurable via href --> */}
                 <Link to="/submit" className="btn-rsvp" target="_blank">
                   <span>SUBMIT PROJECT</span>
-                  <ArrowRight />
                 </Link>
 
                 {/* <!-- Secondary text link to join the Slack channel -->
@@ -69,10 +68,10 @@ export default function HeroSection() {
                 <div className="grant-big">$5</div>
                 <div className="grant-unit">Per hour of build time</div>
                 <div
+                  className="tracked-hours"
                   style={{
                     fontFamily: "var(--font-mono)",
                     fontSize: 11,
-                    color: "var(--ticket-muted)",
                     marginTop: 6,
                   }}
                 >

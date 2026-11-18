@@ -1,106 +1,124 @@
-import { Code, Film, PlayCircle, Wallet } from "lucide-react";
-import React from "react";
+import {
+  Code,
+  Film,
+  Music2,
+  Package,
+  Palette,
+  Send,
+  Star,
+  Video,
+} from "lucide-react";
+
+const steps = [
+  {
+    number: "01",
+    title: "Pick a movie you love",
+    description:
+      "Any film works, from an old favorite you rewatch every year to something you saw last weekend.",
+    image: "/idea.png",
+  },
+  {
+    number: "02",
+    title: "Build a project around it",
+    description:
+      "Be creative: design, interactivity, soundtrack, scenes, anything goes. Bring the mood, quotes, or lore to life.",
+    image: "/coding.png",
+  },
+  {
+    number: "03",
+    title: "Ship it live and submit",
+    description:
+      "Publish your site on GitHub Pages, Vercel, or another host. Then send us the live link and public source code.",
+    image: "/ship.png",
+  },
+  {
+    number: "04",
+    title: "Get your ticket grants",
+    description:
+      "Get $5 in cinema grants for every hour of build time tracked with Hackatime. Movie night is on us.",
+    image: "/tickets_image.png",
+  },
+];
 
 export default function HowItWorksSection() {
   return (
     <section className="how-it-works-section" id="how-it-works">
       <div className="container">
         <div className="section-title-wrap">
-          <h2 className="section-title">How It Works</h2>
+          <h2 className="section-title">How it works</h2>
         </div>
 
-        <div className="steps-grid">
-          {/* <!-- Step 1 --> */}
-          <article className="step-ticket">
-            <div className="step-ticket-top">
-              <span className="notch-left" aria-hidden="true"></span>
-              <span className="step-number-tag">Scene 01</span>
-              <div className="step-icon-wrap" aria-hidden="true">
-                <Film />
-              </div>
-              <span className="notch-right" aria-hidden="true"></span>
-            </div>
-            <div className="step-ticket-content">
-              <div>
-                <h3 className="step-title">Pick a movie you love</h3>
-                <p className="step-desc">
-                  Choose any motion picture that inspires you. It can be a
-                  legendary classic, an animated masterpiece, a sci fi thriller,
-                  or a summer blockbuster.
-                </p>
-              </div>
-              
-            </div>
-          </article>
+        <div className="journey-wrap">
+          <ol className="journey-grid">
+            {steps.map(({ number, title, description, image }, index) => {
+              const isLeftStep = index % 2 === 0;
 
-          {/* <!-- Step 2 --> */}
-          <article className="step-ticket">
-            <div className="step-ticket-top">
-              <span className="notch-left" aria-hidden="true"></span>
-              <span className="step-number-tag">Scene 02</span>
-              <div className="step-icon-wrap" aria-hidden="true">
-                <Code />
-              </div>
-              <span className="notch-right" aria-hidden="true"></span>
-            </div>
-            <div className="step-ticket-content">
-              <div>
-                <h3 className="step-title">Build a project themed around it</h3>
-                <p className="step-desc">
-                  Be creative: design, interactivity, soundtrack, scenes,
-                  gameplay, anything goes. Bring the mood, quotes, lore, or
-                  characters to life in a website, game, or other project.
-                </p>
-              </div>
-            
-            </div>
-          </article>
-
-          {/* <!-- Step 3 --> */}
-          <article className="step-ticket">
-            <div className="step-ticket-top">
-              <span className="notch-left" aria-hidden="true"></span>
-              <span className="step-number-tag">Scene 03</span>
-              <div className="step-icon-wrap" aria-hidden="true">
-                <PlayCircle />
-              </div>
-              <span className="notch-right" aria-hidden="true"></span>
-            </div>
-            <div className="step-ticket-content">
-              <div>
-                <h3 className="step-title">Ship it live and submit</h3>
-                <p className="step-desc">
-                  Publish your project to the world on GitHub Pages or Vercel.
-                  Submit your public source repository and working project URL
-                  through the submission portal.
-                </p>
-              </div>
-           
-            </div>
-          </article>
-
-          {/* <!-- Step 4 --> */}
-          <article className="step-ticket">
-            <div className="step-ticket-top">
-              <span className="notch-left" aria-hidden="true"></span>
-              <span className="step-number-tag">Scene 04</span>
-              <div className="step-icon-wrap" aria-hidden="true">
-                <Wallet />
-              </div>
-              <span className="notch-right" aria-hidden="true"></span>
-            </div>
-            <div className="step-ticket-content">
-              <div>
-                <h3 className="step-title">Get your ticket grants</h3>
-                <p className="step-desc">
-                  Get ticket grants of $5 for every hour of build time to go
-                  watch more movies. Use the grant at your neighborhood cinema
-                  with friends.
-                </p>
-              </div>
-          
-            </div>
-          </article>
+              return (
+                <li
+                  className={`journey-step ${isLeftStep ? "journey-step--left" : "journey-step--right"}`}
+                  key={number}
+                >
+                  <div className="journey-step-copy">
+                    <img
+                      className={`journey-step-art`}
+                      src={image}
+                      alt={
+                        number === "01"
+                          ? "A maker finding inspiration from an idea"
+                          : "Hack Club cinema ticket grants"
+                      }
+                    />
+                    <h3 className="journey-step-title">{title}</h3>
+                    <p className="journey-step-description">{description}</p>
+                  </div>
+                  {index < steps.length - 1 && (
+                    <>
+                      <svg
+                        className={`flow-arrow-desktop ${isLeftStep ? "" : "flow-arrow-desktop--reverse"}`}
+                        viewBox="0 0 440 112"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M 24 10 C 48 82, 92 92, 180 92 L 414 92"
+                          stroke="currentColor"
+                          strokeWidth="2.8"
+                          strokeLinecap="round"
+                        />
+                        <path
+                          d="M 398 78 L 418 92 L 398 106"
+                          stroke="currentColor"
+                          strokeWidth="2.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      <svg
+                        className="flow-arrow-mobile"
+                        viewBox="0 0 36 44"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M 18 4 L 18 38"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                        />
+                        <path
+                          d="M 10 30 L 18 39 L 26 30"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
         </div>
       </div>
     </section>

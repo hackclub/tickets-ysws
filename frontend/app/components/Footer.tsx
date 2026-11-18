@@ -9,6 +9,14 @@ export default function Footer() {
           {/* <!-- Left: Hack Club wordmark / logo & 501(c)(3) nonprofit wording --> */}
           <div className="footer-brand">
             {/* <!-- Exact 501(c)(3) nonprofit legal wording without any hyphens --> */}
+            <a
+              href="https://hackclub.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="site-header-brand"
+            >
+              <img src="/logo.png" className="hackclub-logo" alt="Hack Club" />
+            </a>
             <p className="footer-legal-copy">
               Hack Club is a registered 501(c)(3) nonprofit public charity. EIN
               813748307. Fiscal sponsorship provided by The Hack Foundation.
