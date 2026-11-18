@@ -744,11 +744,42 @@ main.container {
 
 @media (max-width: 680px) {
   .journey-wrap {
-    padding: 18px 0 8px;
+    margin-top: 24px !important;
+    padding: 12px 0 8px;
+  }
+
+  .journey-step {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin: 0 0 20px;
   }
 
   .journey-step-copy {
-    width: min(82%, 390px);
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 18px;
+  }
+
+  .journey-step--right .journey-step-copy {
+    margin-left: auto;
+  }
+
+  .journey-step-art,
+  .journey-step--right .journey-step-art {
+    width: min(100%, 190px);
+    max-height: 150px;
+    margin: 0 auto 12px;
+    object-position: center;
+  }
+
+  .journey-step-title {
+    font-size: clamp(24px, 7vw, 32px);
+  }
+
+  .journey-step-description {
+    font-size: 15px;
   }
 
   .flow-arrow-desktop {
@@ -757,9 +788,10 @@ main.container {
 
   .flow-arrow-mobile {
     display: block;
-    width: 36px;
-    height: 44px;
-    margin: 8px 0 8px 22%;
+    width: 28px;
+    height: 36px;
+    margin: 12px auto 0;
+    color: #fff;
   }
 }
 
