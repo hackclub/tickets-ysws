@@ -1,0 +1,6 @@
+{
+  "watch": ["src", ".frontend-built.trigger"],
+  "ext": "ts,trigger",
+  "exec": "nest start",
+  "delay": 500
+}
