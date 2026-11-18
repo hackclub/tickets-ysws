@@ -1009,7 +1009,10 @@ main.container {
 }
 
 .sub-title .gold-accent {
-  color: var(--gold-light);
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 8px;
 }
 
 .sub-lead {
@@ -1027,16 +1030,16 @@ main.container {
   gap: 12px;
   margin: 36px 0 48px;
   padding: 12px;
-  background: #150f19;
-  border: 2px solid rgba(230, 183, 100, 0.3);
+  background: #fff;
+  border: 2px solid #fff;
   border-radius: 12px;
 }
 
 .progress-frame {
   padding: 14px 12px;
   border-radius: 8px;
-  background: rgba(28, 22, 34, 0.6);
-  border: 1px solid rgba(230, 183, 100, 0.15);
+  background: #fff;
+  border: 1px solid #000;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -1045,13 +1048,13 @@ main.container {
 }
 
 .progress-frame.active {
-  background: rgba(143, 25, 36, 0.4);
-  border-color: var(--gold-primary);
+  background: #000;
+  border-color: #000;
 }
 
 .progress-frame.completed {
-  background: rgba(46, 125, 50, 0.2);
-  border-color: #4caf50;
+  background: #ededed;
+  border-color: #000;
 }
 
 .frame-number {
@@ -1059,7 +1062,7 @@ main.container {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--gold-light);
+  color: #000;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1070,8 +1073,13 @@ main.container {
   font-size: 18px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--text-white);
+  color: #000;
   line-height: 1.1;
+}
+
+.progress-frame.active .frame-number,
+.progress-frame.active .frame-title {
+  color: #fff;
 }
 
 @media (max-width: 600px) {
@@ -1091,10 +1099,10 @@ main.container {
 }
 
 .step-card {
-  background-color: var(--ticket-cream);
-  color: var(--ticket-text);
+  background-color: #fff;
+  color: #000;
   border-radius: 14px;
-  border: 3px solid var(--ticket-border);
+  border: 3px solid #fff;
   position: relative;
   overflow: hidden;
   transition:
@@ -1109,13 +1117,13 @@ main.container {
 }
 
 .step-card-header {
-  background-color: #1f1918;
-  color: var(--gold-light);
+  background-color: #000;
+  color: #fff;
   padding: 18px 26px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px dashed rgba(230, 183, 100, 0.4);
+  border-bottom: 2px dashed #fff;
   position: relative;
 }
 
@@ -1129,7 +1137,7 @@ main.container {
   font-family: var(--font-display);
   font-size: 26px;
   letter-spacing: 0.06em;
-  color: var(--gold-primary);
+  color: #fff;
   line-height: 1;
 }
 
@@ -1138,7 +1146,7 @@ main.container {
   font-size: 24px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--text-white);
+  color: #fff;
 }
 
 .step-status-pill {
@@ -1155,47 +1163,49 @@ main.container {
 }
 
 .status-pending {
-  background: rgba(230, 183, 100, 0.15);
-  color: var(--gold-light);
-  border: 1px solid rgba(230, 183, 100, 0.3);
+  background: #fff;
+  color: #000;
+  border: 1px solid #fff;
 }
 
 .status-completed {
-  background: rgba(46, 125, 50, 0.3);
-  color: #81c784;
-  border: 1px solid #4caf50;
+  background: #fff;
+  color: #000;
+  border: 1px solid #fff;
 }
 
 .status-locked {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--text-muted);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #333;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.status-active {
+  background: #000;
+  color: #fff;
+  border: 1px solid #fff;
 }
 
 .step-card-body {
   padding: 32px 28px;
-  background: radial-gradient(
-    circle at top left,
-    #ffffff,
-    var(--ticket-cream) 75%
-  );
+  background: #fff;
 }
 
 .step-instruction {
   font-size: 16px;
-  color: #3f333a;
+  color: #000;
   margin-bottom: 24px;
   line-height: 1.55;
 }
 
 /* Lock banner for gated steps */
 .locked-notice {
-  background: rgba(20, 14, 22, 0.95);
-  border: 2px dashed rgba(230, 183, 100, 0.4);
+  background: #fff;
+  border: 2px dashed #000;
   border-radius: 10px;
   padding: 24px;
   text-align: center;
-  color: var(--text-white);
+  color: #000;
   margin: 10px 0;
   display: flex;
   flex-direction: column;
@@ -1204,12 +1214,12 @@ main.container {
 }
 
 .locked-notice-icon {
-  color: var(--gold-primary);
+  color: #000;
 }
 
 .locked-notice p {
   font-size: 15px;
-  color: var(--gold-light);
+  color: #000;
   max-width: 440px;
 }
 
@@ -1217,7 +1227,7 @@ main.container {
    STEP 1: hca SIGN IN ELEMENTS
    ========================================================================== */
 .hca-box {
-  border: 2px solid var(--ticket-border);
+  border: 2px solid #000;
   border-radius: 12px;
   padding: 24px;
   background: #ffffff;
@@ -1230,7 +1240,7 @@ main.container {
   justify-content: space-between;
   margin-bottom: 18px;
   padding-bottom: 14px;
-  border-bottom: 1px solid #e8dec8;
+  border-bottom: 1px solid #000;
 }
 
 .hca-brand-title {
@@ -1240,7 +1250,7 @@ main.container {
   font-family: var(--font-display);
   font-size: 24px;
   letter-spacing: 0.04em;
-  color: #17111a;
+  color: #000;
 }
 
 .btn-hca-auth {
@@ -1273,7 +1283,7 @@ main.container {
 .quick-auth-options {
   margin-top: 20px;
   padding-top: 18px;
-  border-top: 1px dashed #d9ccb4;
+  border-top: 1px dashed #000;
 }
 
 .quick-auth-label {
@@ -1320,8 +1330,8 @@ main.container {
   justify-content: space-between;
   align-items: center;
   gap: 18px;
-  background: #fdfaf3;
-  border: 2px solid #388e3c;
+  background: #fff;
+  border: 2px solid #000;
   border-radius: 10px;
   padding: 18px 22px;
 }
@@ -1336,20 +1346,20 @@ main.container {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border: 2px solid var(--gold-primary);
+  border: 2px solid #000;
 }
 
 .hca-name {
   font-size: 18px;
   font-weight: 700;
-  color: #17111a;
+  color: #000;
   line-height: 1.2;
 }
 
 .hca-handle {
   font-family: var(--font-mono);
   font-size: 13px;
-  color: #615450;
+  color: #333;
   margin-top: 2px;
 }
 
@@ -1386,7 +1396,7 @@ main.container {
   min-width: 260px;
   padding: 12px 18px;
   background: #ffffff;
-  border: 2px solid var(--ticket-border);
+  border: 2px solid #000;
   border-radius: 8px;
   font-family: var(--font-body);
   font-size: 15px;
@@ -1395,7 +1405,8 @@ main.container {
 }
 
 .ht-input:focus {
-  border-color: var(--velvet-red);
+  border-color: #000;
+  box-shadow: 0 0 0 3px #000;
   outline: none;
 }
 
@@ -1428,7 +1439,7 @@ main.container {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--ticket-muted);
+  color: #000;
   margin-bottom: 14px;
   display: flex;
   justify-content: space-between;
@@ -1450,7 +1461,7 @@ main.container {
 
 .project-card-option {
   background: #ffffff;
-  border: 2px solid var(--ticket-border);
+  border: 2px solid #000;
   border-radius: 10px;
   padding: 18px 20px;
   cursor: pointer;
@@ -1462,13 +1473,14 @@ main.container {
 }
 
 .project-card-option:hover {
-  border-color: var(--velvet-red);
+  background: #ededed;
 }
 
 .project-card-option.selected {
-  border-color: var(--velvet-bright);
-  background: #fffdf7;
-  outline: 2px solid var(--velvet-bright);
+  border-color: #000;
+  background: #000;
+  color: #fff;
+  outline: 2px solid #000;
   outline-offset: -4px;
 }
 
@@ -1482,15 +1494,21 @@ main.container {
 .option-name {
   font-size: 16px;
   font-weight: 700;
-  color: #17111a;
+  color: #000;
   line-height: 1.3;
+}
+
+.project-card-option.selected .option-name,
+.project-card-option.selected .hours-badge,
+.project-card-option.selected .grant-estimate-badge {
+  color: #fff;
 }
 
 .radio-circle {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 2px solid #b8a688;
+  border: 2px solid #000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1499,8 +1517,8 @@ main.container {
 }
 
 .project-card-option.selected .radio-circle {
-  border-color: var(--velvet-bright);
-  background: var(--velvet-bright);
+  border-color: #fff;
+  background: #000;
 }
 
 .radio-dot {
@@ -1521,25 +1539,25 @@ main.container {
   align-items: center;
   margin-top: 12px;
   padding-top: 10px;
-  border-top: 1px solid #f1e7d2;
+  border-top: 1px solid #000;
   font-family: var(--font-mono);
   font-size: 12px;
 }
 
 .hours-badge {
-  color: #4a3c44;
+  color: #000;
   font-weight: 700;
 }
 
 .grant-estimate-badge {
-  color: var(--velvet-red);
+  color: #000;
   font-weight: 700;
 }
 
 /* Selected Confirmation Strip */
 .confirmed-project-strip {
-  background: #fdfaf3;
-  border: 2px solid var(--gold-dark);
+  background: #fff;
+  border: 2px solid #000;
   border-radius: 10px;
   padding: 18px 22px;
   display: flex;
@@ -1561,19 +1579,19 @@ main.container {
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ticket-muted);
+  color: #333;
 }
 
 .confirmed-title {
   font-size: 18px;
   font-weight: 800;
-  color: #17111a;
+  color: #000;
 }
 
 .confirmed-grant-sum {
   font-family: var(--font-display);
   font-size: 32px;
-  color: var(--velvet-red);
+  color: #000;
   line-height: 1;
 }
 
@@ -1607,7 +1625,7 @@ main.container {
 .form-label {
   font-size: 14px;
   font-weight: 700;
-  color: #211923;
+  color: #000;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -1615,7 +1633,7 @@ main.container {
 
 .form-hint {
   font-size: 12px;
-  color: var(--ticket-muted);
+  color: #333;
   margin-top: 2px;
 }
 
@@ -1624,7 +1642,7 @@ main.container {
   width: 100%;
   padding: 14px 18px;
   background: #ffffff;
-  border: 2px solid var(--ticket-border);
+  border: 2px solid #000;
   border-radius: 8px;
   font-family: var(--font-body);
   font-size: 15px;
@@ -1634,8 +1652,8 @@ main.container {
 
 .form-input:focus,
 .form-textarea:focus {
-  border-color: var(--velvet-red);
-  outline: 3px solid rgba(143, 25, 36, 0.35);
+  border-color: #000;
+  outline: 3px solid rgba(0, 0, 0, 0.25);
   outline-offset: 2px;
 }
 
@@ -1647,7 +1665,7 @@ main.container {
 
 /* Screenshot Upload Zone */
 .screenshot-dropzone {
-  border: 2px dashed #b8a688;
+  border: 2px dashed #000;
   border-radius: 8px;
   padding: 24px 20px;
   background: #ffffff;
@@ -1665,25 +1683,25 @@ main.container {
 
 .screenshot-dropzone:hover,
 .screenshot-dropzone.drag-active {
-  border-color: var(--velvet-bright);
-  background: #fffdf5;
+  border-color: #000;
+  background: #ededed;
 }
 
 .screenshot-dropzone-icon {
-  color: var(--velvet-red);
+  color: #000;
   margin-bottom: 2px;
 }
 
 .screenshot-dropzone-prompt {
   font-size: 15px;
   font-weight: 700;
-  color: #17111a;
+  color: #000;
 }
 
 .screenshot-dropzone-note {
   font-family: var(--font-mono);
   font-size: 12px;
-  color: var(--ticket-muted);
+  color: #333;
 }
 
 .screenshot-previews-grid {
@@ -1697,7 +1715,7 @@ main.container {
   position: relative;
   border-radius: 6px;
   overflow: hidden;
-  border: 2px solid var(--ticket-border);
+  border: 2px solid #000;
   background: #141017;
   aspect-ratio: 16 / 10;
   display: flex;
@@ -1742,8 +1760,8 @@ main.container {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  background: #f7efe1;
-  border: 1px solid #e2d6bf;
+  background: #fff;
+  border: 1px solid #000;
   border-radius: 8px;
   padding: 18px 20px;
   margin-top: 6px;
@@ -1760,13 +1778,13 @@ main.container {
   width: 18px;
   height: 18px;
   margin-top: 3px;
-  accent-color: var(--velvet-red);
+  accent-color: #000;
   cursor: pointer;
 }
 
 .checkbox-text {
   font-size: 14px;
-  color: #2f252b;
+  color: #000;
   line-height: 1.45;
   font-weight: 500;
 }

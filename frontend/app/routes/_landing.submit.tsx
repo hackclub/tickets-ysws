@@ -314,7 +314,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                         style={{
                           fontFamily: "var(--font-mono)",
                           fontSize: 12,
-                          color: "var(ticket-muted)",
+                          color: "var(--ticket-muted)",
                         }}
                       >
                         Secure Auth
@@ -352,7 +352,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                 <div id="hcaLoggedIn">
                   <p
                     className="step-instruction"
-                    style={{ color: "#2e7d32", fontWeight: 600 }}
+                    style={{ color: "#000", fontWeight: 600 }}
                   >
                     Step 1 Complete: Your Hack Club account is connected and
                     ready to ship your project
@@ -444,7 +444,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                     style={{
                       fontFamily: "var(--font-display)",
                       fontSize: 22,
-                      color: "var(--gold-light)",
+                      color: "#000",
                     }}
                   >
                     Step 2 is currently locked
@@ -476,7 +476,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                           style={{
                             fontFamily: "var(--font-mono)",
                             fontSize: 12,
-                            color: "var(ticket-muted)",
+                            color: "var(--ticket-muted)",
                           }}
                         >
                           Track hours
@@ -615,7 +615,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                           style={{
                             fontFamily: "var(--font-mono)",
                             fontSize: 12,
-                            color: "#53454b",
+                            color: "#333",
                           }}
                           id="confirmedProjectHours"
                         >
@@ -649,7 +649,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                             fontFamily: "var(--font-mono)",
                             fontSize: 11,
                             textTransform: "uppercase",
-                            color: "var(--velvet-red)",
+                            color: "#000",
                             fontWeight: 700,
                           }}
                         >
@@ -710,7 +710,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                     style={{
                       fontFamily: "var(--font-display)",
                       fontSize: 22,
-                      color: "var(--gold-light)",
+                      color: "#000",
                     }}
                   >
                     Step 3 is currently locked
@@ -769,7 +769,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                     <div className="form-group">
                       <label htmlFor="movieTitle" className="form-label">
                         <span>Movie Title</span>
-                        <span style={{ color: "var(--velvet-bright)" }}>*</span>
+                        <span style={{ color: "#000" }}>*</span>
                       </label>
                       <input
                         type="text"
@@ -793,7 +793,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                     <div className="form-group">
                       <label htmlFor="projectName" className="form-label">
                         <span>Project Name</span>
-                        <span style={{ color: "var(--velvet-bright)" }}>*</span>
+                        <span style={{ color: "#000" }}>*</span>
                       </label>
                       <input
                         type="text"
@@ -820,7 +820,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                     <div className="form-group">
                       <label htmlFor="liveUrl" className="form-label">
                         <span>Live Project URL</span>
-                        <span style={{ color: "var(--velvet-bright)" }}>*</span>
+                        <span style={{ color: "#000" }}>*</span>
                       </label>
                       <input
                         type="url"
@@ -845,7 +845,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                     <div className="form-group">
                       <label htmlFor="repoUrl" className="form-label">
                         <span>Public GitHub Repository</span>
-                        <span style={{ color: "var(--velvet-bright)" }}>*</span>
+                        <span style={{ color: "#000" }}>*</span>
                       </label>
                       <input
                         type="url"
@@ -871,7 +871,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                   <div className="form-group">
                     <label htmlFor="projectDescription" className="form-label">
                       <span>How does your project celebrate the movie?</span>
-                      <span style={{ color: "var(--velvet-bright)" }}>*</span>
+                      <span style={{ color: "#000" }}>*</span>
                     </label>
                     <textarea
                       id="projectDescription"
@@ -896,7 +896,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                   <div className="form-group">
                     <label className="form-label" htmlFor="screenshotFileInput">
                       <span>Project Screenshot</span>
-                      <span style={{ color: "var(--velvet-bright)" }}>*</span>
+                      <span style={{ color: "#000" }}>*</span>
                     </label>
 
                     <FileUploader
@@ -966,7 +966,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                     <div className="form-group">
                       <label htmlFor="nextMovie" className="form-label">
                         <span>What movie do you plan to watch next?</span>
-                        <span style={{ color: "var(--velvet-bright)" }}>*</span>
+                        <span style={{ color: "#000" }}>*</span>
                       </label>
                       <input
                         type="text"
