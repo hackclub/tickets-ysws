@@ -208,11 +208,18 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
 
   return (
     <main className="container">
+      <style>
+        {`
+        body {
+          background: url("/background.jpg") center center / cover no-repeat;
+        }
+        `}
+      </style>
       <div id="submissionView">
         {/* <!-- Hero Header --> */}
         <section className="submission-hero">
           <h1 className="sub-title">
-            Submit Your <span className="gold-accent">Movie Project</span>
+            <span>Submit Your Movie Project</span>
           </h1>
         </section>
 
@@ -258,23 +265,6 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                   Sign in with Hack Club Auth
                 </h2>
               </div>
-              {!user ? (
-                <span
-                  className="step-status-pill status-pending"
-                  id="step1StatusPill"
-                >
-                  <LogIn size={15} />
-                  <span>Awaiting Sign In</span>
-                </span>
-              ) : (
-                <span
-                  className="step-status-pill status-completed"
-                  id="step1StatusPill"
-                >
-                  <Check size={15} />
-                  <span>Completed</span>
-                </span>
-              )}
             </div>
 
             <div className="step-card-body">
@@ -294,7 +284,6 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                       id="btnhcaLogin"
                       onClick={handleHCA}
                     >
-                      <LogIn />
                       <span>Sign in with Hack Club</span>
                     </button>
                     <p>
@@ -353,31 +342,6 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                   Choose your tracked projects
                 </h2>
               </div>
-              {step2Locked ? (
-                <span
-                  className="step-status-pill status-locked"
-                  id="step2StatusPill"
-                >
-                  <Lock size={16} />
-                  <span>Locked</span>
-                </span>
-              ) : !step3Locked ? (
-                <span
-                  className="step-status-pill status-completed"
-                  id="step2StatusPill"
-                >
-                  <Check size={16} />
-                  <span>Completed</span>
-                </span>
-              ) : (
-                <span
-                  className="step-status-pill status-active"
-                  id="step2StatusPill"
-                >
-                  <Film size={16} />
-                  <span>Select Project</span>
-                </span>
-              )}
             </div>
 
             <div className="step-card-body">
@@ -412,7 +376,6 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                         id="btnhcaLogin"
                         onClick={handleHackatime}
                       >
-                        <LogIn />
                         <span>Link Hackatime</span>
                       </button>
                     </div>
@@ -582,31 +545,6 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
               <div className="step-header-left">
                 <h2 className="step-header-title">Project details</h2>
               </div>
-              {step3Locked ? (
-                <span
-                  className="step-status-pill status-locked"
-                  id="step3StatusPill"
-                >
-                  <Lock size={16} />
-                  <span>Locked</span>
-                </span>
-              ) : submitted ? (
-                <span
-                  className="step-status-pill status-completed"
-                  id="step3StatusPill"
-                >
-                  <Check size={16} />
-                  <span>Submitted</span>
-                </span>
-              ) : (
-                <span
-                  className="step-status-pill status-active"
-                  id="step3StatusPill"
-                >
-                  <FileText size={16} />
-                  <span>Enter details</span>
-                </span>
-              )}
             </div>
 
             <div className="step-card-body">

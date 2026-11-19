@@ -1034,13 +1034,16 @@ main.container {
   font-size: clamp(36px, 6vw, 64px);
   font-weight: 800;
   line-height: 1.05;
-  color: var(--text-white);
+  color: var(--color-white) !important;
   letter-spacing: -0.045em;
   margin-bottom: 16px;
 }
-
-.sub-title .gold-accent {
-  color: #fff;
+.sub-title span {
+  text-shadow:
+    -3px -3px 0 #111827,
+    3px -3px 0 #111827,
+    -3px 3px 0 #111827,
+    3px 3px 0 #111827;
 }
 
 .sub-lead {
@@ -1140,7 +1143,6 @@ main.container {
 }
 
 .step-card.locked {
-  opacity: 0.55;
   filter: grayscale(0.4);
   pointer-events: none;
 }
