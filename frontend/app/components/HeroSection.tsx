@@ -67,16 +67,6 @@ export default function HeroSection() {
               <div className="stub-middle-grant">
                 <div className="grant-big">$5</div>
                 <div className="grant-unit">Per hour of build time</div>
-                <div
-                  className="tracked-hours"
-                  style={{
-                    fontFamily: "var(--font-mono)",
-                    fontSize: 11,
-                    marginTop: 6,
-                  }}
-                >
-                  $5 per tracked hour
-                </div>
               </div>
 
               <div className="stub-barcode" aria-hidden="true">
