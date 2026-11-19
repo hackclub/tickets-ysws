@@ -48,7 +48,7 @@ export default function HeroSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span>Join the Slack channel</span>
+                  <span>Join #tickets-ysws on Slack</span>
                   <ArrowUpRightSquare />
                 </Link>
               </div>

@@ -1,8 +1,9 @@
 import {
   ArrowLeft,
   Check,
-  Circle,
   FileImage,
+  FileText,
+  Film,
   Lock,
   LogIn,
   RefreshCcw,
@@ -232,7 +233,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
             id="progressFrame2"
           >
             <div className="frame-number">
-              <span>02</span>
+              <span>02 </span>
             </div>
             <div className="frame-title">Time tracking</div>
           </div>
@@ -262,7 +263,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                   className="step-status-pill status-pending"
                   id="step1StatusPill"
                 >
-                  <Circle size={15} />
+                  <LogIn size={15} />
                   <span>Awaiting Sign In</span>
                 </span>
               ) : (
@@ -297,8 +298,8 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                       <span>Sign in with Hack Club</span>
                     </button>
                     <p>
-                      Don't have an HCA account yet? A free teen account will
-                      be initiated during verification.
+                      Don't have an HCA account yet? A free teen account will be
+                      initiated during verification.
                     </p>
                   </div>
                 </div>
@@ -373,7 +374,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                   className="step-status-pill status-active"
                   id="step2StatusPill"
                 >
-                  <Circle size={16} />
+                  <Film size={16} />
                   <span>Select Project</span>
                 </span>
               )}
@@ -602,7 +603,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                   className="step-status-pill status-active"
                   id="step3StatusPill"
                 >
-                  <Circle size={16} />
+                  <FileText size={16} />
                   <span>Enter details</span>
                 </span>
               )}
