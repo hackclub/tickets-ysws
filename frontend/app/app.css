@@ -1038,12 +1038,19 @@ main.container {
   letter-spacing: -0.045em;
   margin-bottom: 16px;
 }
-.sub-title span {
+.text-shadow-border-black {
   text-shadow:
     -3px -3px 0 #111827,
     3px -3px 0 #111827,
     -3px 3px 0 #111827,
     3px 3px 0 #111827;
+}
+.text-shadow-border-white {
+  text-shadow:
+    -3px -3px 0 #f4f4f5,
+    3px -3px 0 #f4f4f5,
+    -3px 3px 0 #f4f4f5,
+    3px 3px 0 #f4f4f5;
 }
 
 .sub-lead {
@@ -2007,7 +2014,7 @@ main.container {
 .site-footer {
   background-color: #000;
   border-top: 1px solid #fff;
-  padding: 60px 0 40px;
+  padding: 40px 0;
   margin-top: 60px;
   color: #fff;
 }

@@ -219,7 +219,9 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
         {/* <!-- Hero Header --> */}
         <section className="submission-hero">
           <h1 className="sub-title">
-            <span>Submit Your Movie Project</span>
+            <span className="text-shadow-border-black">
+              Submit Your Movie Project
+            </span>
           </h1>
         </section>
 
