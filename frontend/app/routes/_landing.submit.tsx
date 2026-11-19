@@ -2,12 +2,10 @@ import {
   ArrowLeft,
   Check,
   Circle,
-  Clock,
   FileImage,
   Lock,
   LogIn,
   RefreshCcw,
-  Shield,
 } from "lucide-react";
 import React, { useState } from "react";
 import type { Route } from "./+types/_landing.submit";
@@ -215,10 +213,6 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
           <h1 className="sub-title">
             Submit Your <span className="gold-accent">Movie Project</span>
           </h1>
-          <p className="sub-lead">
-            Sign in with Hack Club Auth, connect your Hackatime coding hours,
-            and input your project details to claim your cinema ticket grant.
-          </p>
         </section>
 
         {/* <!-- 3 Frame Progress Filmstrip --> */}
@@ -228,10 +222,9 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
             id="progressFrame1"
           >
             <div className="frame-number">
-              <span>Frame 01</span>
-              <span id="frame1BadgeText">Required</span>
+              <span>01</span>
             </div>
-            <div className="frame-title">1. Sign in with HCA</div>
+            <div className="frame-title">Account</div>
           </div>
 
           <div
@@ -239,16 +232,9 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
             id="progressFrame2"
           >
             <div className="frame-number">
-              <span>Frame 02</span>
-              <span id="frame2BadgeText">
-                {step2Locked
-                  ? "Locked"
-                  : !step3Locked
-                    ? "Completed"
-                    : "Required"}
-              </span>
+              <span>02</span>
             </div>
-            <div className="frame-title">2. Link Hackatime</div>
+            <div className="frame-title">Time tracking</div>
           </div>
 
           <div
@@ -256,12 +242,9 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
             id="progressFrame3"
           >
             <div className="frame-number">
-              <span>Frame 03</span>
-              <span id="frame3BadgeText">
-                {submitted ? "Submitted" : !step3Locked ? "Required" : "Locked"}
-              </span>
+              <span>03</span>
             </div>
-            <div className="frame-title">3. Project Details</div>
+            <div className="frame-title">Project</div>
           </div>
         </div>
 
@@ -270,7 +253,6 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
           <section className="step-card" id="stepCard1">
             <div className="step-card-header">
               <div className="step-header-left">
-                <span className="step-tag">Step 01</span>
                 <h2 className="step-header-title">
                   Sign in with Hack Club Auth
                 </h2>
@@ -304,60 +286,25 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                     ticket grant.
                   </p>
 
-                  <div className="hca-box">
-                    <div className="hca-box-header">
-                      <div className="hca-brand-title">
-                        <Shield />
-                        <span>Hack Club Auth</span>
-                      </div>
-                      <span
-                        style={{
-                          fontFamily: "var(--font-mono)",
-                          fontSize: 12,
-                          color: "var(--ticket-muted)",
-                        }}
-                      >
-                        Secure Auth
-                      </span>
-                    </div>
-
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        gap: 14,
-                        textAlign: "center",
-                        padding: "10px 0",
-                      }}
+                  <div className="auth-action">
+                    <button
+                      type="button"
+                      className="btn-hca-auth"
+                      id="btnhcaLogin"
+                      onClick={handleHCA}
                     >
-                      <button
-                        type="button"
-                        className="btn-hca-auth"
-                        id="btnhcaLogin"
-                        onClick={handleHCA}
-                      >
-                        <LogIn />
-                        <span>Sign in with Hack Club</span>
-                      </button>
-                      <p style={{ fontSize: 13, color: "var(--ticket-muted)" }}>
-                        Don't have an HCA account yet? A free teen account will
-                        be initiated during verification.
-                      </p>
-                    </div>
+                      <LogIn />
+                      <span>Sign in with Hack Club</span>
+                    </button>
+                    <p>
+                      Don't have an HCA account yet? A free teen account will
+                      be initiated during verification.
+                    </p>
                   </div>
                 </div>
               ) : (
                 /* <!-- Authenticated State --> */
                 <div id="hcaLoggedIn">
-                  <p
-                    className="step-instruction"
-                    style={{ color: "#000", fontWeight: 600 }}
-                  >
-                    Step 1 Complete: Your Hack Club account is connected and
-                    ready to ship your project
-                  </p>
-
                   <div className="hca-profile-card">
                     <div className="hca-profile-info">
                       <img
@@ -401,9 +348,8 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
           >
             <div className="step-card-header">
               <div className="step-header-left">
-                <span className="step-tag">Step 02</span>
                 <h2 className="step-header-title">
-                  Link Hackatime and Select Project
+                  Choose your tracked projects
                 </h2>
               </div>
               {step2Locked ? (
@@ -440,15 +386,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                   <div className="locked-notice-icon">
                     <Lock size={32} />
                   </div>
-                  <h3
-                    style={{
-                      fontFamily: "var(--font-display)",
-                      fontSize: 22,
-                      color: "#000",
-                    }}
-                  >
-                    Step 2 is currently locked
-                  </h3>
+                  <h3>Sign in to continue</h3>
                   <p>
                     Please sign in with Hack Club Auth in Step 1 above to load
                     your Hackatime coding activity and projects.
@@ -466,43 +404,16 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                       work on a project.
                     </p>
 
-                    <div className="hca-box">
-                      <div className="hca-box-header">
-                        <div className="hca-brand-title">
-                          <Clock />
-                          <span>Hackatime</span>
-                        </div>
-                        <span
-                          style={{
-                            fontFamily: "var(--font-mono)",
-                            fontSize: 12,
-                            color: "var(--ticket-muted)",
-                          }}
-                        >
-                          Track hours
-                        </span>
-                      </div>
-
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "center",
-                          gap: 14,
-                          textAlign: "center",
-                          padding: "10px 0",
-                        }}
+                    <div className="auth-action">
+                      <button
+                        type="button"
+                        className="btn-hca-auth"
+                        id="btnhcaLogin"
+                        onClick={handleHackatime}
                       >
-                        <button
-                          type="button"
-                          className="btn-hca-auth"
-                          id="btnhcaLogin"
-                          onClick={handleHackatime}
-                        >
-                          <LogIn />
-                          <span>Link Hackatime</span>
-                        </button>
-                      </div>
+                        <LogIn />
+                        <span>Link Hackatime</span>
+                      </button>
                     </div>
                   </div>
                 ) : (
@@ -648,12 +559,11 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                           style={{
                             fontFamily: "var(--font-mono)",
                             fontSize: 11,
-                            textTransform: "uppercase",
                             color: "#000",
                             fontWeight: 700,
                           }}
                         >
-                          Estimated Grant Total
+                          Estimated grant
                         </span>
                       </div>
                     </div>
@@ -669,8 +579,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
           >
             <div className="step-card-header">
               <div className="step-header-left">
-                <span className="step-tag">Step 03</span>
-                <h2 className="step-header-title">Input Project Details</h2>
+                <h2 className="step-header-title">Project details</h2>
               </div>
               {step3Locked ? (
                 <span
@@ -706,15 +615,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                   <div className="locked-notice-icon">
                     <Lock size={32} />
                   </div>
-                  <h3
-                    style={{
-                      fontFamily: "var(--font-display)",
-                      fontSize: 22,
-                      color: "#000",
-                    }}
-                  >
-                    Step 3 is currently locked
-                  </h3>
+                  <h3>Complete the earlier steps to continue</h3>
                   <p>
                     Please complete Step 1 (Sign in with HCA) and Step 2 (Select
                     Hackatime Project) above to unlock this submission form.
@@ -725,14 +626,6 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
               {/* <!-- Success State --> */}
               {!step3Locked && submitted && (
                 <div className="locked-notice" role="status">
-                  <h3
-                    style={{
-                      fontFamily: "var(--font-display)",
-                      fontSize: 22,
-                    }}
-                  >
-                    Project submitted
-                  </h3>
                   <p>
                     Thanks for shipping. The Hack Club team will review your
                     project and verify your tracked hours before grant payout.
@@ -747,12 +640,6 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                   className="project-form"
                   onSubmit={handleProjectSubmission}
                 >
-                  <p className="step-instruction">
-                    Fill in the details for your movie-themed project. Make sure
-                    your project link is accessible and your code repository is
-                    public so the review crew can examine your project.
-                  </p>
-
                   {/* <!-- Error Alert Banner --> */}
 
                   <div
@@ -785,9 +672,6 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                         }
                         required
                       />
-                      <span className="form-hint">
-                        The motion picture your project celebrates.
-                      </span>
                     </div>
 
                     <div className="form-group">
@@ -809,9 +693,6 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                         }
                         required
                       />
-                      <span className="form-hint">
-                        The public title of your project.
-                      </span>
                     </div>
                   </div>
 

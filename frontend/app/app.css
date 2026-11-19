@@ -387,11 +387,11 @@ main.container {
 }
 
 .hero-headline {
-  font-family: var(--font-display);
-  font-size: clamp(48px, 8vw, 84px);
-  line-height: 0.95;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-size: clamp(40px, 6.8vw, 72px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.045em;
   color: #211821;
   margin-bottom: 16px;
 }
@@ -425,17 +425,17 @@ main.container {
   background: #000;
   color: #fff;
   text-decoration: none;
-  font-family: var(--font-display);
-  font-size: 26px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 12px 36px;
-  border-radius: 8px;
-  border: 2px solid #000;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 6px;
+  border: 1px solid #000;
   cursor: pointer;
   transition:
     transform 0.15s ease,
-    background 0.15s ease;
+    background-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .btn-rsvp:hover {
@@ -615,12 +615,12 @@ main.container {
 }
 
 .section-title {
-  font-family: var(--font-display);
-  font-size: clamp(40px, 6vw, 64px);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
   color: var(--text-white);
-  line-height: 1;
+  line-height: 1.1;
 }
 
 .section-description {
@@ -705,12 +705,11 @@ main.container {
 .journey-step-title {
   margin-bottom: 6px;
   color: var(--text-white);
-  font-family: var(--font-display);
-  font-size: clamp(26px, 3.2vw, 36px);
-  font-weight: 700;
-  line-height: 1.02;
-  letter-spacing: 0.015em;
-  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-size: clamp(22px, 2.6vw, 28px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
 }
 
 .journey-step-description {
@@ -838,7 +837,7 @@ main.container {
 .faq-item {
   background-color: #fff;
   color: #000;
-  border: 2px solid #fff;
+  border: 1px solid #fff;
   border-radius: 10px;
   overflow: hidden;
   transition:
@@ -929,7 +928,7 @@ main.container {
   padding: 22px 26px 26px;
   background-color: #fff;
   color: #000;
-  border-top: 2px dashed #000;
+  border-top: 1px dashed #000;
   position: relative;
 }
 
@@ -989,13 +988,13 @@ main.container {
 }
 
 .cta-title {
-  font-family: var(--font-display);
-  font-size: clamp(36px, 5vw, 54px);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
   color: var(--text-white);
   margin-bottom: 12px;
-  line-height: 1;
+  line-height: 1.1;
 }
 
 .cta-desc {
@@ -1031,20 +1030,17 @@ main.container {
 }
 
 .sub-title {
-  font-family: var(--font-display);
-  font-size: clamp(44px, 7vw, 76px);
-  line-height: 0.96;
-  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 800;
+  line-height: 1.05;
   color: var(--text-white);
-  letter-spacing: 0.02em;
+  letter-spacing: -0.045em;
   margin-bottom: 16px;
 }
 
 .sub-title .gold-accent {
   color: #fff;
-  text-decoration: underline;
-  text-decoration-thickness: 3px;
-  text-underline-offset: 8px;
 }
 
 .sub-lead {
@@ -1063,7 +1059,7 @@ main.container {
   margin: 36px 0 48px;
   padding: 12px;
   background: #fff;
-  border: 2px solid #fff;
+  border: 1px solid #d6d6d6;
   border-radius: 12px;
 }
 
@@ -1092,8 +1088,8 @@ main.container {
 .frame-number {
   font-family: var(--font-mono);
   font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   color: #000;
   display: flex;
   align-items: center;
@@ -1101,12 +1097,12 @@ main.container {
 }
 
 .frame-title {
-  font-family: var(--font-display);
-  font-size: 18px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   color: #000;
-  line-height: 1.1;
+  line-height: 1.35;
 }
 
 .progress-frame.active .frame-number,
@@ -1134,7 +1130,7 @@ main.container {
   background-color: #fff;
   color: #000;
   border-radius: 14px;
-  border: 3px solid #fff;
+  border: 1px solid #d6d6d6;
   position: relative;
   overflow: hidden;
   transition:
@@ -1155,7 +1151,7 @@ main.container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px dashed #fff;
+  border-bottom: 1px dashed #fff;
   position: relative;
 }
 
@@ -1165,19 +1161,11 @@ main.container {
   gap: 14px;
 }
 
-.step-tag {
-  font-family: var(--font-display);
-  font-size: 26px;
-  letter-spacing: 0.06em;
-  color: #fff;
-  line-height: 1;
-}
-
 .step-header-title {
-  font-family: var(--font-display);
-  font-size: 24px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
   color: #fff;
 }
 
@@ -1185,8 +1173,7 @@ main.container {
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
   padding: 4px 12px;
   border-radius: 4px;
   display: inline-flex;
@@ -1233,7 +1220,7 @@ main.container {
 /* Lock banner for gated steps */
 .locked-notice {
   background: #fff;
-  border: 2px dashed #000;
+  border: 1px dashed #000;
   border-radius: 10px;
   padding: 24px;
   text-align: center;
@@ -1255,36 +1242,23 @@ main.container {
   max-width: 440px;
 }
 
+.auth-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.auth-action p {
+  font-size: 13px;
+  color: #333;
+}
+
 /* ==========================================================================
    STEP 1: hca SIGN IN ELEMENTS
    ========================================================================== */
-.hca-box {
-  border: 2px solid #000;
-  border-radius: 12px;
-  padding: 24px;
-  background: #ffffff;
-  margin-bottom: 16px;
-}
-
-.hca-box-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 18px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid #000;
-}
-
-.hca-brand-title {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-display);
-  font-size: 24px;
-  letter-spacing: 0.04em;
-  color: #000;
-}
-
 .btn-hca-auth {
   display: inline-flex;
   align-items: center;
@@ -1292,13 +1266,12 @@ main.container {
   gap: 12px;
   background: #000;
   color: #fff;
-  font-family: var(--font-display);
-  font-size: 22px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: 14px 32px;
-  border-radius: 8px;
-  border: 2px solid #000;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 6px;
+  border: 1px solid #000;
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
@@ -1363,7 +1336,7 @@ main.container {
   align-items: center;
   gap: 18px;
   background: #fff;
-  border: 2px solid #000;
+  border: 1px solid #000;
   border-radius: 10px;
   padding: 18px 22px;
 }
@@ -1378,7 +1351,7 @@ main.container {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border: 2px solid #000;
+  border: 1px solid #000;
 }
 
 .hca-name {
@@ -1399,7 +1372,8 @@ main.container {
   background: #fff;
   border: 1px solid #000;
   border-radius: 6px;
-  padding: 6px 14px;
+  padding: 7px 12px;
+  font-family: var(--font-body);
   font-size: 13px;
   font-weight: 600;
   color: #000;
@@ -1428,7 +1402,7 @@ main.container {
   min-width: 260px;
   padding: 12px 18px;
   background: #ffffff;
-  border: 2px solid #000;
+  border: 1px solid #777;
   border-radius: 8px;
   font-family: var(--font-body);
   font-size: 15px;
@@ -1438,7 +1412,7 @@ main.container {
 
 .ht-input:focus {
   border-color: #000;
-  box-shadow: 0 0 0 3px #000;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
   outline: none;
 }
 
@@ -1449,13 +1423,12 @@ main.container {
   gap: 8px;
   background: #000;
   color: #fff;
-  border: 2px solid #000;
-  border-radius: 8px;
-  padding: 12px 24px;
-  font-family: var(--font-display);
-  font-size: 20px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  border: 1px solid #000;
+  border-radius: 6px;
+  padding: 12px 18px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.15s ease;
 }
@@ -1469,8 +1442,7 @@ main.container {
   font-family: var(--font-mono);
   font-size: 13px;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.02em;
   color: #000;
   margin-bottom: 14px;
   display: flex;
@@ -1493,7 +1465,7 @@ main.container {
 
 .project-card-option {
   background: #ffffff;
-  border: 2px solid #000;
+  border: 1px solid #999;
   border-radius: 10px;
   padding: 18px 20px;
   cursor: pointer;
@@ -1509,11 +1481,9 @@ main.container {
 }
 
 .project-card-option.selected {
-  border-color: #000;
+  border: 1px solid #000;
   background: #000;
   color: #fff;
-  outline: 2px solid #000;
-  outline-offset: -4px;
 }
 
 .option-top {
@@ -1540,7 +1510,7 @@ main.container {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 2px solid #000;
+  border: 1px solid #000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1589,7 +1559,7 @@ main.container {
 /* Selected Confirmation Strip */
 .confirmed-project-strip {
   background: #fff;
-  border: 2px solid #000;
+  border: 1px solid #000;
   border-radius: 10px;
   padding: 18px 22px;
   display: flex;
@@ -1609,8 +1579,7 @@ main.container {
 .confirmed-label {
   font-family: var(--font-mono);
   font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
   color: #333;
 }
 
@@ -1674,7 +1643,7 @@ main.container {
   width: 100%;
   padding: 14px 18px;
   background: #ffffff;
-  border: 2px solid #000;
+  border: 1px solid #777;
   border-radius: 8px;
   font-family: var(--font-body);
   font-size: 15px;
@@ -1685,7 +1654,7 @@ main.container {
 .form-input:focus,
 .form-textarea:focus {
   border-color: #000;
-  outline: 3px solid rgba(0, 0, 0, 0.25);
+  outline: 2px solid rgba(0, 0, 0, 0.25);
   outline-offset: 2px;
 }
 
@@ -1697,7 +1666,7 @@ main.container {
 
 /* Screenshot Upload Zone */
 .screenshot-dropzone {
-  border: 2px dashed #000;
+  border: 1px dashed #000;
   border-radius: 8px;
   padding: 24px 20px;
   background: #ffffff;
@@ -1747,7 +1716,7 @@ main.container {
   position: relative;
   border-radius: 6px;
   overflow: hidden;
-  border: 2px solid #000;
+  border: 1px solid #000;
   background: #141017;
   aspect-ratio: 16 / 10;
   display: flex;
@@ -1773,7 +1742,7 @@ main.container {
   padding: 3px 6px;
   font-size: 11px;
   font-weight: 700;
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1836,13 +1805,12 @@ main.container {
   gap: 12px;
   background: #000;
   color: #fff;
-  font-family: var(--font-display);
-  font-size: 28px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 16px 48px;
-  border-radius: 8px;
-  border: 2px solid #000;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: 6px;
+  border: 1px solid #000;
   cursor: pointer;
   transition: all 0.2s ease;
   width: 100%;
@@ -1852,6 +1820,20 @@ main.container {
 .btn-submit-project:hover {
   background: #fff;
   color: #000;
+}
+
+.btn-hca-auth:disabled,
+.btn-fetch-projects:disabled,
+.btn-submit-project:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btn-hca-auth:disabled:hover,
+.btn-fetch-projects:disabled:hover,
+.btn-submit-project:disabled:hover {
+  background: #000;
+  color: #fff;
 }
 
 .error-banner {
@@ -1894,11 +1876,11 @@ main.container {
 }
 
 .receipt-title {
-  font-family: var(--font-display);
-  font-size: clamp(38px, 6vw, 56px);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  line-height: 1;
+  font-family: var(--font-body);
+  font-size: clamp(30px, 5vw, 46px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
   margin-bottom: 8px;
   color: var(--gold-light);
 }
@@ -2000,13 +1982,12 @@ main.container {
   gap: 8px;
   background: #fff;
   color: #000;
-  border: 2px solid #000;
-  border-radius: 8px;
-  padding: 12px 24px;
-  font-family: var(--font-display);
-  font-size: 20px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  border: 1px solid #000;
+  border-radius: 6px;
+  padding: 10px 18px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.15s ease;

@@ -37,7 +37,7 @@ export default function HeroSection() {
                 {/* <!-- Primary RSVP Button linking to external form URL -->
                   <!-- [RSVP_FORM_URL] placeholder configurable via href --> */}
                 <Link to="/submit" className="btn-rsvp" target="_blank">
-                  <span>SUBMIT PROJECT</span>
+                  <span>Submit your project</span>
                 </Link>
 
                 {/* <!-- Secondary text link to join the Slack channel -->
