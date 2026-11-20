@@ -9,10 +9,7 @@ export default function Footer() {
           {/* <!-- Left: Hack Club wordmark / logo & 501(c)(3) nonprofit wording --> */}
           <div className="footer-brand">
             {/* <!-- Exact 501(c)(3) nonprofit legal wording without any hyphens --> */}
-            <Link
-              to="/"
-              className="site-header-brand"
-            >
+            <Link to="/" className="site-header-brand">
               <img src="/logo.png" className="hackclub-logo" alt="Hack Club" />
             </Link>
             <p className="footer-legal-copy">
@@ -70,12 +67,12 @@ export default function Footer() {
                 Fulfillment Bounty
               </Link>
               <Link
-                to="https://hackclub.com/conduct"
+                to="https://security.hackclub.com/"
                 className="footer-nav-link"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Code of Conduct
+                Security Bounty
               </Link>
             </nav>
           </div>
