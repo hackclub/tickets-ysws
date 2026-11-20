@@ -51,29 +51,29 @@ export default function App() {
   return <Outlet />;
 }
 
-export function HydrateFallback() {
-  return (
-    <main
-      role="status"
-      aria-live="polite"
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: 14,
-      }}
-    >
-      <img
-        src="/logo.png"
-        className="animate-bounce hackclub-logo"
-        style={{ position: "unset", width: 200 }}
-      />
-      <p style={{ fontSize: 15, color: "var(--ticket-muted)" }}>Loading</p>
-    </main>
-  );
-}
+// export function HydrateFallback() {
+//   return (
+//     <main
+//       role="status"
+//       aria-live="polite"
+//       style={{
+//         minHeight: "100vh",
+//         display: "flex",
+//         flexDirection: "column",
+//         alignItems: "center",
+//         justifyContent: "center",
+//         gap: 14,
+//       }}
+//     >
+//       <img
+//         src="/logo.png"
+//         className="animate-bounce hackclub-logo"
+//         style={{ position: "unset", width: 200 }}
+//       />
+//       <p style={{ fontSize: 15, color: "var(--ticket-muted)" }}>Loading</p>
+//     </main>
+//   );
+// }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   let message = "Oops!";
