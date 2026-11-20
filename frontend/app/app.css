@@ -1062,8 +1062,6 @@ main.container {
   text-align: center;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  border-radius: 10px;
 }
 
 .cta-banner .btn-rsvp {
@@ -2203,7 +2201,7 @@ main.container {
 
 /* Primary action colors */
 .btn-rsvp,
-.cta-banner .btn-rsvp,
+.btn-rsvp,
 .btn-hca-auth,
 .btn-disconnect,
 .btn-fetch-projects,
@@ -2238,6 +2236,7 @@ main.container {
 .cta-banner .btn-rsvp:hover {
   background: var(--velvet-red);
   color: #fff;
+  border-color: #fff;
 }
 
 .btn-hca-auth:disabled:hover,
