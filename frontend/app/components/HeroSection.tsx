@@ -36,7 +36,7 @@ export default function HeroSection() {
               <div className="hero-actions">
                 {/* <!-- Primary RSVP Button linking to external form URL -->
                   <!-- [RSVP_FORM_URL] placeholder configurable via href --> */}
-                <Link to="/submit" className="btn-rsvp" target="_blank">
+                <Link to="/submit" className="btn-rsvp">
                   <span>Submit your project</span>
                 </Link>
 

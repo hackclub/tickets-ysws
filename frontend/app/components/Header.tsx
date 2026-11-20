@@ -1,16 +1,15 @@
 import React from "react";
+import { Link } from "react-router";
 
 export default function Header() {
   return (
     <header className="site-header">
-      <a
-        href="https://hackclub.com"
-        target="_blank"
-        rel="noopener noreferrer"
+      <Link
+        to="/"
         className="site-header-brand"
       >
         <img src="/logo.png" className="hackclub-logo" alt="Hack Club" />
-      </a>
+      </Link>
     </header>
   );
 }

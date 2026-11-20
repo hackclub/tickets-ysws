@@ -13,6 +13,7 @@ import type { Route } from "./+types/_landing.submit";
 import axios, { isAxiosError } from "axios";
 import { Link, useNavigate, useRevalidator } from "react-router";
 import { FileUploader } from "react-drag-drop-files";
+import SiteDecorations from "~/components/SiteDecorations";
 
 const fileTypes = ["JPG", "PNG", "WEBP"];
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
@@ -207,14 +208,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
   };
 
   return (
-    <main className="container">
-      <style>
-        {`
-        body {
-          background: url("/background.png") center center / cover no-repeat;
-        }
-        `}
-      </style>
+    <main className="container submit-page">
       <div id="submissionView">
         {/* <!-- Hero Header --> */}
         <section className="submission-hero">
@@ -225,8 +219,11 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
           </h1>
         </section>
 
-        {/* <!-- 3 Frame Progress Filmstrip --> */}
-        <div className="progress-filmstrip" aria-label="Submission Progress">
+        <div className="site-decoration-field submit-decoration-field">
+          <SiteDecorations />
+          <div className="site-decoration-content submit-decoration-content">
+            {/* <!-- 3 Frame Progress Filmstrip --> */}
+            <div className="progress-filmstrip" aria-label="Submission Progress">
           <div
             className={`progress-frame ${!step2Locked ? "completed" : "active"}`}
             id="progressFrame1"
@@ -258,7 +255,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
           </div>
         </div>
 
-        <div className="steps-container">
+            <div className="steps-container">
           {/* First step */}
           <section className="step-card" id="stepCard1">
             <div className="step-card-header">
@@ -865,6 +862,8 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
               )}
             </div>
           </section>
+            </div>
+          </div>
         </div>
       </div>
     </main>
