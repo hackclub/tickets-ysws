@@ -80,7 +80,6 @@ export class SubmitService {
       'Slack Id': slack_id,
       'Project Movie': movieName,
       'Project Name': projectName,
-      'Automation - First Submitted At': Date.now(),
       'Optional - Override Hours Spent': parseFloat(
         (
           hackatimeProjects.reduce((sum, p) => sum + p.total_seconds, 0) / 3600
