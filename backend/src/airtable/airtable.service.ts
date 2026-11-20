@@ -43,7 +43,7 @@ export class AirtableService extends Airtable {
         },
         body: JSON.stringify({
           contentType: file.mimetype,
-          filename: file.originalname,
+          filename: `tickets-projects-screenshot-${Date.now()}`,
           file: file.buffer.toString('base64'),
         }),
       },

@@ -48,7 +48,6 @@ export class SubmitService {
       ),
     );
 
-
     const address = addresses ? addresses[0] : undefined;
 
     const recordPayload = {
