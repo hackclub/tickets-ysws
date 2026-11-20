@@ -211,7 +211,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
       <style>
         {`
         body {
-          background: url("/background.jpg") center center / cover no-repeat;
+          background: url("/background.png") center center / cover no-repeat;
         }
         `}
       </style>

@@ -58,22 +58,6 @@ export default function layout() {
         });
       }
 
-      // Marquee chase simulation for bulbs
-      var bulbs = document.querySelectorAll<HTMLSpanElement>(".bulb-row .bulb");
-      if (bulbs.length > 0 && !prefersReducedMotion) {
-        var step = 0;
-        setInterval(function () {
-          step = (step + 1) % bulbs.length;
-          bulbs.forEach(function (bulb, idx) {
-            if (idx === step || (idx + 10) % bulbs.length === step) {
-              bulb.style.boxShadow =
-                "0 0 16px var(--gold-light), 0 0 24px #ffffff";
-            } else {
-              bulb.style.boxShadow = "";
-            }
-          });
-        }, 320);
-      }
     })();
   }, []);
   return (

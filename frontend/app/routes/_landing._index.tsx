@@ -4,6 +4,7 @@ import HowItWorksSection from "~/components/HowItWorksSection";
 import DecorativeDivider from "~/components/DecorativeDivider";
 import FaqSection from "~/components/FaqSection";
 import Header from "~/components/Header";
+import SiteDecorations from "~/components/SiteDecorations";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -24,10 +25,15 @@ export default function Home() {
         <HeroSection />
         {/* <DecorativeDivider /> */}
       </div>
-      <HowItWorksSection />
-      <DecorativeDivider />
+      <div className="site-decoration-field">
+        <SiteDecorations />
+        <div className="site-decoration-content">
+          <HowItWorksSection />
+          <DecorativeDivider />
 
-      <FaqSection />
+          <FaqSection />
+        </div>
+      </div>
     </main>
   );
 }
