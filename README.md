@@ -68,4 +68,4 @@ docker compose logs -f app
 docker compose down
 ```
 
-![ticket logo](/frontend/public/logo.png)
+![ticket logo](/marketing/logo.png)
