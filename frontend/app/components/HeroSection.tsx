@@ -26,7 +26,7 @@ export default function HeroSection() {
 
                 {/* <!-- One sentence subheading explaining the offer --> */}
                 <p className="hero-subheading">
-                  Choose a movie your love, build a website or game about it,
+                  Choose a movie you love, build a website or game about it,
                   ship it live and submit it, get tickets grant to go watch more
                   movies. You can repeat this BTW.
                 </p>
