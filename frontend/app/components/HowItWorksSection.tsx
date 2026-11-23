@@ -14,28 +14,28 @@ const steps = [
     number: "01",
     title: "Pick a movie you love",
     description:
-      "Any film works, from an old favorite you rewatch every year to something you saw last weekend.",
+      "Any film works, it could be a movie you watched a long time ago or one that you recently watched.",
     image: "/idea.png",
   },
   {
     number: "02",
     title: "Build a project around it",
     description:
-      "Be creative: design, interactivity, soundtrack, scenes, anything goes. Bring the mood, quotes, or lore to life.",
+      "Make your project themed around the movie, you can chose a character from the movie or a scene from the movie, just be creative.",
     image: "/coding.png",
   },
   {
     number: "03",
     title: "Ship it live and submit",
     description:
-      "Publish your site on GitHub Pages, Vercel, or another host. Then send us the live link and public source code.",
+      "Publish your site on GitHub Pages, Vercel, or another host. Then submit it for review.",
     image: "/ship.png",
   },
   {
     number: "04",
     title: "Get your ticket grants",
     description:
-      "Get $5 in cinema grants for every hour of build time tracked with Hackatime. Movie night is on us.",
+      "The most interesting part I know you have been waiting for, get rewarded for every approved hours you logged. Movie night is on us.",
     image: "/tickets_image.png",
   },
 ];
@@ -45,7 +45,7 @@ export default function HowItWorksSection() {
     <section className="how-it-works-section" id="how-it-works">
       <div className="container">
         <div className="section-title-wrap">
-          <h2 className="section-title">How it works</h2>
+          <h2 className="section-title">How It Works</h2>
         </div>
 
         <div className="journey-wrap">
