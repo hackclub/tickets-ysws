@@ -26,9 +26,9 @@ export default function HeroSection() {
 
                 {/* <!-- One sentence subheading explaining the offer --> */}
                 <p className="hero-subheading">
-                  Pick a film you love, build a website, game, or other creative
-                  project around it, share it with the world, and earn ticket
-                  grants to spend at your local cinema.
+                  Choose a movie your love, build a website or game about it,
+                  ship it live and submit it, get tickets grant to go watch more
+                  movies. You can repeat this BTW.
                 </p>
               </div>
 
