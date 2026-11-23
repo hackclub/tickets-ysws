@@ -269,13 +269,14 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                   </div>
                 </div>
 
-            <div className="step-card-body">
-              {/* <!-- Unauthenticated State --> */}
-              {loaderData == null || !loaderData.userData ? (
-                <div id="hcaLoggedOut">
-                  <p className="step-instruction">
-                    Log in with Hack Club Auth so we know where the ticket's going.
-                  </p>
+                <div className="step-card-body">
+                  {/* <!-- Unauthenticated State --> */}
+                  {loaderData == null || !loaderData.userData ? (
+                    <div id="hcaLoggedOut">
+                      <p className="step-instruction">
+                        Log in with Hack Club Auth so we know where the ticket's
+                        going.
+                      </p>
 
                       <div className="auth-action">
                         <button
@@ -383,9 +384,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                     ) : (
                       <div id="step2Content">
                         <p className="step-instruction">
-                          Select the project you built around your movie to
-                          calculate your ticket grant ($5 for every hour of
-                          tracked build time).
+                          Select the project you built around your movie
                         </p>
 
                         {/* <!-- Hackatime Username Search Input --> */}
@@ -497,15 +496,16 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                     </div>
                   )}
 
-              {/* <!-- Success State --> */}
-              {!step3Locked && submitted && (
-                <div className="locked-notice" role="status">
-                  <p>
-                    Thanks for shipping. The Hack Club team will review your
-                    project and verify your tracked hours before issuing a grant to buy the ticket.
-                  </p>
-                </div>
-              )}
+                  {/* <!-- Success State --> */}
+                  {!step3Locked && submitted && (
+                    <div className="locked-notice" role="status">
+                      <p>
+                        Thanks for shipping. The Hack Club team will review your
+                        project and verify your tracked hours before issuing a
+                        grant to buy the ticket.
+                      </p>
+                    </div>
+                  )}
 
                   {/* <!-- Unlocked Submission Form --> */}
                   {!step3Locked && !submitted && (
@@ -780,35 +780,36 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                         </label>
                       </div>
 
-                  {/* <!-- Submit Button --> */}
-                  <div className="form-actions">
-                    <button
-                      type="submit"
-                      className="btn-submit-project"
-                      id="btnSubmitForm"
-                      disabled={submitting}
-                    >
-                      <span>
-                        {submitting
-                          ? "Submitting..."
-                          : "Submit Project For Review"}
-                      </span>
-                    </button>
-                    <p
-                      style={{
-                        fontSize: 13,
-                        color: "var(--ticket-muted)",
-                        textAlign: "center",
-                      }}
-                    >
-                      Once submitted, the Hack Club team reviews your project
-                      and verifies tracked hours before issuing a grant to buy the ticket.
-                    </p>
-                  </div>
-                </form>
-              )}
-            </div>
-          </section>
+                      {/* <!-- Submit Button --> */}
+                      <div className="form-actions">
+                        <button
+                          type="submit"
+                          className="btn-submit-project"
+                          id="btnSubmitForm"
+                          disabled={submitting}
+                        >
+                          <span>
+                            {submitting
+                              ? "Submitting..."
+                              : "Submit Project For Review"}
+                          </span>
+                        </button>
+                        <p
+                          style={{
+                            fontSize: 13,
+                            color: "var(--ticket-muted)",
+                            textAlign: "center",
+                          }}
+                        >
+                          Once submitted, the Hack Club team reviews your
+                          project and verifies tracked hours before issuing a
+                          grant to buy the ticket.
+                        </p>
+                      </div>
+                    </form>
+                  )}
+                </div>
+              </section>
             </div>
           </div>
         </div>
