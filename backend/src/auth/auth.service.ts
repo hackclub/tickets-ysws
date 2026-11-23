@@ -70,7 +70,7 @@ export class AuthService {
       client_id: client_id ?? '',
       redirect_uri,
       response_type: 'code',
-      scope: `email name profile verification_status slack_id${this.config.get('NODE_ENV') === 'production' ? ' basic_info addresses' : ''}`,
+      scope: `email name profile verification_status slack_id${this.config.get('NODE_ENV') === 'production' ? ' basic_info address' : ''}`,
       state,
     });
 
