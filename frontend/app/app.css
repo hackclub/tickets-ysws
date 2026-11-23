@@ -754,7 +754,7 @@ main.container {
 
 .journey-step-description {
   max-width: 390px;
-  color: var(--text-muted);
+  color: var(--text-white);
   font-size: 14px;
   line-height: 1.55;
 }
