@@ -13,7 +13,7 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"pnpm --filter frontend dev\" \"pnpm --filter backend start:dev\"",
+    "dev": "concurrently \"pnpm --filter frontend dev:build\" \"pnpm --filter backend dev\"",
     "frontend": "pnpm --filter frontend dev",
     "backend": "pnpm --filter backend start:dev",
     "build": "pnpm --filter frontend build &&  pnpm --filter backend build"
