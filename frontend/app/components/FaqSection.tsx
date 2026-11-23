@@ -72,7 +72,7 @@ export default function FaqSection() {
         <div className="cta-banner">
           <h3 className="cta-title">Is your Project ready?</h3>
           <p className="cta-desc">
-            All done with your awesome project, i can't wait to see it.
+            All done with your awesome project, I can't wait to see it.
           </p>
           <Link to="/submit" className="btn-rsvp">
             <span>Submit Project</span>
