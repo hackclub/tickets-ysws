@@ -1,12 +1,20 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
 import { SubmitProjectDto } from './dto/submit.dto.js';
 import { AirtableService } from '../airtable/airtable.service.js';
 import { Request } from 'express';
 import { HackatimeService } from '../hackatime/hackatime.service.js';
 import { UserService } from '../user/user.service.js';
+import { detectImageType } from './image-type.js';
 
 @Injectable()
 export class SubmitService {
+  private readonly logger = new Logger(SubmitService.name);
+
   constructor(
     private readonly airtable: AirtableService,
     private readonly hackatimeService: HackatimeService,
@@ -17,6 +25,12 @@ export class SubmitService {
     request: Request,
     screenshotFile: Express.Multer.File,
   ) {
+    const imageType = detectImageType(screenshotFile.buffer);
+    if (!imageType)
+      throw new BadRequestException(
+        'screenshot must be a JPG, PNG or WEBP image',
+      );
+
     const {
       first_name,
       last_name,
@@ -26,6 +40,11 @@ export class SubmitService {
       addresses,
       birthday,
     } = await this.userService.me(request);
+    if (!slack_id)
+      throw new BadRequestException(
+        'no Slack account is linked to your Hack Club account',
+      );
+
     const { id: hackatime_id, github_username } =
       await this.hackatimeService.getUserProfile(request);
     const {
@@ -43,12 +62,12 @@ export class SubmitService {
         async (projectName) =>
           await this.hackatimeService.getProjectFullDetails(
             projectName,
-            slack_id!,
+            slack_id,
           ),
       ),
     );
 
-    const address = addresses ? addresses[0] : undefined;
+    const address = addresses?.find((a) => a.primary) ?? addresses?.[0];
 
     const recordPayload = {
       'Code URL': codeUrl,
@@ -94,11 +113,22 @@ export class SubmitService {
       throw new InternalServerErrorException('Failed to create project record');
     }
 
-    await this.airtable.uploadAttachment(
-      record.id,
-      'Screenshot',
-      screenshotFile,
-    );
+    try {
+      await this.airtable.uploadAttachment(record.id, 'Screenshot', {
+        buffer: screenshotFile.buffer,
+        ...imageType,
+      });
+    } catch (err) {
+      await this.airtable
+        .deleteProjectRecord(record.id)
+        .catch((deleteErr) =>
+          this.logger.error(
+            `Failed to delete record ${record.id} after upload failure`,
+            deleteErr,
+          ),
+        );
+      throw err;
+    }
 
     return {
       message: 'Project submitted successfully',

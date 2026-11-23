@@ -1,6 +1,6 @@
 # Tickets YSWS
 
-Tickets is a Hack Club YSWS where you ship a website or game themed around a movie, and we ship you tickets (grants) to go watch more movies
+Tickets is a Hack Club YSWS where you ship a website or game themed around a movie, and we ship you tickets to go watch more movies
 
 ## Run locally
 

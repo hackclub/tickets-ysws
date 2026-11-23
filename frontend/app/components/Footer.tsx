@@ -16,27 +16,6 @@ export default function Footer() {
               Hack Club is a registered 501(c)(3) nonprofit public charity. EIN
               813748307. Fiscal sponsorship provided by The Hack Foundation.
             </p>
-
-            <p className="footer-credit">
-              Made with {"<3"} by{" "}
-              <Link
-                to={"https://hackclub.enterprise.slack.com/team/U0AEXPQNM5W"}
-                target="_blank"
-                className="footer-nav-link"
-              >
-                @AzCodes
-              </Link>
-              , sponsored by{" "}
-              <Link
-                to={
-                  "https://hackclub.enterprise.slack.com/archives/D0C8RJHBZQC"
-                }
-                target="_blank"
-                className="footer-nav-link"
-              >
-                @Brendan
-              </Link>
-            </p>
           </div>
 
           {/* <!-- Right: Links to Hack Club, Slack, GitHub, Code of Conduct --> */}

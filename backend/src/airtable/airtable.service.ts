@@ -1,10 +1,16 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import Airtable, { base } from 'airtable';
 import 'multer';
 
 @Injectable()
 export class AirtableService extends Airtable {
+  private readonly logger = new Logger(AirtableService.name);
+
   constructor(private readonly config: ConfigService) {
     super({ apiKey: config.get('AIRTABLE_ACCESS_TOKEN') });
   }
@@ -26,10 +32,14 @@ export class AirtableService extends Airtable {
     }
   }
 
+  async deleteProjectRecord(recordId: string) {
+    await this.getTicketYsWsBaseTable().destroy(recordId);
+  }
+
   async uploadAttachment(
     recordId: string,
     fieldIdOrName: string,
-    file: Express.Multer.File,
+    file: { buffer: Buffer; contentType: string; extension: string },
   ) {
     const res = await fetch(
       `https://content.airtable.com/v0/${this.config.get('AIRTABLE_BASE_ID')}/${recordId}/${encodeURIComponent(
@@ -42,17 +52,18 @@ export class AirtableService extends Airtable {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          contentType: file.mimetype,
-          filename: `tickets-projects-screenshot-${Date.now()}`,
+          contentType: file.contentType,
+          filename: `tickets-projects-screenshot-${Date.now()}.${file.extension}`,
           file: file.buffer.toString('base64'),
         }),
       },
     );
 
     if (!res.ok) {
-      throw new InternalServerErrorException(
+      this.logger.error(
         `Airtable upload failed: ${res.status} ${await res.text()}`,
       );
+      throw new InternalServerErrorException('Failed to upload screenshot');
     }
     return res.json();
   }

@@ -37,6 +37,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
+        <script
+          defer
+          data-domain="tickets.hackclub.com"
+          src="https://plausible.io/js/script.js"
+        ></script>
       </head>
       <body>
         {children}
