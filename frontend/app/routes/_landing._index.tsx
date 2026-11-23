@@ -77,6 +77,24 @@ export default function Home() {
       <div className="home-hero-backdrop">
         <Header />
         <HeroSection />
+        <p className="hero-credit">
+          Made with {"<3"} by{" "}
+          <a
+            href="https://hackclub.enterprise.slack.com/team/U0AEXPQNM5W"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            @AzCodes
+          </a>
+          , sponsored by{" "}
+          <a
+            href="https://hackclub.enterprise.slack.com/archives/D0C8RJHBZQC"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            @Brendan
+          </a>
+        </p>
         {/* <DecorativeDivider /> */}
       </div>
       <div className="site-decoration-field">
