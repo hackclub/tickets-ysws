@@ -33,7 +33,7 @@ const steps = [
   },
   {
     number: "04",
-    title: "Get your ticket grants",
+    title: "Get your tickets",
     description:
       "The most interesting part I know you have been waiting for, get rewarded for every approved hours you logged. Movie night is on us.",
     image: "/tickets_image.png",

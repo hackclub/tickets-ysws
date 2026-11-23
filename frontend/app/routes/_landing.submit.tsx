@@ -271,9 +271,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
               {loaderData == null || !loaderData.userData ? (
                 <div id="hcaLoggedOut">
                   <p className="step-instruction">
-                    Hack Club Bank handles grants for teen makers. Sign in with
-                    your HCA account so we know where to deposit your cinema
-                    ticket grant.
+                    Log in with Hack Club Auth so we know where the ticket's going.
                   </p>
 
                   <div className="auth-action">
@@ -566,7 +564,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                 <div className="locked-notice" role="status">
                   <p>
                     Thanks for shipping. The Hack Club team will review your
-                    project and verify your tracked hours before grant payout.
+                    project and verify your tracked hours before issuing a grant to buy the ticket.
                   </p>
                 </div>
               )}
@@ -855,7 +853,7 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                       }}
                     >
                       Once submitted, the Hack Club team reviews your project
-                      and verifies tracked hours before grant payout.
+                      and verifies tracked hours before issuing a grant to buy the ticket.
                     </p>
                   </div>
                 </form>
