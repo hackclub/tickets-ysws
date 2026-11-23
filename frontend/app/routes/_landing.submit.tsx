@@ -223,48 +223,51 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
           <SiteDecorations />
           <div className="site-decoration-content submit-decoration-content">
             {/* <!-- 3 Frame Progress Filmstrip --> */}
-            <div className="progress-filmstrip" aria-label="Submission Progress">
-          <div
-            className={`progress-frame ${!step2Locked ? "completed" : "active"}`}
-            id="progressFrame1"
-          >
-            <div className="frame-number">
-              <span>01</span>
-            </div>
-            <div className="frame-title">Account</div>
-          </div>
+            <div
+              className="progress-filmstrip"
+              aria-label="Submission Progress"
+            >
+              <div
+                className={`progress-frame ${!step2Locked ? "completed" : "active"}`}
+                id="progressFrame1"
+              >
+                <div className="frame-number">
+                  <span>01</span>
+                </div>
+                <div className="frame-title">Account</div>
+              </div>
 
-          <div
-            className={`progress-frame ${!step3Locked ? "completed" : !step2Locked ? "active" : ""}`}
-            id="progressFrame2"
-          >
-            <div className="frame-number">
-              <span>02 </span>
-            </div>
-            <div className="frame-title">Time tracking</div>
-          </div>
+              <div
+                className={`progress-frame ${!step3Locked ? "completed" : !step2Locked ? "active" : ""}`}
+                id="progressFrame2"
+              >
+                <div className="frame-number">
+                  <span>02 </span>
+                </div>
+                <div className="frame-title">Time tracking</div>
+              </div>
 
-          <div
-            className={`progress-frame ${submitted ? "completed" : !step3Locked ? "active" : ""}`}
-            id="progressFrame3"
-          >
-            <div className="frame-number">
-              <span>03</span>
-            </div>
-            <div className="frame-title">Project</div>
-          </div>
-        </div>
-
-            <div className="steps-container">
-          {/* First step */}
-          <section className="step-card" id="stepCard1">
-            <div className="step-card-header">
-              <div className="step-header-left">
-                <h2 className="step-header-title">
-                  Sign in with Hack Club Auth
-                </h2>
+              <div
+                className={`progress-frame ${submitted ? "completed" : !step3Locked ? "active" : ""}`}
+                id="progressFrame3"
+              >
+                <div className="frame-number">
+                  <span>03</span>
+                </div>
+                <div className="frame-title">Project</div>
               </div>
             </div>
+
+            <div className="steps-container">
+              {/* First step */}
+              <section className="step-card" id="stepCard1">
+                <div className="step-card-header">
+                  <div className="step-header-left">
+                    <h2 className="step-header-title">
+                      Sign in with Hack Club Auth
+                    </h2>
+                  </div>
+                </div>
 
             <div className="step-card-body">
               {/* <!-- Unauthenticated State --> */}
@@ -274,290 +277,225 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                     Log in with Hack Club Auth so we know where the ticket's going.
                   </p>
 
-                  <div className="auth-action">
-                    <button
-                      type="button"
-                      className="btn-hca-auth"
-                      id="btnhcaLogin"
-                      onClick={handleHCA}
-                    >
-                      <span>Sign in with Hack Club</span>
-                    </button>
-                    <p>
-                      Don't have an HCA account yet? A free teen account will be
-                      initiated during verification.
-                    </p>
-                  </div>
-                </div>
-              ) : (
-                /* <!-- Authenticated State --> */
-                <div id="hcaLoggedIn">
-                  <div className="hca-profile-card">
-                    <div className="hca-profile-info">
-                      <img
-                        className="hca-avatar"
-                        id="hcaAvatarText"
-                        src={loaderData.userData.imageUrl}
-                        alt=""
-                      />
-
-                      <div>
-                        <div className="hca-name" id="hcaUserName">
-                          {loaderData.userData.first_name}
-                        </div>
-                        <div className="hca-handle" id="hcaUserHandle">
-                          @{loaderData.userData.displayName} ·{" "}
-                          {loaderData.userData.primary_email}
-                        </div>
+                      <div className="auth-action">
+                        <button
+                          type="button"
+                          className="btn-hca-auth"
+                          id="btnhcaLogin"
+                          onClick={handleHCA}
+                        >
+                          <span>Sign in with Hack Club</span>
+                        </button>
+                        <p>
+                          Don't have an HCA account yet? A free teen account
+                          will be initiated during verification.
+                        </p>
                       </div>
                     </div>
+                  ) : (
+                    /* <!-- Authenticated State --> */
+                    <div id="hcaLoggedIn">
+                      <div className="hca-profile-card">
+                        <div className="hca-profile-info">
+                          <img
+                            className="hca-avatar"
+                            id="hcaAvatarText"
+                            src={loaderData.userData.imageUrl}
+                            alt=""
+                          />
 
-                    <button
-                      type="button"
-                      className="btn-disconnect"
-                      id="btnhcaDisconnect"
-                      onClick={() =>
-                        window.location.replace("/api/auth/logout")
-                      }
-                    >
-                      Logout
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
-          </section>
-
-          {/* second step */}
-          <section
-            className={`step-card ${step2Locked && "locked"}`}
-            id="stepCard2"
-          >
-            <div className="step-card-header">
-              <div className="step-header-left">
-                <h2 className="step-header-title">
-                  Choose your tracked projects
-                </h2>
-              </div>
-            </div>
-
-            <div className="step-card-body">
-              {/* <!-- Locked Notification --> */}
-              {step2Locked && (
-                <div className="locked-notice" id="step2LockNotice">
-                  <div className="locked-notice-icon">
-                    <Lock size={32} />
-                  </div>
-                  <h3>Sign in to continue</h3>
-                  <p>
-                    Please sign in with Hack Club Auth in Step 1 above to load
-                    your Hackatime coding activity and projects.
-                  </p>
-                </div>
-              )}
-
-              {/* <!-- Unlocked Content --> */}
-              {!step2Locked &&
-                (!hackatimeProjects ? (
-                  <div id="hcaLoggedOut">
-                    <p className="step-instruction">
-                      Hackatime is the official hackclub time tracking software
-                      that allows you to track exactly how long it took you to
-                      work on a project.
-                    </p>
-
-                    <div className="auth-action">
-                      <button
-                        type="button"
-                        className="btn-hca-auth"
-                        id="btnhcaLogin"
-                        onClick={handleHackatime}
-                      >
-                        <span>Link Hackatime</span>
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  <div id="step2Content">
-                    <p className="step-instruction">
-                      Select the project you built around your movie to
-                      calculate your ticket grant ($5 for every hour of tracked
-                      build time).
-                    </p>
-
-                    {/* <!-- Hackatime Username Search Input --> */}
-                    <div className="hackatime-search-box">
-                      <input
-                        type="text"
-                        id="hackatimeProjectSearchInput"
-                        className="ht-input"
-                        placeholder="super cool project"
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                      />
-                      <button
-                        type="button"
-                        className="btn-fetch-projects"
-                        id="btnFetchHackatime"
-                        onClick={() => revalidator.revalidate()}
-                        disabled={revalidator.state === "loading"}
-                      >
-                        <RefreshCcw
-                          className={`${revalidator.state === "loading" && "animate-spin"}`}
-                        />
-                        <span>Fetch Projects</span>
-                      </button>
-                    </div>
-
-                    {/* <!-- Available Detected Projects Grid --> */}
-                    <div className="projects-list-title">
-                      <span>Select your movie project:</span>
-                      <span id="projectsCountLabel">
-                        {hackatimeProjects.length} projects found
-                      </span>
-                    </div>
-
-                    <div
-                      className="project-options-grid"
-                      id="projectOptionsGrid"
-                    >
-                      {hackatimeProjects
-                        .filter((p) =>
-                          p.name
-                            .toLocaleLowerCase()
-                            .includes(search.toLocaleLowerCase()),
-                        )
-                        .map((project: HackatimeProject) => (
-                          <div
-                            key={project.name}
-                            className={`project-card-option ${selectedHackatimeProjects.find((p) => p.name === project.name) && "selected"}`}
-                            data-project="interstellar flight computer"
-                            data-hours={formatHours(project.total_seconds)}
-                            data-grant="42.00"
-                            onClick={() =>
-                              setSelectedHackatimeProjects((prev) =>
-                                prev.find((p) => p.name === project.name)
-                                  ? prev.filter((p) => p.name !== project.name)
-                                  : [...prev, project],
-                              )
-                            }
-                          >
-                            <div className="option-top">
-                              <div>
-                                <div className="option-name">
-                                  {project.name}
-                                </div>
-                              </div>
-                              <div className="radio-circle">
-                                <div className="radio-dot"></div>
-                              </div>
+                          <div>
+                            <div className="hca-name" id="hcaUserName">
+                              {loaderData.userData.first_name}
                             </div>
-                            <div className="option-meta">
-                              <span className="hours-badge">
-                                {formatHours(project.total_seconds)} logged
-                              </span>
-                              <span className="grant-estimate-badge">
-                                $
-                                {((project.total_seconds / 3600) * 5).toFixed(
-                                  2,
-                                )}{" "}
-                                grant
-                              </span>
+                            <div className="hca-handle" id="hcaUserHandle">
+                              @{loaderData.userData.displayName} ·{" "}
+                              {loaderData.userData.primary_email}
                             </div>
                           </div>
-                        ))}
-                    </div>
+                        </div>
 
-                    {/* Selected Confirmation Summary Strip */}
-                    <div
-                      className="confirmed-project-strip"
-                      id="confirmedProjectStrip"
-                    >
-                      <div className="confirmed-details">
-                        <span className="confirmed-label">
-                          Selected Project For Verification
-                        </span>
-                        <div
-                          className="confirmed-title"
-                          id="confirmedProjectTitle"
+                        <button
+                          type="button"
+                          className="btn-disconnect"
+                          id="btnhcaDisconnect"
+                          onClick={() =>
+                            window.location.replace("/api/auth/logout")
+                          }
                         >
-                          {selectedHackatimeProjects.length} projects selected
-                        </div>
-                        <div
-                          style={{
-                            fontFamily: "var(--font-mono)",
-                            fontSize: 12,
-                            color: "#333",
-                          }}
-                          id="confirmedProjectHours"
-                        >
-                          {(
-                            selectedHackatimeProjects.reduce(
-                              (sum, p) => sum + p.total_seconds,
-                              0,
-                            ) / 3600
-                          ).toFixed(1)}{" "}
-                          verified coding hours recorded via Hackatime
-                        </div>
-                      </div>
-
-                      <div style={{ textAlign: "right" }}>
-                        <div
-                          className="confirmed-grant-sum"
-                          id="confirmedGrantSum"
-                        >
-                          $
-                          {(
-                            (selectedHackatimeProjects.reduce(
-                              (sum, p) => sum + p.total_seconds,
-                              0,
-                            ) /
-                              3600) *
-                            5
-                          ).toFixed(2)}
-                        </div>
-                        <span
-                          style={{
-                            fontFamily: "var(--font-mono)",
-                            fontSize: 11,
-                            color: "#000",
-                            fontWeight: 700,
-                          }}
-                        >
-                          Estimated grant
-                        </span>
+                          Logout
+                        </button>
                       </div>
                     </div>
-                  </div>
-                ))}
-            </div>
-          </section>
-
-          {/* third step */}
-          <section
-            className={`step-card ${step3Locked && "locked"}`}
-            id="stepCard3"
-          >
-            <div className="step-card-header">
-              <div className="step-header-left">
-                <h2 className="step-header-title">Project details</h2>
-              </div>
-            </div>
-
-            <div className="step-card-body">
-              {/* <!-- Locked Notification --> */}
-              {step3Locked && (
-                <div className="locked-notice" id="step3LockNotice">
-                  <div className="locked-notice-icon">
-                    <Lock size={32} />
-                  </div>
-                  <h3>Complete the earlier steps to continue</h3>
-                  <p>
-                    Please complete Step 1 (Sign in with HCA) and Step 2 (Select
-                    Hackatime Project) above to unlock this submission form.
-                  </p>
+                  )}
                 </div>
-              )}
+              </section>
+
+              {/* second step */}
+              <section
+                className={`step-card ${step2Locked && "locked"}`}
+                id="stepCard2"
+              >
+                <div className="step-card-header">
+                  <div className="step-header-left">
+                    <h2 className="step-header-title">
+                      Choose your tracked projects
+                    </h2>
+                  </div>
+                </div>
+
+                <div className="step-card-body">
+                  {/* <!-- Locked Notification --> */}
+                  {step2Locked && (
+                    <div className="locked-notice" id="step2LockNotice">
+                      <div className="locked-notice-icon">
+                        <Lock size={32} />
+                      </div>
+                      <h3>Sign in to continue</h3>
+                      <p>
+                        Please sign in with Hack Club Auth in Step 1 above to
+                        load your Hackatime coding activity and projects.
+                      </p>
+                    </div>
+                  )}
+
+                  {/* <!-- Unlocked Content --> */}
+                  {!step2Locked &&
+                    (!hackatimeProjects ? (
+                      <div id="hcaLoggedOut">
+                        <p className="step-instruction">
+                          Hackatime is the official hackclub time tracking
+                          software that allows you to track exactly how long it
+                          took you to work on a project.
+                        </p>
+
+                        <div className="auth-action">
+                          <button
+                            type="button"
+                            className="btn-hca-auth"
+                            id="btnhcaLogin"
+                            onClick={handleHackatime}
+                          >
+                            <span>Link Hackatime</span>
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div id="step2Content">
+                        <p className="step-instruction">
+                          Select the project you built around your movie to
+                          calculate your ticket grant ($5 for every hour of
+                          tracked build time).
+                        </p>
+
+                        {/* <!-- Hackatime Username Search Input --> */}
+                        <div className="hackatime-search-box">
+                          <input
+                            type="text"
+                            id="hackatimeProjectSearchInput"
+                            className="ht-input"
+                            placeholder="super cool project"
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                          />
+                          <button
+                            type="button"
+                            className="btn-fetch-projects"
+                            id="btnFetchHackatime"
+                            onClick={() => revalidator.revalidate()}
+                            disabled={revalidator.state === "loading"}
+                          >
+                            <RefreshCcw
+                              className={`${revalidator.state === "loading" && "animate-spin"}`}
+                            />
+                            <span>Fetch Projects</span>
+                          </button>
+                        </div>
+
+                        {/* <!-- Available Detected Projects Grid --> */}
+                        <div className="projects-list-title">
+                          <span>Select your movie project:</span>
+                          <span id="projectsCountLabel">
+                            {hackatimeProjects.length} projects found
+                          </span>
+                        </div>
+
+                        <div
+                          className="project-options-grid"
+                          id="projectOptionsGrid"
+                        >
+                          {hackatimeProjects
+                            .filter((p) =>
+                              p.name
+                                .toLocaleLowerCase()
+                                .includes(search.toLocaleLowerCase()),
+                            )
+                            .map((project: HackatimeProject) => (
+                              <div
+                                key={project.name}
+                                className={`project-card-option ${selectedHackatimeProjects.find((p) => p.name === project.name) && "selected"}`}
+                                data-project="interstellar flight computer"
+                                data-hours={formatHours(project.total_seconds)}
+                                data-grant="42.00"
+                                onClick={() =>
+                                  setSelectedHackatimeProjects((prev) =>
+                                    prev.find((p) => p.name === project.name)
+                                      ? prev.filter(
+                                          (p) => p.name !== project.name,
+                                        )
+                                      : [...prev, project],
+                                  )
+                                }
+                              >
+                                <div className="option-top">
+                                  <div>
+                                    <div className="option-name">
+                                      {project.name}
+                                    </div>
+                                  </div>
+                                  <div className="radio-circle">
+                                    <div className="radio-dot"></div>
+                                  </div>
+                                </div>
+                                <div className="option-meta">
+                                  <span className="hours-badge">
+                                    {formatHours(project.total_seconds)} logged
+                                  </span>
+                                </div>
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              </section>
+
+              {/* third step */}
+              <section
+                className={`step-card ${step3Locked && "locked"}`}
+                id="stepCard3"
+              >
+                <div className="step-card-header">
+                  <div className="step-header-left">
+                    <h2 className="step-header-title">Project details</h2>
+                  </div>
+                </div>
+
+                <div className="step-card-body">
+                  {/* <!-- Locked Notification --> */}
+                  {step3Locked && (
+                    <div className="locked-notice" id="step3LockNotice">
+                      <div className="locked-notice-icon">
+                        <Lock size={32} />
+                      </div>
+                      <h3>Complete the earlier steps to continue</h3>
+                      <p>
+                        Please complete Step 1 (Sign in with HCA) and Step 2
+                        (Select Hackatime Project) above to unlock this
+                        submission form.
+                      </p>
+                    </div>
+                  )}
 
               {/* <!-- Success State --> */}
               {!step3Locked && submitted && (
@@ -569,267 +507,278 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                 </div>
               )}
 
-              {/* <!-- Unlocked Submission Form --> */}
-              {!step3Locked && !submitted && (
-                <form
-                  id="projectSubmissionForm"
-                  className="project-form"
-                  onSubmit={handleProjectSubmission}
-                >
-                  {/* <!-- Error Alert Banner --> */}
-
-                  <div
-                    className="error-banner"
-                    id="formErrorBanner"
-                    role="alert"
-                    style={{ display: formError ? "block" : "none" }}
-                  >
-                    {formError}
-                  </div>
-
-                  {/* <!-- Row 1: Movie Title & Project Name --> */}
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label htmlFor="movieTitle" className="form-label">
-                        <span>Movie Title</span>
-                        <span style={{ color: "#000" }}>*</span>
-                      </label>
-                      <input
-                        type="text"
-                        id="movieTitle"
-                        className="form-input"
-                        placeholder="e.g. Interstellar, Spirited Away, The Matrix"
-                        value={formInputData.movieName}
-                        onChange={(e) =>
-                          setFormInputData((prev) => ({
-                            ...prev,
-                            movieName: e.target.value,
-                          }))
-                        }
-                        required
-                      />
-                    </div>
-
-                    <div className="form-group">
-                      <label htmlFor="projectName" className="form-label">
-                        <span>Project Name</span>
-                        <span style={{ color: "#000" }}>*</span>
-                      </label>
-                      <input
-                        type="text"
-                        id="projectName"
-                        className="form-input"
-                        placeholder="e.g. Endurance Flight Computer"
-                        value={formInputData.projectName}
-                        onChange={(e) =>
-                          setFormInputData((prev) => ({
-                            ...prev,
-                            projectName: e.target.value,
-                          }))
-                        }
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  {/* <!-- Row 2: Live Link & Public Repo Link --> */}
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label htmlFor="liveUrl" className="form-label">
-                        <span>Live Project URL</span>
-                        <span style={{ color: "#000" }}>*</span>
-                      </label>
-                      <input
-                        type="url"
-                        id="liveUrl"
-                        className="form-input"
-                        placeholder="https://yourproject.vercel.app"
-                        value={formInputData.playableUrl}
-                        onChange={(e) =>
-                          setFormInputData((prev) => ({
-                            ...prev,
-                            playableUrl: e.target.value,
-                          }))
-                        }
-                        required
-                      />
-                      <span className="form-hint">
-                        Public link to try or view your project, hosted on any
-                        platform.
-                      </span>
-                    </div>
-
-                    <div className="form-group">
-                      <label htmlFor="repoUrl" className="form-label">
-                        <span>Public GitHub Repository</span>
-                        <span style={{ color: "#000" }}>*</span>
-                      </label>
-                      <input
-                        type="url"
-                        id="repoUrl"
-                        className="form-input"
-                        placeholder="https://github.com/username/repository"
-                        value={formInputData.codeUrl}
-                        onChange={(e) =>
-                          setFormInputData((prev) => ({
-                            ...prev,
-                            codeUrl: e.target.value,
-                          }))
-                        }
-                        required
-                      />
-                      <span className="form-hint">
-                        Source repository with code authored by you.
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* <!-- Row 3: Description of creative elements --> */}
-                  <div className="form-group">
-                    <label htmlFor="projectDescription" className="form-label">
-                      <span>How does your project celebrate the movie?</span>
-                      <span style={{ color: "#000" }}>*</span>
-                    </label>
-                    <textarea
-                      id="projectDescription"
-                      className="form-textarea"
-                      placeholder="Describe your creative choices: custom interactive scenes, original audio soundtracks, cinematic visuals, easter eggs, or storyline reenactments."
-                      value={formInputData.description}
-                      onChange={(e) =>
-                        setFormInputData((prev) => ({
-                          ...prev,
-                          description: e.target.value,
-                        }))
-                      }
-                      required
-                    ></textarea>
-                    <span className="form-hint">
-                      Be specific about what you created and what makes it
-                      special.
-                    </span>
-                  </div>
-
-                  {/* File upload */}
-                  <div className="form-group">
-                    <label className="form-label" htmlFor="screenshotFileInput">
-                      <span>Project Screenshot</span>
-                      <span style={{ color: "#000" }}>*</span>
-                    </label>
-
-                    <FileUploader
-                      name="screenshotFileInput"
-                      fileOrFiles={formInputData.screenshotFile}
-                      handleChange={(file: File | File[]) => {
-                        const single = Array.isArray(file) ? file[0] : file;
-                        if (single) handleFileUpload(single);
-                      }}
-                      multiple={false}
-                      types={fileTypes}
-                      required
+                  {/* <!-- Unlocked Submission Form --> */}
+                  {!step3Locked && !submitted && (
+                    <form
+                      id="projectSubmissionForm"
+                      className="project-form"
+                      onSubmit={handleProjectSubmission}
                     >
+                      {/* <!-- Error Alert Banner --> */}
+
                       <div
-                        className="screenshot-dropzone"
-                        id="screenshotDropzone"
-                        role="button"
-                        tabIndex={0}
-                        aria-label="Upload screenshots"
+                        className="error-banner"
+                        id="formErrorBanner"
+                        role="alert"
+                        style={{ display: formError ? "block" : "none" }}
                       >
+                        {formError}
+                      </div>
+
+                      {/* <!-- Row 1: Movie Title & Project Name --> */}
+                      <div className="form-row">
+                        <div className="form-group">
+                          <label htmlFor="movieTitle" className="form-label">
+                            <span>Movie Title</span>
+                            <span style={{ color: "#000" }}>*</span>
+                          </label>
+                          <input
+                            type="text"
+                            id="movieTitle"
+                            className="form-input"
+                            placeholder="e.g. Interstellar, Spirited Away, The Matrix"
+                            value={formInputData.movieName}
+                            onChange={(e) =>
+                              setFormInputData((prev) => ({
+                                ...prev,
+                                movieName: e.target.value,
+                              }))
+                            }
+                            required
+                          />
+                        </div>
+
+                        <div className="form-group">
+                          <label htmlFor="projectName" className="form-label">
+                            <span>Project Name</span>
+                            <span style={{ color: "#000" }}>*</span>
+                          </label>
+                          <input
+                            type="text"
+                            id="projectName"
+                            className="form-input"
+                            placeholder="e.g. Endurance Flight Computer"
+                            value={formInputData.projectName}
+                            onChange={(e) =>
+                              setFormInputData((prev) => ({
+                                ...prev,
+                                projectName: e.target.value,
+                              }))
+                            }
+                            required
+                          />
+                        </div>
+                      </div>
+
+                      {/* <!-- Row 2: Live Link & Public Repo Link --> */}
+                      <div className="form-row">
+                        <div className="form-group">
+                          <label htmlFor="liveUrl" className="form-label">
+                            <span>Live Project URL</span>
+                            <span style={{ color: "#000" }}>*</span>
+                          </label>
+                          <input
+                            type="url"
+                            id="liveUrl"
+                            className="form-input"
+                            placeholder="https://yourproject.vercel.app"
+                            value={formInputData.playableUrl}
+                            onChange={(e) =>
+                              setFormInputData((prev) => ({
+                                ...prev,
+                                playableUrl: e.target.value,
+                              }))
+                            }
+                            required
+                          />
+                          <span className="form-hint">
+                            Public link to try or view your project, hosted on
+                            any platform.
+                          </span>
+                        </div>
+
+                        <div className="form-group">
+                          <label htmlFor="repoUrl" className="form-label">
+                            <span>Public GitHub Repository</span>
+                            <span style={{ color: "#000" }}>*</span>
+                          </label>
+                          <input
+                            type="url"
+                            id="repoUrl"
+                            className="form-input"
+                            placeholder="https://github.com/username/repository"
+                            value={formInputData.codeUrl}
+                            onChange={(e) =>
+                              setFormInputData((prev) => ({
+                                ...prev,
+                                codeUrl: e.target.value,
+                              }))
+                            }
+                            required
+                          />
+                          <span className="form-hint">
+                            Source repository with code authored by you.
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* <!-- Row 3: Description of creative elements --> */}
+                      <div className="form-group">
+                        <label
+                          htmlFor="projectDescription"
+                          className="form-label"
+                        >
+                          <span>
+                            How does your project celebrate the movie?
+                          </span>
+                          <span style={{ color: "#000" }}>*</span>
+                        </label>
+                        <textarea
+                          id="projectDescription"
+                          className="form-textarea"
+                          placeholder="Describe your creative choices: custom interactive scenes, original audio soundtracks, cinematic visuals, easter eggs, or storyline reenactments."
+                          value={formInputData.description}
+                          onChange={(e) =>
+                            setFormInputData((prev) => ({
+                              ...prev,
+                              description: e.target.value,
+                            }))
+                          }
+                          required
+                        ></textarea>
+                        <span className="form-hint">
+                          Be specific about what you created and what makes it
+                          special.
+                        </span>
+                      </div>
+
+                      {/* File upload */}
+                      <div className="form-group">
+                        <label
+                          className="form-label"
+                          htmlFor="screenshotFileInput"
+                        >
+                          <span>Project Screenshot</span>
+                          <span style={{ color: "#000" }}>*</span>
+                        </label>
+
+                        <FileUploader
+                          name="screenshotFileInput"
+                          fileOrFiles={formInputData.screenshotFile}
+                          handleChange={(file: File | File[]) => {
+                            const single = Array.isArray(file) ? file[0] : file;
+                            if (single) handleFileUpload(single);
+                          }}
+                          multiple={false}
+                          types={fileTypes}
+                          required
+                        >
+                          <div
+                            className="screenshot-dropzone"
+                            id="screenshotDropzone"
+                            role="button"
+                            tabIndex={0}
+                            aria-label="Upload screenshots"
+                          >
+                            <div
+                              className="screenshot-dropzone-icon"
+                              aria-hidden="true"
+                            >
+                              <FileImage />
+                            </div>
+                            <div className="screenshot-dropzone-prompt">
+                              Select screenshots or drag and drop image files
+                              here
+                            </div>
+                            <div className="screenshot-dropzone-note">
+                              PNG, JPG, or WebP up to 5MB
+                            </div>
+                          </div>
+                        </FileUploader>
+
+                        <span className="form-hint">
+                          Upload a screenshot of your website, game, or other
+                          project.
+                        </span>
+
+                        {/* <!-- Preview container for uploaded screenshots --> */}
                         <div
-                          className="screenshot-dropzone-icon"
-                          aria-hidden="true"
+                          className="screenshot-previews-grid"
+                          id="screenshotPreviewsGrid"
+                          style={{ display: !screenshotUrl ? "none" : "grid" }}
                         >
-                          <FileImage />
-                        </div>
-                        <div className="screenshot-dropzone-prompt">
-                          Select screenshots or drag and drop image files here
-                        </div>
-                        <div className="screenshot-dropzone-note">
-                          PNG, JPG, or WebP up to 5MB
+                          <div className="screenshot-preview-card">
+                            <img
+                              className="screenshot-preview-img"
+                              src={screenshotUrl}
+                              alt="Project Screenshot"
+                            />
+                            <button
+                              type="button"
+                              className="screenshot-remove-btn"
+                              aria-label="Remove screenshot"
+                              onClick={handleRemoveScreenshot}
+                            >
+                              Remove
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </FileUploader>
 
-                    <span className="form-hint">
-                      Upload a screenshot of your website, game, or other
-                      project.
-                    </span>
-
-                    {/* <!-- Preview container for uploaded screenshots --> */}
-                    <div
-                      className="screenshot-previews-grid"
-                      id="screenshotPreviewsGrid"
-                      style={{ display: !screenshotUrl ? "none" : "grid" }}
-                    >
-                      <div className="screenshot-preview-card">
-                        <img
-                          className="screenshot-preview-img"
-                          src={screenshotUrl}
-                          alt="Project Screenshot"
-                        />
-                        <button
-                          type="button"
-                          className="screenshot-remove-btn"
-                          aria-label="Remove screenshot"
-                          onClick={handleRemoveScreenshot}
-                        >
-                          Remove
-                        </button>
+                      {/* <!-- Row 4: Cinema Choice & Watchlist --> */}
+                      <div className="form-row">
+                        <div className="form-group">
+                          <label htmlFor="nextMovie" className="form-label">
+                            <span>What movie do you plan to watch next?</span>
+                            <span style={{ color: "#000" }}>*</span>
+                          </label>
+                          <input
+                            type="text"
+                            id="nextMovie"
+                            className="form-input"
+                            placeholder="e.g. Dune Part Two, Tron Ares"
+                            value={formInputData.plannedMovie}
+                            onChange={(e) =>
+                              setFormInputData((prev) => ({
+                                ...prev,
+                                plannedMovie: e.target.value,
+                              }))
+                            }
+                            required
+                          />
+                          <span className="form-hint">
+                            Tell us what you are excited to see on the big
+                            screen.
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  </div>
 
-                  {/* <!-- Row 4: Cinema Choice & Watchlist --> */}
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label htmlFor="nextMovie" className="form-label">
-                        <span>What movie do you plan to watch next?</span>
-                        <span style={{ color: "#000" }}>*</span>
-                      </label>
-                      <input
-                        type="text"
-                        id="nextMovie"
-                        className="form-input"
-                        placeholder="e.g. Dune Part Two, Tron Ares"
-                        value={formInputData.plannedMovie}
-                        onChange={(e) =>
-                          setFormInputData((prev) => ({
-                            ...prev,
-                            plannedMovie: e.target.value,
-                          }))
-                        }
-                        required
-                      />
-                      <span className="form-hint">
-                        Tell us what you are excited to see on the big screen.
-                      </span>
-                    </div>
-                  </div>
+                      {/* <!-- Eligibility Checkboxes --> */}
+                      <div className="checkbox-group">
+                        <label className="checkbox-item">
+                          <input type="checkbox" id="checkAge" required />
+                          <span className="checkbox-text">
+                            I confirm that I am a teenager 18 years old or
+                            younger.
+                          </span>
+                        </label>
 
-                  {/* <!-- Eligibility Checkboxes --> */}
-                  <div className="checkbox-group">
-                    <label className="checkbox-item">
-                      <input type="checkbox" id="checkAge" required />
-                      <span className="checkbox-text">
-                        I confirm that I am a teenager 18 years old or younger.
-                      </span>
-                    </label>
+                        <label className="checkbox-item">
+                          <input type="checkbox" id="checkAuthor" required />
+                          <span className="checkbox-text">
+                            I authored this project myself, it is live, and my
+                            repository is public.
+                          </span>
+                        </label>
 
-                    <label className="checkbox-item">
-                      <input type="checkbox" id="checkAuthor" required />
-                      <span className="checkbox-text">
-                        I authored this project myself, it is live, and my
-                        repository is public.
-                      </span>
-                    </label>
-
-                    <label className="checkbox-item">
-                      <input type="checkbox" id="checkTime" required />
-                      <span className="checkbox-text">
-                        My hours were authentically recorded with Hackatime
-                        during development.
-                      </span>
-                    </label>
-                  </div>
+                        <label className="checkbox-item">
+                          <input type="checkbox" id="checkTime" required />
+                          <span className="checkbox-text">
+                            My hours were authentically recorded with Hackatime
+                            during development.
+                          </span>
+                        </label>
+                      </div>
 
                   {/* <!-- Submit Button --> */}
                   <div className="form-actions">

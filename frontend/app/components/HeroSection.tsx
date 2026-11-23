@@ -62,11 +62,11 @@ export default function HeroSection() {
 
             {/* <!-- Tear Off Cinema Stub Side --> */}
             <div className="hero-ticket-stub">
-              <div className="stub-brand-badge">TICKETS</div>
+              <div className="stub-brand-badge"></div>
 
               <div className="stub-middle-grant">
-                <div className="grant-big">$5</div>
-                <div className="grant-unit">Per hour of build time</div>
+                <div className="grant-big">TICKETS</div>
+                <div className="grant-unit">For your next movie</div>
               </div>
 
               <div className="stub-barcode" aria-hidden="true">

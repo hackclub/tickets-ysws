@@ -22,20 +22,12 @@ optional.
 Start the app in development mode:
 
 ```sh
-pnpm --filter backend dev
+pnpm dev
 ```
 
-This builds the frontend and watches for changes, then serves the frontend and
-API from the backend. Open `http://localhost:3000` (or the port configured in
-`backend/.env`). Stop the process with Ctrl+C.
-
-To allow the backend auto build the frontend when changes are made, run:
-
-```bash
-pnpm --filter frontend dev:build
-```
-
-Running both commands together allows the backend to reload the frontend static files whenever changes are made to it.
+This runs the frontend `dev:build` and backend `dev` scripts concurrently. The
+backend serves the frontend and API. Open `http://localhost:3000` (or the port
+configured in `backend/.env`). Stop the processes with Ctrl+C.
 
 ## Deploy with Docker
 

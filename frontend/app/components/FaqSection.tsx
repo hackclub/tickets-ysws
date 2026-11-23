@@ -14,6 +14,11 @@ const faqs = [
       "No. Beginners are welcome. There's are several other teens that are ready to help you on Slack, don't worry they are friendly.",
   },
   {
+    question: "How does reward works?",
+    answer:
+      "You get $5 for every hours approved from your project, you can then spend this grant on your movie ticket and snacks",
+  },
+  {
     question: "Does it cost anything?",
     answer: "No. It's completely free.",
   },
