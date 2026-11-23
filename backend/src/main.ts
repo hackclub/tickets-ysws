@@ -47,7 +47,8 @@ async function bootstrap() {
       contentSecurityPolicy: {
         directives: {
           ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-          'script-src': ["'self'", ...hashes],
+          'script-src': ["'self'", 'https://plausible.io', ...hashes],
+          'connect-src': ["'self'", 'https://plausible.io'],
           'img-src': [
             "'self'",
             'data:',
