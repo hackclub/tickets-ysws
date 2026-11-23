@@ -60,7 +60,7 @@ export class SubmitService {
       'GitHub Username': github_username,
 
       'Address (Line 1)': address?.line_1 || 'data not provided',
-      'Address (Line 2)': address?.line_2 || 'data not provided',
+      'Address (Line 2)': address?.line_2 || '',
       City: address?.city || 'data not provided',
       'State / Province': address?.state || 'data not provided',
       Country: address?.country || 'data not provided',
