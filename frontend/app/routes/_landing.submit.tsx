@@ -756,18 +756,35 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                       {/* <!-- Eligibility Checkboxes --> */}
                       <div className="checkbox-group">
                         <label className="checkbox-item">
-                          <input type="checkbox" id="checkAge" required />
-                          <span className="checkbox-text">
-                            I confirm that I am a teenager 18 years old or
-                            younger.
-                          </span>
-                        </label>
-
-                        <label className="checkbox-item">
                           <input type="checkbox" id="checkAuthor" required />
                           <span className="checkbox-text">
                             I authored this project myself, it is live, and my
                             repository is public.
+                          </span>
+                        </label>
+
+                        <label className="checkbox-item">
+                          <input
+                            type="checkbox"
+                            id="checkDisclaimer"
+                            required
+                          />
+                          <span className="checkbox-text">
+                            I have added a README file to my project and I have
+                            added an AI usage statement to my README file.
+                          </span>
+                        </label>
+
+                        <label className="checkbox-item">
+                          <input
+                            type="checkbox"
+                            id="checkDisclaimer"
+                            required
+                          />
+                          <span className="checkbox-text">
+                            I have added a disclaimer stating that my project is
+                            unaffiliated with movie/series production and that
+                            it's just a fan based project.
                           </span>
                         </label>
 
