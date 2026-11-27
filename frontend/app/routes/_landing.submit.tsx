@@ -782,8 +782,8 @@ export default function SubmitPage({ loaderData }: Route.ComponentProps) {
                             required
                           />
                           <span className="checkbox-text">
-                            I have added a disclaimer stating that my project is
-                            unaffiliated with movie/series production and that
+                            I have added a disclaimer stating that your project is
+                            unaffiliated with movie/series production/producer and that
                             it's just a fan based project.
                           </span>
                         </label>
